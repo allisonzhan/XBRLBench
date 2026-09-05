@@ -122,9 +122,18 @@ def render_snippet(vals, ticker, fy):
     return "\n".join(lines)
 
 
+def render_two_year_snippet(vals, prev_vals, ticker, fy):
+    """Same messy rendering as render_snippet, but stacks FY-1 above FY so
+    comparison questions (YoY growth, deltas) actually have both years'
+    figures in front of the model instead of asking it to reason about data
+    it was never shown."""
+    return (render_snippet(prev_vals, ticker, fy - 1) + "\n\n"
+            + render_snippet(vals, ticker, fy))
+
+
 def make_questions(ticker, fy, vals, prev_vals):
     qs = []
-    def q(tier, question, gold_value, gold_unit, concept):
+    def q(tier, question, gold_value, gold_unit, concept, context=None):
         if gold_value is None:
             return
         qs.append({
@@ -134,7 +143,7 @@ def make_questions(ticker, fy, vals, prev_vals):
             "gold_value": round(gold_value, 4),
             "gold_unit": gold_unit,
             "source_concept": concept,
-            "context": render_snippet(vals, ticker, fy),
+            "context": context if context is not None else render_snippet(vals, ticker, fy),
         })
 
     # T1 — single lookup (answer in raw dollars; snippet shows thousands → unit trap)
@@ -158,7 +167,8 @@ def make_questions(ticker, fy, vals, prev_vals):
         q("T2", f"What was {ticker}'s year-over-year revenue growth from FY{fy-1} "
                 f"to FY{fy}? (as a percentage)",
           100 * (vals["revenue"] - prev_vals["revenue"]) / prev_vals["revenue"],
-          "percent", "Revenue YoY")
+          "percent", "Revenue YoY",
+          context=render_two_year_snippet(vals, prev_vals, ticker, fy))
 
     # T3 — distractor / multi-hop (siblings present in snippet to mislead)
     if vals.get("liabilities_current"):
@@ -168,7 +178,8 @@ def make_questions(ticker, fy, vals, prev_vals):
     if prev_vals and prev_vals.get("assets") and vals.get("assets"):
         q("T3", f"By how much did {ticker}'s total assets change from FY{fy-1} to "
                 f"FY{fy}? Answer the dollar difference in USD (positive if increased).",
-          vals["assets"] - prev_vals["assets"], "USD", "Assets delta")
+          vals["assets"] - prev_vals["assets"], "USD", "Assets delta",
+          context=render_two_year_snippet(vals, prev_vals, ticker, fy))
     return qs
 
 
