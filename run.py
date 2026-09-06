@@ -28,6 +28,22 @@ import urllib.request
 
 API_BASE = "https://openrouter.ai/api/v1"
 
+
+def load_dotenv(path=".env"):
+    """Minimal .env loader — only fills vars not already set in the
+    environment, so an explicit `export` always wins. Keeps us stdlib-only
+    (no python-dotenv dependency) for one secret."""
+    if not os.path.exists(path):
+        return
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, val = line.partition("=")
+            key, val = key.strip(), val.strip().strip('"').strip("'")
+            os.environ.setdefault(key, val)
+
 # Pinned, paid model IDs — one per major provider plus one strong open model.
 # Pin exact IDs (not "-latest" aliases) so a run is reproducible months later.
 MODELS = [
@@ -173,9 +189,10 @@ def main():
                      help="skip (question id, model) pairs already in --out")
     args = ap.parse_args()
 
+    load_dotenv()
     api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
-        raise SystemExit("Set OPENROUTER_API_KEY in the environment first.")
+        raise SystemExit("Set OPENROUTER_API_KEY in the environment (or in a .env file) first.")
 
     models = args.models if args.models else MODELS
     print("Models used for this run:")
