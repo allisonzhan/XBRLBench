@@ -94,6 +94,40 @@ def test_run_without_out_dir_auto_generates_a_timestamped_run(monkeypatch, tmp_p
     assert (created[0] / "metadata.json").exists()
 
 
+def test_run_tier_filter_only_runs_that_tier(tmp_path, monkeypatch):
+    monkeypatch.setattr(inference, "call_with_retry", lambda *a, **k: fake_result())
+    out_dir = tmp_path / "run1"
+
+    inference.run(DEFAULT_QUESTIONS_PATH, str(out_dir), models=["test/model"], tier="T2")
+
+    responses = load_jsonl(out_dir / "responses.jsonl")
+    assert responses  # T2 questions exist in the real bank
+    assert all(r["tier"] == "T2" for r in responses)
+
+
+def test_run_question_id_filter_runs_only_those_ids(tmp_path, monkeypatch):
+    monkeypatch.setattr(inference, "call_with_retry", lambda *a, **k: fake_result())
+    out_dir = tmp_path / "run1"
+    wanted = ["AAPL-2023-T1-0", "AAPL-2023-T1-1"]
+
+    inference.run(DEFAULT_QUESTIONS_PATH, str(out_dir), models=["test/model"], question_ids=wanted)
+
+    responses = load_jsonl(out_dir / "responses.jsonl")
+    assert {r["id"] for r in responses} == set(wanted)
+
+
+def test_run_question_id_filter_warns_on_unknown_id(tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(inference, "call_with_retry", lambda *a, **k: fake_result())
+    out_dir = tmp_path / "run1"
+
+    inference.run(DEFAULT_QUESTIONS_PATH, str(out_dir), models=["test/model"],
+                   question_ids=["AAPL-2023-T1-0", "NOT-A-REAL-ID"])
+
+    responses = load_jsonl(out_dir / "responses.jsonl")
+    assert {r["id"] for r in responses} == {"AAPL-2023-T1-0"}
+    assert "NOT-A-REAL-ID" in capsys.readouterr().out
+
+
 def test_run_refuses_to_overwrite_existing_run_without_resume(tmp_path, monkeypatch):
     monkeypatch.setattr(inference, "call_with_retry", lambda *a, **k: fake_result())
     out_dir = tmp_path / "run1"

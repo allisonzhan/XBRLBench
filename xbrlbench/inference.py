@@ -51,6 +51,7 @@ from typing import Optional
 from . import experiment
 from .io_utils import append_jsonl, load_dotenv, load_jsonl
 from .paths import DEFAULT_QUESTIONS_PATH, RUNS_DIR
+from .schema import VALID_TIERS
 
 API_BASE = "https://openrouter.ai/api/v1"
 
@@ -187,6 +188,8 @@ def run(
     models: list[str] | None = None,
     limit: int | None = None,
     resume: bool = False,
+    tier: Optional[str] = None,
+    question_ids: list[str] | None = None,
 ) -> None:
     load_dotenv()
     api_key = os.environ.get("OPENROUTER_API_KEY")
@@ -212,6 +215,14 @@ def run(
         print(f"  - {m}")
 
     questions = load_jsonl(questions_path)
+    if tier:
+        questions = [q for q in questions if q.get("tier") == tier]
+    if question_ids:
+        wanted = set(question_ids)
+        questions = [q for q in questions if q.get("id") in wanted]
+        missing = wanted - {q["id"] for q in questions}
+        if missing:
+            print(f"[warn] --question-id not found in {questions_path}: {sorted(missing)}")
     if limit:
         questions = questions[:limit]
     print(f"\nLoaded {len(questions)} questions from {questions_path}")
@@ -301,6 +312,10 @@ def build_arg_parser(parser: argparse.ArgumentParser | None = None) -> argparse.
                          help="only run the first N questions (smoke test)")
     parser.add_argument("--models", nargs="*", default=None,
                          help="subset of MODELS to run (default: all configured models)")
+    parser.add_argument("--tier", choices=sorted(VALID_TIERS), default=None,
+                         help="only run questions in this difficulty tier (see docs/SCHEMA.md)")
+    parser.add_argument("--question-id", dest="question_ids", nargs="*", default=None,
+                         help="only run these specific question id(s)")
     parser.add_argument("--resume", action="store_true",
                          help="continue an existing run -- requires --out-dir pointing at it")
     return parser
@@ -308,7 +323,7 @@ def build_arg_parser(parser: argparse.ArgumentParser | None = None) -> argparse.
 
 def main(argv: list[str] | None = None) -> None:
     args = build_arg_parser().parse_args(argv)
-    run(args.inp, args.out_dir, args.models, args.limit, args.resume)
+    run(args.inp, args.out_dir, args.models, args.limit, args.resume, args.tier, args.question_ids)
 
 
 if __name__ == "__main__":
