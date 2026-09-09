@@ -1,0 +1,13 @@
+{
+  "id": "KO-2024-T3-6",
+  "ticker": "KO",
+  "fiscal_year": 2024,
+  "tier": "T3",
+  "question": "By how much did KO's total assets change from FY2023 to FY2024? Answer the dollar difference in USD (positive if increased).",
+  "gold_value": 4940000000,
+  "gold_unit": "USD",
+  "source_concept": "Assets delta",
+  "context": "KO — Consolidated Financial Statements (excerpt), FY2023\n(in thousands, except per share data)\n\nINCOME STATEMENT\n  Net revenues .......................... 38,655,000\n  Cost of sales ......................... 15,357,000\n  Gross profit .......................... 23,298,000\n  Net income ............................ 9,771,000\n\nBALANCE SHEET\n  Total current assets .................. 22,591,000\n  Total assets .......................... 92,763,000\n  Total current liabilities ............. 19,724,000\n  Total liabilities ..................... —\n  Total stockholders' equity ............ 24,105,000\n\nKO — Consolidated Financial Statements (excerpt), FY2024\n(in thousands, except per share data)\n\nINCOME STATEMENT\n  Net revenues .......................... 43,004,000\n  Cost of sales ......................... 18,000,000\n  Gross profit .......................... 25,004,000\n  Net income ............................ 9,542,000\n\nBALANCE SHEET\n  Total current assets .................. 26,732,000\n  Total assets .......................... 97,703,000\n  Total current liabilities ............. 23,571,000\n  Total liabilities ..................... —\n  Total stockholders' equity ............ 25,941,000",
+  "reasoning_type": "multi_period_comparison",
+  "tolerance": 0.01
+}
