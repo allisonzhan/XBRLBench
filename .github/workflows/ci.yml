@@ -1,0 +1,30 @@
+name: CI
+
+# Runs the test suite and benchmark integrity validation on every push/PR.
+# Deliberately makes no network calls and needs no secrets: `generate` (SEC
+# API) and `run` (OpenRouter, paid) are exercised only by unit tests with
+# the network call mocked out -- see tests/test_experiment.py.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install xbrlbench (+ dev dependencies)
+        run: pip install -e ".[dev]"
+
+      - name: Run tests
+        run: pytest -q
+
+      - name: Validate benchmark integrity
+        run: python -m xbrlbench validate
