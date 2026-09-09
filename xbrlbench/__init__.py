@@ -10,4 +10,4 @@ exists for the policy):
 """
 
 __version__ = "0.1.0"
-BENCHMARK_VERSION = "v0.1"
+BENCHMARK_VERSION = "v0.2"
