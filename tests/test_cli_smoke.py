@@ -9,7 +9,7 @@ import sys
 
 import pytest
 
-SUBCOMMANDS = ["generate", "run", "grade", "validate", "report"]
+SUBCOMMANDS = ["generate", "run", "grade", "validate", "report", "errors"]
 
 
 def run_cli(*args):
@@ -49,6 +49,7 @@ def test_modules_import():
     import xbrlbench.grading  # noqa: F401
     import xbrlbench.validation  # noqa: F401
     import xbrlbench.reporting  # noqa: F401
+    import xbrlbench.errors  # noqa: F401
     import xbrlbench.cli  # noqa: F401
 
 

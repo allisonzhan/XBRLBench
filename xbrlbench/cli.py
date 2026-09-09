@@ -5,14 +5,13 @@
     python -m xbrlbench run [--models ...] [--limit N] [--resume]
     python -m xbrlbench grade [--epsilon 0.01]
     python -m xbrlbench report [--epsilon 0.01]
+    python -m xbrlbench errors [--epsilon 0.01]
 
-Inference (`run`) and grading (`grade`/`report`) are deliberately separate
-commands backed by separate modules: grading and reporting only ever read a
-saved responses file, so re-grading/re-reporting (a different --epsilon, or
-a grading-logic fix) never repeats paid API calls.
-
-More subcommands (`errors`) are added incrementally in later commits — see
-docs/SCHEMA.md and the README for what's currently available.
+Inference (`run`) and everything downstream of it (`grade`/`report`/
+`errors`) are deliberately separate commands backed by separate modules:
+grading, reporting, and error analysis only ever read a saved responses
+file, so re-running any of them (a different --epsilon, or a grading-logic
+fix) never repeats paid API calls.
 """
 
 from __future__ import annotations
@@ -21,7 +20,7 @@ import argparse
 import sys
 
 from . import __version__
-from . import generation, grading, inference, reporting, validation
+from . import errors, generation, grading, inference, reporting, validation
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -43,6 +42,8 @@ def build_parser() -> argparse.ArgumentParser:
         "validate", help="check benchmark question bank integrity"))
     reporting.build_arg_parser(subparsers.add_parser(
         "report", help="generate accuracy/failure breakdowns from a responses file"))
+    errors.build_arg_parser(subparsers.add_parser(
+        "errors", help="deterministic per-response detail on every non-correct answer"))
 
     return parser
 
@@ -64,6 +65,8 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
     elif args.command == "report":
         reporting.report(args.inp, args.questions, args.out_prefix, args.epsilon)
+    elif args.command == "errors":
+        errors.errors(args.inp, args.questions, args.out_prefix, args.epsilon)
     else:  # pragma: no cover - argparse enforces `required=True` above
         parser.error(f"unknown command: {args.command}")
 

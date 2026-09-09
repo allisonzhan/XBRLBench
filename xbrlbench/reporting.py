@@ -83,7 +83,10 @@ def _accuracy_of(rows: list[dict]) -> Optional[float]:
     return correct / len(rows)
 
 
-def _enrich_reasoning_type(rows: list[dict], questions_path) -> list[dict]:
+def enrich_reasoning_type(rows: list[dict], questions_path) -> list[dict]:
+    """Backfill each row's reasoning_type by joining on id against the
+    question bank, for a responses file that predates the field being
+    propagated into responses.jsonl. Shared with xbrlbench.errors."""
     try:
         questions_by_id = {q.get("id"): q for q in load_jsonl(questions_path)}
     except (FileNotFoundError, OSError):
@@ -157,7 +160,7 @@ def strongest_weakest_reasoning_type(graded: list[dict]) -> dict:
 
 
 def build_report(rows: list[dict], questions_path=DEFAULT_QUESTIONS_PATH, epsilon: Optional[float] = None) -> dict:
-    rows = _enrich_reasoning_type(rows, questions_path)
+    rows = enrich_reasoning_type(rows, questions_path)
     # summarize()'s own tier_table/model_table/grid are ignored here in favor
     # of this module's _bucket/_grid, which add an "accuracy" field to every
     # cell (summarize()'s only does that on the top-level `overall` dict).
