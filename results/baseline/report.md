@@ -1,6 +1,6 @@
 # XBRLBench results
 
-68 questions, 272 graded responses (epsilon=None).
+68 questions, 272 graded responses, graded with each question's own tolerance (see docs/SCHEMA.md).
 
 ## Accuracy by model x difficulty
 

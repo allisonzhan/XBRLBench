@@ -208,11 +208,16 @@ def _fmt_pct(acc) -> str:
     return f"{100 * acc:.1f}%" if acc is not None else "n/a"
 
 
+def _fmt_tolerance_mode(epsilon: Optional[float]) -> str:
+    return f"epsilon={epsilon} (overridden for every question)" if epsilon is not None \
+        else "each question's own tolerance (see docs/SCHEMA.md)"
+
+
 def to_markdown(report: dict) -> str:
     lines = ["# XBRLBench results", ""]
     lines.append(
-        f"{report['questions_evaluated']} questions, {report['response_count']} graded responses "
-        f"(epsilon={report['epsilon']})."
+        f"{report['questions_evaluated']} questions, {report['response_count']} graded responses, "
+        f"graded with {_fmt_tolerance_mode(report['epsilon'])}."
     )
     lines.append("")
 
