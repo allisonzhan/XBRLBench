@@ -56,7 +56,7 @@ def main(argv: list[str] | None = None) -> None:
     if args.command == "generate":
         generation.generate(args.email, args.out)
     elif args.command == "run":
-        inference.run(args.inp, args.out, args.models, args.limit, args.resume)
+        inference.run(args.inp, args.out_dir, args.models, args.limit, args.resume)
     elif args.command == "grade":
         grading.grade(args.inp, args.out_prefix, args.epsilon)
     elif args.command == "validate":

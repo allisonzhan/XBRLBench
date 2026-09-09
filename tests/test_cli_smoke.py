@@ -50,6 +50,7 @@ def test_modules_import():
     import xbrlbench.validation  # noqa: F401
     import xbrlbench.reporting  # noqa: F401
     import xbrlbench.errors  # noqa: F401
+    import xbrlbench.experiment  # noqa: F401
     import xbrlbench.cli  # noqa: F401
 
 
