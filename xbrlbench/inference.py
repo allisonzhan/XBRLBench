@@ -1,9 +1,7 @@
-#!/usr/bin/env python3
-"""
-run.py — send the question bank (questions.jsonl from generate.py) to a set of
-models over OpenRouter and record raw responses for grading.
+"""xbrlbench.inference — send the question bank to a set of models over
+OpenRouter and record raw responses for grading.
 
-Reads records shaped like generate.py's output:
+Reads records shaped like xbrlbench.generation's output:
   id, ticker, fiscal_year, tier, question, gold_value, gold_unit,
   source_concept, context
 
@@ -12,37 +10,33 @@ Writes one record per (question, model) to the output JSONL:
   source_concept, raw_response, extracted_answer, latency_s,
   prompt_tokens, completion_tokens, error
 
-Auth: set OPENROUTER_API_KEY in the environment.
+Auth: set OPENROUTER_API_KEY in the environment (or in a .env file — see
+.env.example).
 
-Run:   python3 run.py --in questions.jsonl --out responses.jsonl
-Smoke: python3 run.py --in questions.jsonl --out responses.jsonl --limit 4
+Run:    python -m xbrlbench run
+Smoke:  python -m xbrlbench run --limit 4
+One model: python -m xbrlbench run --models openai/gpt-4o-2024-11-20
+Resume: python -m xbrlbench run --resume
+
+This module only performs inference — it never grades a response. Grading
+(xbrlbench.grading) runs entirely offline against saved responses, so
+re-grading never re-spends API budget.
 """
 
+from __future__ import annotations
+
 import argparse
-import json
 import os
 import random
 import time
 import urllib.error
 import urllib.request
+import json as _json
+
+from .io_utils import append_jsonl, load_dotenv, load_jsonl
+from .paths import DEFAULT_QUESTIONS_PATH, DEFAULT_RESPONSES_PATH
 
 API_BASE = "https://openrouter.ai/api/v1"
-
-
-def load_dotenv(path=".env"):
-    """Minimal .env loader — only fills vars not already set in the
-    environment, so an explicit `export` always wins. Keeps us stdlib-only
-    (no python-dotenv dependency) for one secret."""
-    if not os.path.exists(path):
-        return
-    with open(path, "r", encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if not line or line.startswith("#") or "=" not in line:
-                continue
-            key, _, val = line.partition("=")
-            key, val = key.strip(), val.strip().strip('"').strip("'")
-            os.environ.setdefault(key, val)
 
 # Pinned, paid model IDs — one per major provider plus one strong open model.
 # Pin exact IDs (not "-latest" aliases) so a run is reproducible months later.
@@ -69,22 +63,7 @@ MAX_RETRIES = 5
 BASE_BACKOFF = 2.0  # seconds
 
 
-def load_jsonl(path):
-    rows = []
-    with open(path, "r", encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if line:
-                rows.append(json.loads(line))
-    return rows
-
-
-def append_jsonl(path, row):
-    with open(path, "a", encoding="utf-8") as f:
-        f.write(json.dumps(row) + "\n")
-
-
-def extract_answer(text):
+def extract_answer(text: str | None) -> str | None:
     """Pull the value after the last 'ANSWER:' line; None if not present."""
     if not text:
         return None
@@ -97,7 +76,7 @@ def extract_answer(text):
     return None
 
 
-def call_openrouter(api_key, model, question, context):
+def call_openrouter(api_key: str, model: str, question: str, context: str) -> dict:
     url = f"{API_BASE}/chat/completions"
     payload = {
         "model": model,
@@ -107,7 +86,7 @@ def call_openrouter(api_key, model, question, context):
         ],
         "temperature": 0,
     }
-    data = json.dumps(payload).encode("utf-8")
+    data = _json.dumps(payload).encode("utf-8")
     req = urllib.request.Request(
         url,
         data=data,
@@ -116,15 +95,15 @@ def call_openrouter(api_key, model, question, context):
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
             # OpenRouter asks for these two for attribution/rankings; harmless if ignored.
-            "HTTP-Referer": "https://github.com/local/financial-eval",
-            "X-Title": "financial-eval",
+            "HTTP-Referer": "https://github.com/local/xbrlbench",
+            "X-Title": "xbrlbench",
         },
     )
     with urllib.request.urlopen(req, timeout=120) as r:
-        return json.loads(r.read().decode("utf-8"))
+        return _json.loads(r.read().decode("utf-8"))
 
 
-def call_with_retry(api_key, model, question, context):
+def call_with_retry(api_key: str, model: str, question: str, context: str) -> dict:
     last_err = None
     for attempt in range(MAX_RETRIES):
         try:
@@ -168,7 +147,7 @@ def call_with_retry(api_key, model, question, context):
     }
 
 
-def already_done(out_path):
+def already_done(out_path) -> set:
     """Resume support: (question id, model) pairs already recorded."""
     done = set()
     if os.path.exists(out_path):
@@ -177,39 +156,37 @@ def already_done(out_path):
     return done
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--in", dest="inp", default="questions.jsonl")
-    ap.add_argument("--out", dest="out", default="responses.jsonl")
-    ap.add_argument("--limit", type=int, default=None,
-                     help="only run the first N questions (smoke test)")
-    ap.add_argument("--models", nargs="*", default=None,
-                     help="subset of MODELS to run (default: all configured models)")
-    ap.add_argument("--resume", action="store_true",
-                     help="skip (question id, model) pairs already in --out")
-    args = ap.parse_args()
-
+def run(
+    questions_path=DEFAULT_QUESTIONS_PATH,
+    out_path=DEFAULT_RESPONSES_PATH,
+    models: list[str] | None = None,
+    limit: int | None = None,
+    resume: bool = False,
+) -> None:
     load_dotenv()
     api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
-        raise SystemExit("Set OPENROUTER_API_KEY in the environment (or in a .env file) first.")
+        raise SystemExit(
+            "Set OPENROUTER_API_KEY in the environment (or in a .env file — "
+            "see .env.example) first."
+        )
 
-    models = args.models if args.models else MODELS
+    models = models if models else MODELS
     print("Models used for this run:")
     for m in models:
         print(f"  - {m}")
 
-    questions = load_jsonl(args.inp)
-    if args.limit:
-        questions = questions[: args.limit]
-    print(f"\nLoaded {len(questions)} questions from {args.inp}")
+    questions = load_jsonl(questions_path)
+    if limit:
+        questions = questions[:limit]
+    print(f"\nLoaded {len(questions)} questions from {questions_path}")
 
-    done = already_done(args.out) if args.resume else set()
+    done = already_done(out_path) if resume else set()
     if done:
         print(f"Resuming: {len(done)} (question, model) pairs already recorded, will skip.")
-    elif not args.resume and os.path.exists(args.out):
+    elif not resume and os.path.exists(out_path):
         # Fresh run overwrites; make that explicit rather than silently appending.
-        os.remove(args.out)
+        os.remove(out_path)
 
     total = len(questions) * len(models)
     n = 0
@@ -239,11 +216,30 @@ def main():
                 "error": result["error"],
             }
             # Append immediately so a crash mid-run only loses the in-flight call.
-            append_jsonl(args.out, row)
+            append_jsonl(out_path, row)
             if result["error"]:
                 print(f"    [error] {result['error']}")
 
-    print(f"\nDone. Wrote responses -> {args.out}")
+    print(f"\nDone. Wrote responses -> {out_path}")
+
+
+def build_arg_parser(parser: argparse.ArgumentParser | None = None) -> argparse.ArgumentParser:
+    parser = parser or argparse.ArgumentParser(
+        description="Send benchmark questions to models via OpenRouter.")
+    parser.add_argument("--in", dest="inp", default=str(DEFAULT_QUESTIONS_PATH))
+    parser.add_argument("--out", dest="out", default=str(DEFAULT_RESPONSES_PATH))
+    parser.add_argument("--limit", type=int, default=None,
+                         help="only run the first N questions (smoke test)")
+    parser.add_argument("--models", nargs="*", default=None,
+                         help="subset of MODELS to run (default: all configured models)")
+    parser.add_argument("--resume", action="store_true",
+                         help="skip (question id, model) pairs already in --out")
+    return parser
+
+
+def main(argv: list[str] | None = None) -> None:
+    args = build_arg_parser().parse_args(argv)
+    run(args.inp, args.out, args.models, args.limit, args.resume)
 
 
 if __name__ == "__main__":

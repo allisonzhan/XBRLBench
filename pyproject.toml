@@ -1,0 +1,24 @@
+[project]
+name = "xbrlbench"
+version = "0.1.0"
+description = "A benchmark for evaluating LLM financial reasoning over real SEC XBRL filing data."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Allison" }]
+# Runtime is deliberately stdlib-only — no requests/pandas/pydantic — so a
+# clone needs nothing beyond Python itself to run the benchmark.
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+xbrlbench = "xbrlbench.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["xbrlbench*"]

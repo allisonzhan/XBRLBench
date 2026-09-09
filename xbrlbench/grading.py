@@ -1,38 +1,40 @@
-#!/usr/bin/env python3
-"""
-grade.py — grade run.py's raw model responses against gold answers and report
-accuracy by tier and by model.
+"""xbrlbench.grading — grade xbrlbench.inference's raw model responses
+against gold answers and report accuracy by tier and by model.
 
-Reads responses.jsonl (run.py's output), which already carries gold_value /
-gold_unit / tier / model alongside each raw_response. Grading is numeric with
-a relative-tolerance epsilon (default 1%) to absorb rounding and "in
-thousands" scale mismatches — see epsilon note below.
+Reads a responses JSONL (xbrlbench.inference's output), which already
+carries gold_value / gold_unit / tier / model alongside each raw_response.
+Grading is numeric with a relative-tolerance epsilon (default 1%) to absorb
+rounding and "in thousands" scale mismatches.
 
 Run:
-  python3 grade.py --in responses.jsonl --out-prefix report
-    -> report_summary.csv, report_summary.json, report_incorrect.jsonl
-       (+ the tier x model table printed to stdout)
+  python -m xbrlbench grade
+    -> results/report_summary.csv, results/report_summary.json,
+       results/report_incorrect.jsonl (+ the tier x model table on stdout)
 
 Flags:
   --epsilon 0.01      relative tolerance for numeric correctness (default 1%)
+
+Note: this module never calls a model — it only re-reads a saved responses
+file, so re-grading with a different --epsilon (or after a grading-logic fix)
+never re-spends API budget.
+
+This is Commit 1's port of the original grade.py: the algorithm below is
+intentionally unchanged from the flat-script version so this refactor is
+behavior-preserving. Grading correctness itself is hardened in a later,
+dedicated commit.
 """
+
+from __future__ import annotations
 
 import argparse
 import csv
 import json
 import re
 
+from .io_utils import load_jsonl
+from .paths import DEFAULT_REPORT_PREFIX, DEFAULT_RESPONSES_PATH
+
 NUMBER_RE = re.compile(r"-?\d[\d,]*\.?\d*")
-
-
-def load_jsonl(path):
-    rows = []
-    with open(path, "r", encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if line:
-                rows.append(json.loads(line))
-    return rows
 
 
 def parse_number(s):
@@ -57,8 +59,8 @@ def last_number_in_text(text):
 
 
 def get_model_answer(row):
-    """extracted_answer (from run.py's ANSWER: parse) first; otherwise fall
-    back to scanning raw_response for a trailing number. Returns
+    """extracted_answer (from inference's ANSWER: parse) first; otherwise
+    fall back to scanning raw_response for a trailing number. Returns
     (value_or_None, source_tag)."""
     val = parse_number(row.get("extracted_answer"))
     if val is not None:
@@ -78,7 +80,7 @@ def is_correct(model_val, gold_val, epsilon):
 
 
 def summarize(rows, epsilon):
-    """Returns (per_row_graded, tier_table, model_table, overall)."""
+    """Returns (graded, tier_table, model_table, grid, overall)."""
     graded = []
     for row in rows:
         model_val, source = get_model_answer(row)
@@ -126,7 +128,6 @@ def print_report(tier_table, model_table, grid, overall, epsilon):
     models = sorted(model_table.keys(), key=lambda m: (m is None, m))
 
     print(f"\n=== Accuracy by tier x model (epsilon={epsilon}) ===\n")
-    header = ["model"] + tiers + ["overall"]
     col_w = max(len(m) for m in models) if models else 10
     col_w = max(col_w, 24)
     print(f"{'model':<{col_w}} " + " ".join(f"{t:>10}" for t in tiers) + f" {'overall':>10}")
@@ -200,18 +201,27 @@ def write_outputs(graded, tier_table, model_table, grid, overall, out_prefix, ep
     print(f"Wrote {incorrect_path} ({n_incorrect} incorrect responses for failure-mode analysis)")
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--in", dest="inp", default="responses.jsonl")
-    ap.add_argument("--out-prefix", default="report")
-    ap.add_argument("--epsilon", type=float, default=0.01,
-                     help="relative tolerance for numeric correctness (default 0.01 = 1%%)")
-    args = ap.parse_args()
+def grade(responses_path=DEFAULT_RESPONSES_PATH, out_prefix=DEFAULT_REPORT_PREFIX, epsilon: float = 0.01):
+    rows = load_jsonl(responses_path)
+    graded, tier_table, model_table, grid, overall = summarize(rows, epsilon)
+    print_report(tier_table, model_table, grid, overall, epsilon)
+    write_outputs(graded, tier_table, model_table, grid, overall, out_prefix, epsilon)
+    return graded, tier_table, model_table, grid, overall
 
-    rows = load_jsonl(args.inp)
-    graded, tier_table, model_table, grid, overall = summarize(rows, args.epsilon)
-    print_report(tier_table, model_table, grid, overall, args.epsilon)
-    write_outputs(graded, tier_table, model_table, grid, overall, args.out_prefix, args.epsilon)
+
+def build_arg_parser(parser: argparse.ArgumentParser | None = None) -> argparse.ArgumentParser:
+    parser = parser or argparse.ArgumentParser(
+        description="Grade saved model responses against gold answers.")
+    parser.add_argument("--in", dest="inp", default=str(DEFAULT_RESPONSES_PATH))
+    parser.add_argument("--out-prefix", default=str(DEFAULT_REPORT_PREFIX))
+    parser.add_argument("--epsilon", type=float, default=0.01,
+                         help="relative tolerance for numeric correctness (default 0.01 = 1%%)")
+    return parser
+
+
+def main(argv: list[str] | None = None) -> None:
+    args = build_arg_parser().parse_args(argv)
+    grade(args.inp, args.out_prefix, args.epsilon)
 
 
 if __name__ == "__main__":
