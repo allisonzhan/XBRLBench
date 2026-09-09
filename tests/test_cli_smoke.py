@@ -9,7 +9,7 @@ import sys
 
 import pytest
 
-SUBCOMMANDS = ["generate", "run", "grade"]
+SUBCOMMANDS = ["generate", "run", "grade", "validate"]
 
 
 def run_cli(*args):
@@ -47,4 +47,20 @@ def test_modules_import():
     import xbrlbench.generation  # noqa: F401
     import xbrlbench.inference  # noqa: F401
     import xbrlbench.grading  # noqa: F401
+    import xbrlbench.validation  # noqa: F401
     import xbrlbench.cli  # noqa: F401
+
+
+def test_validate_passes_on_the_real_question_bank():
+    result = run_cli("validate")
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "0 error(s)" in result.stdout
+
+
+def test_validate_exits_nonzero_on_a_broken_question_bank(tmp_path):
+    broken = tmp_path / "broken_questions.jsonl"
+    broken.write_text('{"id": "X-1", "tier": "T1"}\n', encoding="utf-8")  # missing almost everything
+    result = run_cli("validate", "--in", str(broken))
+    assert result.returncode == 1
+    assert "error(s)" in result.stdout
+    assert "0 error(s)" not in result.stdout
