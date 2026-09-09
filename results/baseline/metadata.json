@@ -1,0 +1,27 @@
+{
+  "run_id": "baseline",
+  "reconstructed": true,
+  "reconstruction_note": "This run predates xbrlbench.experiment (metadata capture was added later). Fields below are the best-known reconstruction from git history and the README's existing writeup, not a live capture -- see docs/METADATA.md for what a real run's metadata.json looks like.",
+  "started_at": null,
+  "completed_at": null,
+  "committed_at": "2026-09-05T19:59:50-04:00",
+  "committed_as": "234a757393cd573c226817522a4b51fa7ac34899",
+  "xbrlbench_version": null,
+  "xbrlbench_version_note": "predates the xbrlbench package; produced by the original flat generate.py/run.py/grade.py scripts at the commit above",
+  "benchmark_version": "v0.1",
+  "benchmark_version_note": "data/questions.jsonl has since been migrated to v0.2 (reasoning_type/tolerance fields added, commit 'feat: formalize benchmark question schema') with no changes to question wording or gold values, so this run's responses remain valid against the current question bank",
+  "git_commit": "234a757393cd573c226817522a4b51fa7ac34899",
+  "models": [
+    "openai/gpt-4o-2024-11-20",
+    "anthropic/claude-sonnet-4.5",
+    "google/gemini-2.5-pro",
+    "qwen/qwen-2.5-72b-instruct"
+  ],
+  "temperature": 0,
+  "max_tokens": null,
+  "prompt_version": "v1",
+  "prompt_version_note": "SYSTEM_PROMPT's wording has been verified unchanged from this run through the current xbrlbench.inference.SYSTEM_PROMPT, so the current v1 label applies retroactively",
+  "question_count": 68,
+  "response_count": 272,
+  "resume": false
+}

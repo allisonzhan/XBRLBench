@@ -1,90 +1,110 @@
 {
-  "epsilon": 0.01,
+  "epsilon": null,
   "overall": {
     "n": 272,
     "correct": 261,
+    "invalid": 0,
     "accuracy": 0.9595588235294118
   },
   "by_tier": {
     "T1": {
       "n": 80,
-      "correct": 79
+      "correct": 79,
+      "invalid": 0
     },
     "T2": {
       "n": 112,
-      "correct": 112
+      "correct": 112,
+      "invalid": 0
     },
     "T3": {
       "n": 80,
-      "correct": 70
+      "correct": 70,
+      "invalid": 0
     }
   },
   "by_model": {
     "openai/gpt-4o-2024-11-20": {
       "n": 68,
-      "correct": 60
+      "correct": 60,
+      "invalid": 0
     },
     "anthropic/claude-sonnet-4.5": {
       "n": 68,
-      "correct": 68
+      "correct": 68,
+      "invalid": 0
     },
     "google/gemini-2.5-pro": {
       "n": 68,
-      "correct": 67
+      "correct": 67,
+      "invalid": 0
     },
     "qwen/qwen-2.5-72b-instruct": {
       "n": 68,
-      "correct": 66
+      "correct": 66,
+      "invalid": 0
     }
   },
   "by_tier_and_model": {
     "T1|openai/gpt-4o-2024-11-20": {
       "n": 20,
-      "correct": 20
+      "correct": 20,
+      "invalid": 0
     },
     "T1|anthropic/claude-sonnet-4.5": {
       "n": 20,
-      "correct": 20
+      "correct": 20,
+      "invalid": 0
     },
     "T1|google/gemini-2.5-pro": {
       "n": 20,
-      "correct": 19
+      "correct": 19,
+      "invalid": 0
     },
     "T1|qwen/qwen-2.5-72b-instruct": {
       "n": 20,
-      "correct": 20
+      "correct": 20,
+      "invalid": 0
     },
     "T2|openai/gpt-4o-2024-11-20": {
       "n": 28,
-      "correct": 28
+      "correct": 28,
+      "invalid": 0
     },
     "T2|anthropic/claude-sonnet-4.5": {
       "n": 28,
-      "correct": 28
+      "correct": 28,
+      "invalid": 0
     },
     "T2|google/gemini-2.5-pro": {
       "n": 28,
-      "correct": 28
+      "correct": 28,
+      "invalid": 0
     },
     "T2|qwen/qwen-2.5-72b-instruct": {
       "n": 28,
-      "correct": 28
+      "correct": 28,
+      "invalid": 0
     },
     "T3|openai/gpt-4o-2024-11-20": {
       "n": 20,
-      "correct": 12
+      "correct": 12,
+      "invalid": 0
     },
     "T3|anthropic/claude-sonnet-4.5": {
       "n": 20,
-      "correct": 20
+      "correct": 20,
+      "invalid": 0
     },
     "T3|google/gemini-2.5-pro": {
       "n": 20,
-      "correct": 20
+      "correct": 20,
+      "invalid": 0
     },
     "T3|qwen/qwen-2.5-72b-instruct": {
       "n": 20,
-      "correct": 18
+      "correct": 18,
+      "invalid": 0
     }
   }
 }
