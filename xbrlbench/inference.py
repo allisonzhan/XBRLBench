@@ -1,14 +1,20 @@
 """xbrlbench.inference — send the question bank to a set of models over
 OpenRouter and record raw responses for grading.
 
-Reads records shaped like xbrlbench.generation's output:
+Reads records shaped like xbrlbench.generation's output (see
+xbrlbench.schema / docs/SCHEMA.md):
   id, ticker, fiscal_year, tier, question, gold_value, gold_unit,
-  source_concept, context
+  source_concept, context, reasoning_type, tolerance
 
 Writes one record per (question, model) to the output JSONL:
   id, ticker, fiscal_year, tier, model, question, gold_value, gold_unit,
-  source_concept, raw_response, extracted_answer, latency_s,
-  prompt_tokens, completion_tokens, error
+  source_concept, reasoning_type, tolerance, raw_response, extracted_answer,
+  latency_s, prompt_tokens, completion_tokens, error
+
+reasoning_type/tolerance are carried through so xbrlbench.grading can grade
+each row with its own question's tolerance rather than one global default;
+a responses file from before these fields existed still grades fine (grading
+falls back to a default tolerance when the field is absent).
 
 Auth: set OPENROUTER_API_KEY in the environment (or in a .env file — see
 .env.example).
@@ -208,6 +214,8 @@ def run(
                 "gold_value": q.get("gold_value"),
                 "gold_unit": q.get("gold_unit"),
                 "source_concept": q.get("source_concept"),
+                "reasoning_type": q.get("reasoning_type"),
+                "tolerance": q.get("tolerance"),
                 "raw_response": result["raw_response"],
                 "extracted_answer": extracted,
                 "latency_s": result["latency_s"],

@@ -20,7 +20,7 @@ mirrored by the `Question` dataclass in [`xbrlbench/schema.py`](../xbrlbench/sch
 | `source_concept`  | string  | The us-gaap XBRL concept(s) the gold answer was derived from — provenance, not shown to the model. |
 | `context`         | string  | The messy rendered statement snippet the model actually sees.                                |
 | `reasoning_type`  | string  | What kind of reasoning the question requires — see [Reasoning types](#reasoning-types).      |
-| `tolerance`       | number  | Per-question numeric tolerance. Currently informational — every question is set to the historical global default (`0.01`); grading still applies a single CLI-wide `--epsilon`. `xbrlbench.grading` starts honoring this field, and where the value needs to change per `gold_unit` (e.g. an absolute tolerance for `ratio`/`percent` instead of relative), when the grading logic is hardened — see the `fix: harden numeric answer grading` commit. |
+| `tolerance`       | number  | Per-question numeric tolerance, interpreted together with `gold_unit` by `xbrlbench.grading.numeric_tolerance` — see [Tolerance](#tolerance) below. Every question is currently `0.01`, the historical default. |
 
 ## Difficulty tiers
 
@@ -61,6 +61,22 @@ line, not extra computation. Tier and reasoning type are independent axes:
 tier is about *how hard it is to get right*, reasoning type is about *what
 kind of operation is required*.
 
+## Tolerance
+
+`tolerance` is combined with `gold_unit` into an absolute +/- window a model
+answer must fall within (`xbrlbench.grading.numeric_tolerance`):
+
+| `gold_unit` | formula                              | why                                                                 |
+|-------------|---------------------------------------|----------------------------------------------------------------------|
+| `USD`       | `max(tolerance * \|gold\|, $1)`       | relative tolerance, same as the historical behavior; $1 floor only matters for a near-zero gold value. |
+| `ratio`     | `tolerance` (used directly, absolute) | ratio questions ask for "2 decimals"; an absolute window maps directly to "off by at most 1 in the last requested digit," which a relative-to-a-small-number formula doesn't. |
+| `percent`   | `max(tolerance * \|gold\|, 0.1 pts)`  | relative tolerance, same as the historical behavior, but with a floor: without it, a near-0% gold value (e.g. ~0% YoY growth) would demand near-exact precision purely because its denominator is tiny — a division-by-near-zero trap, not a real precision requirement. |
+
+`0.01` (the current value for every question) therefore means "within 1%
+relative, $1/0.1pt minimum" for USD/percent, and "within 0.01" for ratio.
+`python -m xbrlbench grade --epsilon <value>` overrides every row's
+tolerance uniformly, for experimentation.
+
 ## Provenance
 
 `source_concept` records the us-gaap XBRL concept(s) `xbrlbench.generation`
@@ -77,11 +93,16 @@ machine-verified, not manually curated.
 identifies the benchmark's *content*, separately from `xbrlbench.__version__`
 (the code/package version):
 
-- **Bump `BENCHMARK_VERSION`** when `data/questions.jsonl` changes in a way
-  that could change results: added/removed/reworded questions, changed gold
-  values, changed schema fields, changed tolerance semantics.
-- **Don't bump it** for code-only changes (grading fixes, new CLI commands,
-  reporting/tooling) that don't touch the question bank's content.
+- **Bump `BENCHMARK_VERSION`** when `data/questions.jsonl` itself changes in
+  a way that could change results: added/removed/reworded questions, changed
+  gold values, changed/added schema fields, changed a stored `tolerance`
+  value.
+- **Don't bump it** for code-only changes that don't touch the question bank
+  file — including a grading-logic fix that changes how an existing
+  `tolerance` value is *interpreted* (e.g. becoming unit-aware instead of
+  always-relative). That's a code change to `xbrlbench.grading`, not a
+  benchmark content change, even though it can change accuracy numbers; see
+  the `fix: harden numeric answer grading` commit.
 
 `v0.1` was the original 68-question bank (`id`..`context` fields only).
 `v0.2` adds `reasoning_type` and `tolerance` to every record with no changes
