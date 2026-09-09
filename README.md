@@ -123,6 +123,25 @@ python3 grade.py --in responses.jsonl --out-prefix report --epsilon 0.02
   parsed model answer, and full raw transcript, for manual failure-mode
   analysis.
 
+### Viewing results in a browser
+
+`report.html` is a static, self-contained explorer for the results — no
+server, no build step, no network access beyond loading two Google Fonts.
+Double-click it (or open it from a browser's File > Open) to get:
+
+- the tier x model accuracy heatmap and headline number from
+  `report_summary.json`,
+- the three-mode failure taxonomy as clickable filters, and
+- all 272 graded responses, grouped by question and expandable down to the
+  statement snippet the model saw and its full raw transcript.
+
+It's a **snapshot**, not a live view: the data (joined from
+`responses.jsonl` and `questions.jsonl`, graded with the same logic as
+`grade.py`) is embedded directly in the HTML at generation time. There's no
+script in this repo yet that regenerates it — after a fresh `run.py` +
+`grade.py` pass, `report.html` needs to be rebuilt to reflect the new
+results.
+
 ### Models used
 
 Configured at the top of `run.py`, pinned to exact IDs for reproducibility.
