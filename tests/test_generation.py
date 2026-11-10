@@ -12,6 +12,7 @@ calls.
 from xbrlbench.generation import (
     _days,
     annual_value,
+    derive_total_liabilities,
     fiscal_year_end,
     make_questions,
     render_snippet,
@@ -351,3 +352,22 @@ def test_restated_comparative_does_not_override_original_report():
 def test_explicit_period_end_is_respected():
     facts = realistic_facts()
     assert annual_value(facts, ["Assets"], 2024, period_end="2023-09-30") == (352_583, "Assets")
+
+
+# ---------------------------------------------------------------------------
+# derive_total_liabilities -- KO/WMT don't tag `Liabilities`
+# ---------------------------------------------------------------------------
+
+def test_derive_total_liabilities_fills_missing_value_excluding_nci():
+    vals = {"liabilities": None, "liabilities_and_equity": 97_703.0, "equity_incl_nci": 27_480.0}
+    assert derive_total_liabilities(vals)["liabilities"] == 70_223.0
+
+
+def test_derive_total_liabilities_never_overwrites_reported_value():
+    vals = {"liabilities": 1.0, "liabilities_and_equity": 100.0, "equity_incl_nci": 40.0}
+    assert derive_total_liabilities(vals)["liabilities"] == 1.0
+
+
+def test_derive_total_liabilities_leaves_none_when_an_input_is_missing():
+    vals = {"liabilities": None, "liabilities_and_equity": 100.0, "equity_incl_nci": None}
+    assert derive_total_liabilities(vals)["liabilities"] is None

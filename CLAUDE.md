@@ -75,7 +75,9 @@ docs/                     SCHEMA.md, METADATA.md, PRD.md
   days are both "annual".
 - Filers tag differently: revenue may be `Revenues` or
   `RevenueFromContractWithCustomerExcludingAssessedTax`; KO and WMT don't tag
-  `Liabilities`; WMT doesn't tag `GrossProfit`.
+  `Liabilities` (we derive it as `LiabilitiesAndStockholdersEquity` minus
+  equity *including* noncontrolling interest — `generation.derive_total_liabilities`);
+  WMT doesn't tag `GrossProfit`.
 - The same period appears in several filings (original, next year's
   comparative, 10-K/A). We take the earliest-filed value (as originally
   reported).

@@ -58,6 +58,9 @@ CONCEPTS = {
     "equity": ["StockholdersEquity"],
     "gross_profit": ["GrossProfit"],
     "cogs": ["CostOfGoodsAndServicesSold", "CostOfRevenue"],
+    # Inputs for derive_total_liabilities (not rendered in the snippet).
+    "liabilities_and_equity": ["LiabilitiesAndStockholdersEquity"],
+    "equity_incl_nci": ["StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"],
 }
 
 UA_TEMPLATE = "financial-eval-research {email}"
@@ -146,6 +149,22 @@ def annual_value(facts: dict, concept_candidates: list[str], fy: int,
         if best:
             return best[1], concept
     return None, None
+
+
+def derive_total_liabilities(vals: dict) -> dict:
+    """Fill in `liabilities` for filers that don't tag `Liabilities` (KO, WMT).
+
+    Total liabilities = total liabilities-and-equity minus total equity
+    INCLUDING noncontrolling interest. NCI is equity, not a liability, so
+    subtracting only parent-company `StockholdersEquity` would overstate
+    liabilities by the NCI amount. A reported `Liabilities` value always wins.
+    """
+    if vals.get("liabilities") is not None:
+        return vals
+    lse, eq = vals.get("liabilities_and_equity"), vals.get("equity_incl_nci")
+    if lse is not None and eq is not None:
+        vals["liabilities"] = lse - eq
+    return vals
 
 
 def render_snippet(vals: dict, ticker: str, fy: int) -> str:
@@ -263,7 +282,7 @@ def generate(email: str, out_path=DEFAULT_QUESTIONS_PATH) -> list[dict]:
             for name, cands in CONCEPTS.items():
                 v, _ = annual_value(facts, cands, fy, period_end=period_end)
                 vals[name] = v
-            by_year[fy] = vals
+            by_year[fy] = derive_total_liabilities(vals)
         for fy in YEARS:
             if fy not in by_year:
                 continue
