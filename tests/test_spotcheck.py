@@ -34,6 +34,41 @@ def test_candidates_prefer_same_calendar_year():
     assert [r.report_date for r in edgar.candidates_for_fiscal_year(refs, 2023)] == ["2023-09-30", "2024-09-28"]
 
 
+OLDER_PAGE = {
+    "form":            ["10-K",       "8-K"],
+    "accessionNumber": ["0001-22-5",  "0001-22-4"],
+    "primaryDocument": ["k2022.htm",  "e.htm"],
+    "filingDate":      ["2022-10-28", "2022-10-27"],
+    "reportDate":      ["2022-09-24", "2022-10-27"],
+}
+
+
+def test_annual_filings_reads_older_pages():
+    # A prolific filer's earlier 10-Ks fall out of `recent` into paged files.
+    subs = {**SUBMISSIONS, "older_pages": [OLDER_PAGE]}
+    refs = edgar.annual_filings(subs, "0000320193")
+    assert [r.primary_document for r in refs] == ["k2024.htm", "k2023.htm", "k2022.htm"]
+
+
+def test_get_submissions_fetches_older_pages_since_cutoff(monkeypatch):
+    import json
+    main = {"filings": {"recent": SUBMISSIONS["filings"]["recent"], "files": [
+        {"name": "CIK0000320193-submissions-001.json", "filingTo": "2023-06-19"},
+        {"name": "CIK0000320193-submissions-002.json", "filingTo": "2012-09-04"},
+    ]}}
+    fetched = []
+
+    def fake_fetch(url, email):
+        fetched.append(url)
+        return json.dumps(OLDER_PAGE if url.endswith("-001.json") else main).encode()
+
+    monkeypatch.setattr(edgar, "fetch", fake_fetch)
+    subs = edgar.get_submissions("0000320193", "a@b.c", since="2015-01-01")
+    assert fetched == ["https://data.sec.gov/submissions/CIK0000320193.json",
+                       "https://data.sec.gov/submissions/CIK0000320193-submissions-001.json"]
+    assert subs["older_pages"] == [OLDER_PAGE]
+
+
 def test_sample_is_deterministic_and_checkable_only():
     rows = [{"id": f"X-{i}", "source_concept": c}
             for i, c in enumerate(["Assets", "Revenue YoY", "NetIncomeLoss", "Assets", "GrossProfit/Revenue"])]

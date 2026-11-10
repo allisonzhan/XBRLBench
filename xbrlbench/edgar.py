@@ -17,6 +17,7 @@ from dataclasses import dataclass
 
 UA_TEMPLATE = "xbrlbench research {email}"
 SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik}.json"
+OLDER_PAGE_URL = "https://data.sec.gov/submissions/{name}"
 ARCHIVE_URL = "https://www.sec.gov/Archives/edgar/data/{cik_int}/{accession}/{document}"
 REQUEST_INTERVAL_S = 0.2
 
@@ -54,13 +55,16 @@ class FilingRef:
 def annual_filings(submissions: dict, cik: str, forms: tuple[str, ...] = ("10-K",)) -> list[FilingRef]:
     """All filings of `forms` listed in a submissions-API response, newest first.
 
-    Only the `filings.recent` block is read (roughly the last 1,000 filings),
-    which covers every 10-K from the last several years for any filer."""
-    recent = submissions.get("filings", {}).get("recent", {})
+    Reads `filings.recent` plus any older pages that `get_submissions` attached
+    under `older_pages`. `recent` alone holds only the last ~1,000 filings of
+    any form, which for a prolific filer (WMT) is under three years."""
+    blocks = [submissions.get("filings", {}).get("recent", {}), *submissions.get("older_pages", [])]
     columns = ("form", "accessionNumber", "primaryDocument", "filingDate", "reportDate")
-    rows = zip(*(recent.get(c, []) for c in columns), strict=True)
-    refs = [FilingRef(cik, form, acc, doc, filed, report)
-            for form, acc, doc, filed, report in rows if form in forms]
+    refs = []
+    for block in blocks:
+        rows = zip(*(block.get(c, []) for c in columns), strict=True)
+        refs += [FilingRef(cik, form, acc, doc, filed, report)
+                 for form, acc, doc, filed, report in rows if form in forms]
     return sorted(refs, key=lambda r: r.filing_date, reverse=True)
 
 
@@ -76,5 +80,14 @@ def candidates_for_fiscal_year(refs: list[FilingRef], fiscal_year: int) -> list[
     return sorted(picked, key=lambda r: by_year[int(r.report_date[:4])])
 
 
-def get_submissions(cik: str, email: str) -> dict:
-    return json.loads(fetch(SUBMISSIONS_URL.format(cik=cik), email))
+def get_submissions(cik: str, email: str, since: str = "2015-01-01") -> dict:
+    """The submissions-API response for `cik`, with the older pages listed in
+    `filings.files` that reach back to `since` fetched and attached as
+    `older_pages` (same column layout as `filings.recent`)."""
+    submissions = json.loads(fetch(SUBMISSIONS_URL.format(cik=cik), email))
+    submissions["older_pages"] = [
+        json.loads(fetch(OLDER_PAGE_URL.format(name=page["name"]), email))
+        for page in submissions.get("filings", {}).get("files", [])
+        if page.get("filingTo", "9999") >= since
+    ]
+    return submissions
