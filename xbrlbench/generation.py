@@ -31,6 +31,7 @@ import time
 import urllib.request
 from datetime import date
 
+from .grading import DEFAULT_TOLERANCE
 from .io_utils import write_jsonl
 from .paths import DEFAULT_QUESTIONS_PATH
 
@@ -189,7 +190,7 @@ def render_two_year_snippet(vals: dict, prev_vals: dict, ticker: str, fy: int) -
 def make_questions(ticker: str, fy: int, vals: dict, prev_vals: dict | None) -> list[dict]:
     qs: list[dict] = []
 
-    def q(tier, question, gold_value, gold_unit, concept, context=None):
+    def q(tier, question, gold_value, gold_unit, concept, reasoning_type, context=None):
         if gold_value is None:
             return
         qs.append({
@@ -200,41 +201,44 @@ def make_questions(ticker: str, fy: int, vals: dict, prev_vals: dict | None) -> 
             "gold_unit": gold_unit,
             "source_concept": concept,
             "context": context if context is not None else render_snippet(vals, ticker, fy),
+            "reasoning_type": reasoning_type,
+            "tolerance": DEFAULT_TOLERANCE,
         })
 
     # T1 — single lookup (answer in raw dollars; snippet shows thousands → unit trap)
     q("T1", f"What were {ticker}'s total assets for fiscal year {fy}? Answer in USD.",
-      vals.get("assets"), "USD", "Assets")
+      vals.get("assets"), "USD", "Assets", "direct_retrieval")
     q("T1", f"What was {ticker}'s net income for fiscal year {fy}? Answer in USD.",
-      vals.get("net_income"), "USD", "NetIncomeLoss")
+      vals.get("net_income"), "USD", "NetIncomeLoss", "direct_retrieval")
 
     # T2 — computation
     if vals.get("assets_current") and vals.get("liabilities_current"):
         q("T2", f"What was {ticker}'s current ratio for fiscal year {fy}? "
                 f"(current assets / current liabilities, 2 decimals)",
           vals["assets_current"] / vals["liabilities_current"], "ratio",
-          "AssetsCurrent/LiabilitiesCurrent")
+          "AssetsCurrent/LiabilitiesCurrent", "ratio")
     if vals.get("gross_profit") and vals.get("revenue"):
         q("T2", f"What was {ticker}'s gross margin for fiscal year {fy}? "
                 f"(gross profit / revenue, as a percentage)",
           100 * vals["gross_profit"] / vals["revenue"], "percent",
-          "GrossProfit/Revenue")
+          "GrossProfit/Revenue", "ratio")
     if prev_vals and prev_vals.get("revenue") and vals.get("revenue"):
         q("T2", f"What was {ticker}'s year-over-year revenue growth from FY{fy - 1} "
                 f"to FY{fy}? (as a percentage)",
           100 * (vals["revenue"] - prev_vals["revenue"]) / prev_vals["revenue"],
-          "percent", "Revenue YoY",
+          "percent", "Revenue YoY", "percentage_change",
           context=render_two_year_snippet(vals, prev_vals, ticker, fy))
 
     # T3 — distractor / multi-hop (siblings present in snippet to mislead)
     if vals.get("liabilities_current"):
         q("T3", f"From {ticker}'s FY{fy} balance sheet, what were total CURRENT "
                 f"liabilities (not total liabilities)? Answer in USD.",
-          vals["liabilities_current"], "USD", "LiabilitiesCurrent (distractor: Liabilities)")
+          vals["liabilities_current"], "USD", "LiabilitiesCurrent (distractor: Liabilities)",
+          "direct_retrieval")
     if prev_vals and prev_vals.get("assets") and vals.get("assets"):
         q("T3", f"By how much did {ticker}'s total assets change from FY{fy - 1} to "
                 f"FY{fy}? Answer the dollar difference in USD (positive if increased).",
-          vals["assets"] - prev_vals["assets"], "USD", "Assets delta",
+          vals["assets"] - prev_vals["assets"], "USD", "Assets delta", "multi_period_comparison",
           context=render_two_year_snippet(vals, prev_vals, ticker, fy))
     return qs
 

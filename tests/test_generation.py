@@ -151,9 +151,6 @@ def test_render_two_year_snippet_stacks_both_years():
 
 # ---------------------------------------------------------------------------
 # make_questions -- tier construction, gold values, reasoning-type mapping
-# (reasoning_type isn't a make_questions output field yet at this layer --
-# see xbrlbench.schema; this just locks down source_concept/tier/gold_value,
-# which the schema migration's reasoning_type mapping was keyed on)
 # ---------------------------------------------------------------------------
 
 FULL_VALS = {
@@ -174,6 +171,24 @@ def test_full_data_produces_all_seven_question_templates():
     assert concepts == {
         "Assets", "NetIncomeLoss", "AssetsCurrent/LiabilitiesCurrent", "GrossProfit/Revenue",
         "Revenue YoY", "LiabilitiesCurrent (distractor: Liabilities)", "Assets delta",
+    }
+
+
+def test_every_record_is_schema_complete_with_expected_reasoning_types():
+    from xbrlbench.schema import Question
+
+    qs = make_questions("AAPL", 2023, FULL_VALS, PREV_VALS)
+    for q in qs:
+        Question.from_dict(q)  # raises if a required field (e.g. tolerance) is missing
+        assert q["tolerance"] == 0.01
+    assert {c: q["reasoning_type"] for c, q in by_concept(qs).items()} == {
+        "Assets": "direct_retrieval",
+        "NetIncomeLoss": "direct_retrieval",
+        "AssetsCurrent/LiabilitiesCurrent": "ratio",
+        "GrossProfit/Revenue": "ratio",
+        "Revenue YoY": "percentage_change",
+        "LiabilitiesCurrent (distractor: Liabilities)": "direct_retrieval",
+        "Assets delta": "multi_period_comparison",
     }
 
 
