@@ -231,3 +231,20 @@ def test_build_corpus_end_to_end(monkeypatch, tmp_path, raw):
     filings.build_corpus("x@example.com", out, n_companies=1, per_company=2)
     assert fetched == []
     assert filings.summarize(out)["questions"] == 11
+
+
+def test_build_corpus_trial_tickers_take_newest_filing_any_split(monkeypatch, tmp_path, raw):
+    test_cik = next(c for c in range(1, 1000) if filings.company_group(c) == "test")
+    subs = {"name": "N", "sic": "3829", "filings": {"recent": {
+        "form": ["10-K"], "accessionNumber": ["a-25"], "primaryDocument": ["k25.htm"],
+        "filingDate": ["2025-08-20"], "reportDate": ["2025-06-28"]}}}
+    monkeypatch.setattr(edgar, "company_list", lambda email: [
+        {"cik": f"{test_cik:010d}", "ticker": "NWIN", "title": "N"},
+        {"cik": "0000000002", "ticker": "OTHER", "title": "O"}])
+    monkeypatch.setattr(edgar, "get_submissions", lambda c, email, since="": subs)
+    monkeypatch.setattr(edgar, "fetch", lambda url, email: raw.encode("utf-8"))
+    out = str(tmp_path / "trial.jsonl")
+    stats = filings.build_corpus("x@example.com", out, n_companies=5, per_company=1, tickers=["nwin"])
+    assert stats["ok"] == 1 and stats["companies_ok"] == 1
+    rows = [json.loads(line) for line in open(out, encoding="utf-8")]
+    assert {r["split"] for r in rows} == {None}  # held-out company, filed before the cutoff

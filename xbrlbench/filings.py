@@ -368,9 +368,10 @@ def interleaved_order(items: list) -> list:
     return [items[i] for i in order]
 
 
-def _filings_for_split(refs: list[edgar.FilingRef], cik: str, per_company: int, since: str) -> list[edgar.FilingRef]:
+def _filings_for_split(refs: list[edgar.FilingRef], cik: str, per_company: int, since: str,
+                       any_split: bool = False) -> list[edgar.FilingRef]:
     refs = [r for r in refs if r.filing_date >= since and r.primary_document.lower().endswith((".htm", ".html"))]
-    keep = [r for r in refs if assign_split(cik, r.filing_date) is not None]
+    keep = refs if any_split else [r for r in refs if assign_split(cik, r.filing_date) is not None]
     return keep[:per_company]  # refs are newest first
 
 
@@ -386,15 +387,25 @@ def _read_done(log_path: str) -> set[str]:
 
 def build_corpus(email: str, out: str, n_companies: int = 500, per_company: int = 2,
                  since: str = "2021-01-01", keep_failures: str | None = None,
-                 max_attempts: int | None = None) -> Counter:
+                 max_attempts: int | None = None, tickers: list[str] | None = None) -> Counter:
     """Download 10-Ks for up to `n_companies` companies that yield questions
     and append the questions to `out` (JSONL). Every filing tried is logged
     to `out + ".log.jsonl"` with its status, which is also the resume point:
-    re-running skips logged accessions and counts their companies."""
+    re-running skips logged accessions and counts their companies.
+
+    `tickers` restricts the build to those companies and takes their newest
+    10-Ks whatever their split (split is then null for filings outside it):
+    a quick trial on chosen filers before a full run."""
     log_path = out + ".log.jsonl"
     os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
     done = _read_done(log_path)
     companies = edgar.company_list(email)
+    if tickers:
+        wanted = {t.upper() for t in tickers}
+        companies = [c for c in companies if c["ticker"].upper() in wanted]
+        missing = wanted - {c["ticker"].upper() for c in companies}
+        if missing:
+            print(f"[warn] not in SEC's ticker list: {sorted(missing)}")
     ok_companies: set[str] = set()
     if os.path.exists(log_path):
         with open(log_path, encoding="utf-8") as f:
@@ -406,7 +417,7 @@ def build_corpus(email: str, out: str, n_companies: int = 500, per_company: int 
     attempts = 0
     max_attempts = max_attempts or 4 * n_companies
     with open(out, "a", encoding="utf-8") as qf, open(log_path, "a", encoding="utf-8") as lf:
-        for comp in interleaved_order(companies):
+        for comp in (companies if tickers else interleaved_order(companies)):
             if len(ok_companies) >= n_companies or attempts >= max_attempts:
                 break
             cik = comp["cik"]
@@ -423,7 +434,8 @@ def build_corpus(email: str, out: str, n_companies: int = 500, per_company: int 
             if sic in SKIP_SIC:
                 stats["skipped_sic"] += 1
                 continue
-            refs = _filings_for_split(edgar.annual_filings(subs, cik), cik, per_company, since)
+            refs = _filings_for_split(edgar.annual_filings(subs, cik), cik, per_company, since,
+                                      any_split=bool(tickers))
             if not refs:
                 stats["no_filings"] += 1
                 continue
@@ -488,13 +500,16 @@ def build_arg_parser(parser: argparse.ArgumentParser | None = None) -> argparse.
     parser.add_argument("--per-company", type=int, default=2, help="10-Ks per company (newest in its split)")
     parser.add_argument("--since", default="2021-01-01", help="ignore filings before this date")
     parser.add_argument("--keep-failures", default=None, help="directory to save filings that failed, for debugging")
+    parser.add_argument("--tickers", default=None,
+                        help="comma-separated tickers for a trial run (newest 10-Ks, any split)")
     parser.add_argument("--max-attempts", type=int, default=None, help="companies to try (default 4x --companies)")
     return parser
 
 
 def run(args: argparse.Namespace) -> None:
     build_corpus(args.email, args.out, args.companies, args.per_company, args.since,
-                 args.keep_failures, args.max_attempts)
+                 args.keep_failures, args.max_attempts,
+                 args.tickers.split(",") if args.tickers else None)
     print(json.dumps(summarize(args.out), indent=2))
 
 
