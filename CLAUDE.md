@@ -110,10 +110,11 @@ docs/                     SCHEMA.md, METADATA.md, PRD.md
   `spotcheck --n 30` passed 30/30 against the filed 10-Ks on 2026-11-10,
   covering every checkable question (total assets, net income and current
   liabilities for all 5 companies, FY2023–2024).
-- Milestone 2 (real filings): in progress. `filings.py` builds up to 11
-  questions per 10-K from its real statement tables, with the held-out
-  split. Tested on fixtures only: the next step is a `build --tickers`
-  trial on real filings (needs the XBRLBench environment), fixing what
-  breaks, then the 500-company build and a hand-checked sample.
-  The "negative if it decreased" wording (v0.4) is in the generator, but
-  `data/questions.jsonl` has not been regenerated yet.
+- Milestone 2 (real filings): built. On 2026-11-10 `build --companies 500
+  --per-company 2` produced 8,208 questions from 968 10-Ks of 500 companies
+  (all SIC divisions), and `audit` passed 8,208/8,208. Trials on 30 named
+  companies fixed the parser against real markup; 10 hand-checked questions
+  all matched. The corpus (~22 MB) is not committed: `data/filings/` is
+  gitignored. Open gap: only 126 held-out (`test`) questions, because few
+  10-Ks are filed after 2026-07-01; the PRD's fix is adding 10-Qs to the
+  held-out set. `data/questions.jsonl` (synthetic bank) is at v0.4.

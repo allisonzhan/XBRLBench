@@ -13,3 +13,6 @@ dist/
 # local experiment runs -- scratch output, not committed by default.
 # results/baseline/ is the one intentionally-committed example run.
 results/runs/
+
+# real-filing corpus build outputs (large; published separately)
+data/filings/
