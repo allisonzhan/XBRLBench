@@ -27,9 +27,11 @@ python -m xbrlbench generate --email <contact>   # rebuild data/questions.jsonl 
 python -m xbrlbench run --limit 4                # live model eval (needs OPENROUTER_API_KEY, costs money)
 python -m xbrlbench grade|report|errors --in <responses.jsonl>   # offline, free
 python -m xbrlbench spotcheck --email <contact> # compare gold values with the filed 10-Ks (network)
+python -m xbrlbench build --email <contact> --tickers AAPL,JPM   # real-filing questions, trial (network)
+python -m xbrlbench build --email <contact> --companies 500      # full real-filing corpus (network, resumable)
 ```
 
-Network: `generate` and `spotcheck` need `data.sec.gov` and `www.sec.gov`. The "XBRLBench" cloud environment
+Network: `generate`, `spotcheck` and `build` need `data.sec.gov` and `www.sec.gov`. The "XBRLBench" cloud environment
 allows it; the Default environment does not. SEC requires a real contact
 email in the User-Agent (`--email`) — ask the user, never invent one.
 
@@ -45,7 +47,8 @@ xbrlbench/schema.py       Question dataclass + allowed values
 xbrlbench/ixbrl.py        inline-XBRL 10-K -> facts + statement tables (milestone 2)
 xbrlbench/edgar.py        EDGAR submissions lookup + rate-limited downloads
 xbrlbench/spotcheck.py    gold values vs. the filed 10-K's own tags
-tests/fixtures/           hand-written iXBRL sample mirroring EDGAR filings
+xbrlbench/filings.py      real 10-K tables -> questions, train/test split, corpus build
+tests/fixtures/           hand-written iXBRL samples (realistic_10k.htm mirrors EDGAR markup)
 data/questions.jsonl      the benchmark (generated, committed)
 results/baseline/         the committed reference run
 docs/                     SCHEMA.md, METADATA.md, PRD.md
@@ -88,6 +91,14 @@ docs/                     SCHEMA.md, METADATA.md, PRD.md
   reported).
 - Large filers report "in millions"; the current synthetic snippet renders
   "in thousands". Real-filing rendering is milestone 2 in the PRD.
+- In filed 10-Ks, unit ids (`unitRef`) are arbitrary: compare `Fact.unit`
+  (the resolved measure), never the id. The "(In millions...)" line and the
+  statement title usually sit in divs above the table, not inside it, and
+  a balance sheet can be split over two tables by a page break
+  (`ixbrl.primary_statements` merges them).
+- Never trust a stated scale blindly: `filings.table_scale_problem` drops a
+  statement whose "(In thousands/millions)" text disagrees with its tags'
+  `scale`.
 
 ## Current status (update as milestones land)
 
@@ -97,7 +108,10 @@ docs/                     SCHEMA.md, METADATA.md, PRD.md
   `spotcheck --n 30` passed 30/30 against the filed 10-Ks on 2026-11-10,
   covering every checkable question (total assets, net income and current
   liabilities for all 5 companies, FY2023–2024).
-- Milestone 2 (real filings): started. `ixbrl.py` parses facts and
-  statement tables from a filed 10-K; it is tested on a fixture only and
-  must be validated on real filings next, then wired into question
-  generation.
+- Milestone 2 (real filings): in progress. `filings.py` builds up to 11
+  questions per 10-K from its real statement tables, with the held-out
+  split. Tested on fixtures only: the next step is a `build --tickers`
+  trial on real filings (needs the XBRLBench environment), fixing what
+  breaks, then the 500-company build and a hand-checked sample.
+  The "negative if it decreased" wording (v0.4) is in the generator, but
+  `data/questions.jsonl` has not been regenerated yet.
