@@ -118,7 +118,10 @@ def test_questions_quote_the_filings_row_labels(built):
 def test_change_questions_state_the_sign_convention(built):
     q = by_family(built[0])
     assert "negative if it decreased" in q["revenue_growth"]["question"]
-    assert "negative if it decreased" in q["net_income_change"]["question"]
+    assert "a loss narrowed" in q["net_income_change"]["question"]
+    assert "negative number for a net loss" in q["lookup_net_income"]["question"]
+    assert "negative number if cash was used" in q["lookup_operating_cash_flow"]["question"]
+    assert "negative for an operating loss" in q["operating_margin"]["question"]
 
 
 def test_context_has_only_the_needed_statement_and_no_markup(built):

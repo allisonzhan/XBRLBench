@@ -78,6 +78,15 @@ LINE_ITEMS: dict[str, tuple[str, tuple[str, ...]]] = {
 
 STATEMENT_ORDER = ("income_statement", "balance_sheet", "cash_flow")
 
+# Sign conventions stated in every question about a signed line item, whatever
+# the filing's own value, so a "Net loss" or "Net cash used in ..." row label
+# can't be read as a positive magnitude. (M3 found frontier models split on
+# this when the question was silent.)
+SIGN_NOTES = {
+    "net_income": ", as a negative number for a net loss",
+    "operating_cash_flow": ", as a negative number if cash was used",
+}
+
 _MONTHS = ("January", "February", "March", "April", "May", "June", "July", "August",
            "September", "October", "November", "December")
 
@@ -367,7 +376,8 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
             continue
         kind = LINE_ITEMS[name][0]
         add(f"lookup_{name}", "T1", "direct_retrieval",
-            f"According to {company}'s {meta.form}, what was {_q(it.label)} {phrase(kind, cur)}? Answer in USD.",
+            f"According to {company}'s {meta.form}, what was {_q(it.label)} {phrase(kind, cur)}? "
+            f"Answer in USD{SIGN_NOTES.get(name, '')}.",
             it.value, "USD", it.concept, [kind], it)
 
     # --- T2: ratios and margins ----------------------------------------------
@@ -390,7 +400,8 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
         if oi:
             add("operating_margin", "T2", "ratio",
                 f"What was {company}'s operating margin {is_when}, computed as "
-                f"{_q(oi.label)} divided by {_q(rev.label)}? Answer as a percentage.",
+                f"{_q(oi.label)} divided by {_q(rev.label)}? Answer as a percentage "
+                f"(negative for an operating loss).",
                 100 * oi.value / rev.value, "percent", f"{oi.concept}/{rev.concept}", ["income_statement"], oi, rev)
 
     # --- T2: year-over-year change -------------------------------------------
@@ -408,9 +419,10 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
     ni, ni_prev = get("net_income", cur), get("net_income", prev)
     if ni and ni_prev and ni.label == ni_prev.label and ni.value != ni_prev.value:
         add("net_income_change", "T3", "multi_period_comparison",
-            f"By how much did {company}'s {_q(ni.label)} change from the {period_word} ended "
-            f"{long_date(prev)} to the {period_word} ended {when}? Answer the difference in USD "
-            f"(positive if it increased, negative if it decreased).",
+            f"By how much did {company}'s net income, reported as {_q(ni.label)}, change from the "
+            f"{period_word} ended {long_date(prev)} to the {period_word} ended {when}? Count a net loss "
+            f"as negative net income and answer the difference in USD (positive if net income "
+            f"increased or a loss narrowed, negative if it decreased or a loss widened).",
             ni.value - ni_prev.value, "USD", f"{ni.concept} delta", ["income_statement"], ni, ni_prev)
 
     ocf, capex = get("operating_cash_flow", cur), get("capex", cur)
@@ -418,7 +430,7 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
         add("free_cash_flow", "T3", "derived_metric",
             f"What was {company}'s free cash flow {phrase('cash_flow', cur)}, defined as "
             f"{_q(ocf.label)} minus {_q(capex.label)} (capital expenditures, as a positive amount)? "
-            f"Answer in USD.",
+            f"Count net cash used in operations as negative. Answer in USD (negative for an outflow).",
             ocf.value - capex.value, "USD", f"{ocf.concept}-{capex.concept}", ["cash_flow"], ocf, capex)
 
     report.questions = len(questions)
