@@ -99,8 +99,8 @@ def test_errors_end_to_end_on_baseline_responses(tmp_path):
 
     records = errors(responses_path, DEFAULT_QUESTIONS_PATH, out_prefix)
 
-    # Matches report_summary.json: 272 - 261 correct = 11 non-correct.
-    assert len(records) == 11
+    # Matches report_summary.json: 272 - 262 correct = 10 non-correct.
+    assert len(records) == 10
     assert all(r["status"] != "correct" for r in records)
     assert all(r["reasoning_type"] is not None for r in records)  # backfilled, not left None
 
