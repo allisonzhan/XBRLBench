@@ -110,11 +110,11 @@ docs/                     SCHEMA.md, METADATA.md, PRD.md
   `spotcheck --n 30` passed 30/30 against the filed 10-Ks on 2026-11-10,
   covering every checkable question (total assets, net income and current
   liabilities for all 5 companies, FY2023–2024).
-- Milestone 2 (real filings): built. On 2026-11-10 `build --companies 500
-  --per-company 2` produced 8,208 questions from 968 10-Ks of 500 companies
-  (all SIC divisions), and `audit` passed 8,208/8,208. Trials on 30 named
-  companies fixed the parser against real markup; 10 hand-checked questions
-  all matched. The corpus (~22 MB) is not committed: `data/filings/` is
-  gitignored. Open gap: only 126 held-out (`test`) questions, because few
-  10-Ks are filed after 2026-07-01; the PRD's fix is adding 10-Qs to the
-  held-out set. `data/questions.jsonl` (synthetic bank) is at v0.4.
+- Milestone 2 (real filings): done. On 2026-11-10 `build --companies 500
+  --per-company 2` produced 8,110 questions from 962 filings of 500
+  companies (all SIC divisions); `audit` passed 8,110/8,110 and 18
+  hand-checked questions (10 from 10-Ks, 8 from 10-Qs) all matched. Split:
+  6,743 train (10-Ks), 1,367 test from 95 held-out companies (1,247 from
+  10-Qs, 120 from 10-Ks). The corpus is not committed: `data/filings/` is
+  gitignored (latest build is on allison's PC under data/filings/v2).
+  `data/questions.jsonl` (synthetic bank) is at v0.4.
