@@ -179,7 +179,9 @@ def _company_key(row: dict):
 
 
 def add_breakdown_fields(rows: list[dict], questions: list[dict]) -> list[dict]:
-    assets = company_assets(questions)
+    # Response rows carry family/cik/gold_value too, so sizes work without
+    # the question file (which, for the real-filing corpus, isn't committed).
+    assets = {**company_assets(rows), **company_assets(questions)}
     return [{**r, "sector": sic_division(r.get("sic")) if r.get("sic") else UNKNOWN,
              "size": size_bucket(assets.get(_company_key(r)))} for r in rows]
 
