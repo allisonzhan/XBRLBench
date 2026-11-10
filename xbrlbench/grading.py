@@ -54,7 +54,6 @@ import argparse
 import csv
 import json
 import re
-from typing import Optional
 
 from .io_utils import load_jsonl
 from .paths import DEFAULT_REPORT_PREFIX, DEFAULT_RESPONSES_PATH
@@ -80,7 +79,7 @@ _USD_FLOOR = 1.0          # $1 -- keeps relative tolerance from vanishing near $
 _PERCENT_FLOOR = 0.1      # 0.1 percentage points -- same, for near-0% values
 
 
-def _parse_single_token(token: str) -> Optional[float]:
+def _parse_single_token(token: str) -> float | None:
     """Parse one already-isolated number token: strips $/,/% and recognizes
     accounting-style "(1,234)" as a negative. Returns None (never raises) on
     anything that isn't cleanly numeric -- callers treat that as "no number
@@ -99,7 +98,7 @@ def _parse_single_token(token: str) -> Optional[float]:
     return -val if negative else val
 
 
-def extract_numbers(text: Optional[str]) -> list[float]:
+def extract_numbers(text: str | None) -> list[float]:
     """Every numeric value mentioned in `text`, in order of appearance.
     Recognizes accounting-style negative parentheses and a number
     immediately followed by a scale word (thousand/million/billion/
@@ -134,7 +133,7 @@ def _dedupe(values: list[float]) -> list[float]:
     return out
 
 
-def extract_single_number(text: Optional[str]) -> tuple[Optional[float], str]:
+def extract_single_number(text: str | None) -> tuple[float | None, str]:
     """Returns (value, status):
       "ok"        -- exactly one distinct number in `text` -> value is it
       "empty"     -- no numbers found -> value is None
@@ -149,7 +148,7 @@ def extract_single_number(text: Optional[str]) -> tuple[Optional[float], str]:
     return values[0], "ok"
 
 
-def get_model_answer(row: dict) -> tuple[Optional[float], str]:
+def get_model_answer(row: dict) -> tuple[float | None, str]:
     """Resolve a graded row's model answer to a single float, in decreasing
     order of confidence. Returns (value_or_None, parse_source):
 
@@ -210,14 +209,14 @@ def numeric_tolerance(gold_unit: str, gold_val: float, tolerance: float) -> floa
     raise ValueError(f"unsupported gold_unit: {gold_unit!r}")
 
 
-def is_correct(model_val: Optional[float], gold_val: Optional[float],
-                gold_unit: Optional[str], tolerance: float) -> bool:
+def is_correct(model_val: float | None, gold_val: float | None,
+                gold_unit: str | None, tolerance: float) -> bool:
     if model_val is None or gold_val is None or gold_unit is None:
         return False
     return abs(model_val - gold_val) <= numeric_tolerance(gold_unit, gold_val, tolerance)
 
 
-def grade_row(row: dict, epsilon_override: Optional[float]) -> dict:
+def grade_row(row: dict, epsilon_override: float | None) -> dict:
     """Grade one response row. Never raises on malformed input -- anything
     it can't confidently judge comes back as status "invalid_response"."""
     model_val, source = get_model_answer(row)
@@ -250,7 +249,7 @@ def grade_row(row: dict, epsilon_override: Optional[float]) -> dict:
     }
 
 
-def summarize(rows: list[dict], epsilon: Optional[float] = None):
+def summarize(rows: list[dict], epsilon: float | None = None):
     """Returns (graded, tier_table, model_table, grid, overall). Each bucket
     cell is {"n", "correct", "invalid"}; "incorrect" is implicit
     (n - correct - invalid)."""
@@ -378,7 +377,7 @@ def write_outputs(graded, tier_table, model_table, grid, overall, out_prefix, ep
     print(f"Wrote {incorrect_path} ({n_written} non-correct responses for failure-mode analysis)")
 
 
-def grade(responses_path=DEFAULT_RESPONSES_PATH, out_prefix=DEFAULT_REPORT_PREFIX, epsilon: Optional[float] = None):
+def grade(responses_path=DEFAULT_RESPONSES_PATH, out_prefix=DEFAULT_REPORT_PREFIX, epsilon: float | None = None):
     rows = load_jsonl(responses_path)
     graded, tier_table, model_table, grid, overall = summarize(rows, epsilon)
     print_report(tier_table, model_table, grid, overall, epsilon)

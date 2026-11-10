@@ -19,8 +19,7 @@ from __future__ import annotations
 import argparse
 import sys
 
-from . import __version__
-from . import errors, generation, grading, inference, reporting, validation
+from . import __version__, errors, generation, grading, inference, reporting, validation
 
 
 def build_parser() -> argparse.ArgumentParser:

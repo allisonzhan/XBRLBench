@@ -22,7 +22,6 @@ import math
 import re
 from collections import Counter, defaultdict
 from dataclasses import dataclass
-from typing import Optional
 
 from .io_utils import load_jsonl
 from .paths import DEFAULT_QUESTIONS_PATH
@@ -54,7 +53,7 @@ class ValidationIssue:
     severity: str  # "error" | "warning"
     code: str
     message: str
-    question_id: Optional[str] = None
+    question_id: str | None = None
 
     def __str__(self) -> str:
         prefix = "ERROR" if self.severity == ERROR else "WARN "
@@ -184,7 +183,7 @@ def _check_duplicates(rows: list[dict]) -> list[ValidationIssue]:
         text = (r.get("question") or "").strip().lower()
         if text:
             text_ids[text].append(r.get("id"))
-    for text, ids in text_ids.items():
+    for ids in text_ids.values():
         if len(ids) > 1:
             for qid in ids:
                 issues.append(ValidationIssue(

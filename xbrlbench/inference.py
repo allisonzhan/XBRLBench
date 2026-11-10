@@ -39,14 +39,13 @@ re-grading never re-spends API budget.
 from __future__ import annotations
 
 import argparse
+import json as _json
 import os
 import random
 import time
 import urllib.error
 import urllib.request
-import json as _json
 from pathlib import Path
-from typing import Optional
 
 from . import experiment
 from .io_utils import append_jsonl, load_dotenv, load_jsonl
@@ -184,11 +183,11 @@ def already_done(out_path) -> set:
 
 def run(
     questions_path=DEFAULT_QUESTIONS_PATH,
-    out_dir: Optional[str] = None,
+    out_dir: str | None = None,
     models: list[str] | None = None,
     limit: int | None = None,
     resume: bool = False,
-    tier: Optional[str] = None,
+    tier: str | None = None,
     question_ids: list[str] | None = None,
 ) -> None:
     load_dotenv()

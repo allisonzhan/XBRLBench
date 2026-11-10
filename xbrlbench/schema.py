@@ -57,7 +57,7 @@ class Question:
     tolerance: float
 
     @classmethod
-    def from_dict(cls, d: dict[str, Any]) -> "Question":
+    def from_dict(cls, d: dict[str, Any]) -> Question:
         known = {f.name for f in fields(cls)}
         missing = known - d.keys()
         if missing:

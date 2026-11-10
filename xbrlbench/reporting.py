@@ -27,7 +27,6 @@ from __future__ import annotations
 import argparse
 import csv
 import json
-from typing import Optional
 
 from .grading import summarize
 from .io_utils import load_jsonl
@@ -76,7 +75,7 @@ def _grid(rows: list[dict], key1: str, key2: str) -> dict:
     return g
 
 
-def _accuracy_of(rows: list[dict]) -> Optional[float]:
+def _accuracy_of(rows: list[dict]) -> float | None:
     if not rows:
         return None
     correct = sum(1 for r in rows if r["status"] == "correct")
@@ -159,7 +158,7 @@ def strongest_weakest_reasoning_type(graded: list[dict]) -> dict:
     return result
 
 
-def build_report(rows: list[dict], questions_path=DEFAULT_QUESTIONS_PATH, epsilon: Optional[float] = None) -> dict:
+def build_report(rows: list[dict], questions_path=DEFAULT_QUESTIONS_PATH, epsilon: float | None = None) -> dict:
     rows = enrich_reasoning_type(rows, questions_path)
     # summarize()'s own tier_table/model_table/grid are ignored here in favor
     # of this module's _bucket/_grid, which add an "accuracy" field to every
@@ -208,7 +207,7 @@ def _fmt_pct(acc) -> str:
     return f"{100 * acc:.1f}%" if acc is not None else "n/a"
 
 
-def _fmt_tolerance_mode(epsilon: Optional[float]) -> str:
+def _fmt_tolerance_mode(epsilon: float | None) -> str:
     return f"epsilon={epsilon} (overridden for every question)" if epsilon is not None \
         else "each question's own tolerance (see docs/SCHEMA.md)"
 
@@ -290,7 +289,7 @@ def report(
     responses_path=DEFAULT_RESPONSES_PATH,
     questions_path=DEFAULT_QUESTIONS_PATH,
     out_prefix=DEFAULT_REPORT_PREFIX,
-    epsilon: Optional[float] = None,
+    epsilon: float | None = None,
 ) -> dict:
     rows = load_jsonl(responses_path)
     result = build_report(rows, questions_path, epsilon)
