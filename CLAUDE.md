@@ -20,6 +20,7 @@ Today the repo is the benchmark half: 68 questions, 5 companies, FY2023–2024,
 
 ```bash
 pip install -e ".[dev]"                         # dev install (pytest)
+ruff check .                                     # lint (CI runs this)
 pytest -q                                        # full suite, no network
 python -m xbrlbench validate                     # question-bank integrity; CI runs this
 python -m xbrlbench generate --email <contact>   # rebuild data/questions.jsonl from SEC (network)
