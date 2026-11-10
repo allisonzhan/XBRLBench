@@ -370,15 +370,14 @@ def _classify(facts: list[Fact], contexts: dict[str, Context]) -> str | None:
 
 def _heading(snippets: list[str]) -> str:
     """The statement title and scale line from the text chunks that precede
-    a table: everything from the last title-looking chunk on, or failing
-    that the last two chunks."""
-    start = max(0, len(snippets) - 2)
+    a table: everything from the last title-looking chunk on. With no title
+    nearby (the title is inside the table, as at CAT and T), only the lines
+    stating a scale are kept, so the previous page's footnotes or the
+    auditor's report don't pass for a heading."""
     for i in range(len(snippets) - 1, -1, -1):
         if _TITLE_PATTERN.search(snippets[i]):
-            start = i
-            break
-    text = "\n".join(snippets[start:])
-    return text[-_HEADING_MAX_CHARS:]
+            return "\n".join(snippets[i:])[-_HEADING_MAX_CHARS:]
+    return "\n".join(s for s in snippets[-2:] if _SCALE_PATTERN.search(s))[-_HEADING_MAX_CHARS:]
 
 
 def _table_rows(doc: IXBRLDocument, table: ET.Element):

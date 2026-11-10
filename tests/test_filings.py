@@ -334,3 +334,13 @@ def test_page_number_and_toc_link_are_not_heading(raw):
                         "<div><a>Table of Contents</a></div>", 1)
     bs = ixbrl.statement_tables(ixbrl.parse_ixbrl(paged))[1]
     assert bs.heading == "CONSOLIDATED BALANCE SHEETS\n(In thousands, except par value)"
+
+
+def test_heading_without_title_keeps_only_the_scale_line(raw):
+    # CAT puts the statement title inside the table, so the text above it is
+    # the previous statement's footnote; that must not become the heading.
+    moved = raw.replace(
+        '<div style="text-align:center"><span>CONSOLIDATED BALANCE SHEETS</span></div>',
+        '<div><span>See accompanying notes to Consolidated Financial Statements.</span></div>', 1)
+    bs = ixbrl.statement_tables(ixbrl.parse_ixbrl(moved))[1]
+    assert bs.heading == "(In thousands, except par value)"
