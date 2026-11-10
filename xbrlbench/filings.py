@@ -567,7 +567,7 @@ def build_corpus(email: str, out: str, n_companies: int = 500, per_company: int 
                     report.status, report.note, qs = "error", f"{type(e).__name__}: {e}"[:200], []
                 for q in qs:
                     qf.write(json.dumps(q, ensure_ascii=False) + "\n")
-                rec = asdict(report) | {"ticker": meta.ticker, "filing_date": meta.filing_date,
+                rec = asdict(report) | {"ticker": meta.ticker, "form": ref.form, "filing_date": meta.filing_date,
                                         "sic": sic, "url": ref.url}
                 lf.write(json.dumps(rec) + "\n")
                 qf.flush()

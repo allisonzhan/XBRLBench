@@ -225,6 +225,7 @@ def test_build_corpus_end_to_end(monkeypatch, tmp_path, raw):
     assert len(rows) == 11 and {r["split"] for r in rows} == {"train"}
     log = [json.loads(line) for line in open(out + ".log.jsonl", encoding="utf-8")]
     assert [r["status"] for r in log] == ["ok", "not_ixbrl"]
+    assert [r["form"] for r in log] == ["10-K", "10-K"]
 
     # Resume: nothing is fetched again, and the company already counts.
     fetched.clear()
