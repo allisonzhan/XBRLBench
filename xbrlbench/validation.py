@@ -165,9 +165,11 @@ def _check_duplicates(rows: list[dict]) -> list[ValidationIssue]:
 
     # Same underlying fact (company, year, tier, source concept) asked more
     # than once under different ids -- almost always a generation bug.
+    # Real-filing questions also carry period_end, which separates a
+    # company's 10-Qs within one fiscal year.
     fact_ids: dict[tuple, list[str]] = defaultdict(list)
     for r in rows:
-        key = (r.get("ticker"), r.get("fiscal_year"), r.get("tier"), r.get("source_concept"))
+        key = (r.get("ticker"), r.get("fiscal_year"), r.get("period_end"), r.get("tier"), r.get("source_concept"))
         fact_ids[key].append(r.get("id"))
     for key, ids in fact_ids.items():
         if len(ids) > 1:
