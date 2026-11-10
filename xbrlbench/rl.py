@@ -279,6 +279,9 @@ def export(inp: str, out: str, fmt: str = "trl", split: str = "train", val_fract
            max_context_chars: int | None = None, limit: int | None = None) -> dict:
     train, val, dropped = export_records(load_jsonl(inp), fmt, split, val_fraction, families,
                                          exclude_families, max_context_chars, limit)
+    if not train and not val:
+        raise SystemExit(f"no questions to export from {inp} (dropped: {dict(dropped) or 'none'}). "
+                         "A file without a split field, like the synthetic bank, needs --split all.")
     write_jsonl(out, train)
     if val:
         write_jsonl(val_path(out), val)
