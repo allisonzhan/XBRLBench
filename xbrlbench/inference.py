@@ -114,14 +114,21 @@ def is_openrouter(api_base: str) -> bool:
     return "openrouter.ai" in api_base
 
 
+def build_messages(question: str, context: str) -> list[dict]:
+    """The chat messages every model sees for one question. RL training
+    (xbrlbench.rl) uses the same messages, so a trained model is evaluated
+    on exactly the prompt it was trained on."""
+    return [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": f"{context}\n\nQuestion: {question}"},
+    ]
+
+
 def build_payload(model: str, question: str, context: str, api_base: str = API_BASE,
                   max_tokens: int | None = MAX_TOKENS, reasoning: str = "default") -> dict:
     payload = {
         "model": model,
-        "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": f"{context}\n\nQuestion: {question}"},
-        ],
+        "messages": build_messages(question, context),
         "temperature": TEMPERATURE,
     }
     if max_tokens is not None:
