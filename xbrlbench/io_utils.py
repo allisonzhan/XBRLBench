@@ -8,13 +8,14 @@ from __future__ import annotations
 
 import json
 import os
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 
 def load_jsonl(path: str | Path) -> list[dict[str, Any]]:
     rows = []
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if line:
@@ -44,7 +45,7 @@ def load_dotenv(path: str | Path = ".env") -> None:
     path = Path(path)
     if not path.exists():
         return
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if not line or line.startswith("#") or "=" not in line:

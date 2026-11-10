@@ -44,14 +44,14 @@ def test_no_command_errors_cleanly():
 
 
 def test_modules_import():
-    import xbrlbench.generation  # noqa: F401
-    import xbrlbench.inference  # noqa: F401
-    import xbrlbench.grading  # noqa: F401
-    import xbrlbench.validation  # noqa: F401
-    import xbrlbench.reporting  # noqa: F401
+    import xbrlbench.cli  # noqa: F401
     import xbrlbench.errors  # noqa: F401
     import xbrlbench.experiment  # noqa: F401
-    import xbrlbench.cli  # noqa: F401
+    import xbrlbench.generation  # noqa: F401
+    import xbrlbench.grading  # noqa: F401
+    import xbrlbench.inference  # noqa: F401
+    import xbrlbench.reporting  # noqa: F401
+    import xbrlbench.validation  # noqa: F401
 
 
 def test_validate_passes_on_the_real_question_bank():

@@ -31,6 +31,7 @@ import time
 import urllib.request
 from datetime import date
 
+from .grading import DEFAULT_TOLERANCE
 from .io_utils import write_jsonl
 from .paths import DEFAULT_QUESTIONS_PATH
 
@@ -57,6 +58,9 @@ CONCEPTS = {
     "equity": ["StockholdersEquity"],
     "gross_profit": ["GrossProfit"],
     "cogs": ["CostOfGoodsAndServicesSold", "CostOfRevenue"],
+    # Inputs for derive_total_liabilities (not rendered in the snippet).
+    "liabilities_and_equity": ["LiabilitiesAndStockholdersEquity"],
+    "equity_incl_nci": ["StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"],
 }
 
 UA_TEMPLATE = "financial-eval-research {email}"
@@ -75,32 +79,92 @@ def _days(start: str, end: str) -> int:
     return (b - a).days
 
 
-def annual_value(facts: dict, concept_candidates: list[str], fy: int):
-    """Return the annual (FY, 10-K) USD value for the first matching concept."""
+# A fiscal year is 52 or 53 weeks for many filers (e.g. AAPL, WMT, NVDA), so a
+# full-year duration fact spans roughly 357-372 days. Anything outside this
+# window is a quarter, a partial period, or a multi-year cumulative figure.
+MIN_ANNUAL_DAYS = 350
+MAX_ANNUAL_DAYS = 380
+
+
+def fiscal_year_end(facts: dict, fy: int) -> str | None:
+    """Return the balance-sheet date (ISO string) of `fy`'s own 10-K.
+
+    In companyfacts, `fy`/`fp` describe the FILING a fact appeared in, not the
+    period the fact covers: a FY2023 10-K also carries FY2022 (and, for income
+    statement items, FY2021) comparatives, all tagged fy=2023. The filing's
+    own reporting period is the latest `end` date among its facts, so that is
+    what we anchor every lookup for `fy` to.
+    """
+    latest = None
+    for node in facts.get("facts", {}).get("us-gaap", {}).values():
+        for rows in node.get("units", {}).values():
+            for row in rows:
+                if row.get("fy") != fy or row.get("fp") != "FY":
+                    continue
+                if not str(row.get("form", "")).startswith("10-K"):
+                    continue
+                end = row.get("end")
+                if end and (latest is None or end > latest):
+                    latest = end
+    return latest
+
+
+def annual_value(facts: dict, concept_candidates: list[str], fy: int,
+                 period_end: str | None = None):
+    """Return (value, concept) for the fiscal year `fy`, or (None, None).
+
+    Facts are selected by the PERIOD they describe (end date == the fiscal
+    year end, and a ~1-year span for duration items), never by the `fy` tag
+    alone -- see fiscal_year_end for why. If the same period was reported more
+    than once (the original 10-K, a later 10-K's comparative column, a 10-K/A),
+    the earliest-filed value wins: it is the figure as originally reported in
+    that year's own annual report, which is what the rendered statement for
+    that year represents.
+
+    `period_end` can be passed in to avoid recomputing it per concept.
+    """
+    if period_end is None:
+        period_end = fiscal_year_end(facts, fy)
+    if period_end is None:
+        return None, None
     gaap = facts.get("facts", {}).get("us-gaap", {})
     for concept in concept_candidates:
         node = gaap.get(concept)
         if not node:
             continue
         usd = node.get("units", {}).get("USD", [])
-        # annual figures: full-year period, 10-K form. For duration items keep
-        # the longest period per FY; for instant items there's one 'end'.
-        best = None
+        best = None  # (filed, value)
         for row in usd:
-            if row.get("fy") != fy or "FY" != row.get("fp"):
+            if row.get("end") != period_end:
                 continue
             if not str(row.get("form", "")).startswith("10-K"):
                 continue
-            span = 999
-            if row.get("start") and row.get("end"):
+            if row.get("start"):
                 span = _days(row["start"], row["end"])
-                if span < 300:  # drop quarterly/partial
-                    continue
-            if best is None or span < best[0]:
-                best = (span, row["val"], concept)
+                if not MIN_ANNUAL_DAYS <= span <= MAX_ANNUAL_DAYS:
+                    continue  # quarterly, partial, or multi-year figure
+            filed = row.get("filed", "")
+            if best is None or filed < best[0]:
+                best = (filed, row["val"])
         if best:
-            return best[1], best[2]
+            return best[1], concept
     return None, None
+
+
+def derive_total_liabilities(vals: dict) -> dict:
+    """Fill in `liabilities` for filers that don't tag `Liabilities` (KO, WMT).
+
+    Total liabilities = total liabilities-and-equity minus total equity
+    INCLUDING noncontrolling interest. NCI is equity, not a liability, so
+    subtracting only parent-company `StockholdersEquity` would overstate
+    liabilities by the NCI amount. A reported `Liabilities` value always wins.
+    """
+    if vals.get("liabilities") is not None:
+        return vals
+    lse, eq = vals.get("liabilities_and_equity"), vals.get("equity_incl_nci")
+    if lse is not None and eq is not None:
+        vals["liabilities"] = lse - eq
+    return vals
 
 
 def render_snippet(vals: dict, ticker: str, fy: int) -> str:
@@ -145,7 +209,7 @@ def render_two_year_snippet(vals: dict, prev_vals: dict, ticker: str, fy: int) -
 def make_questions(ticker: str, fy: int, vals: dict, prev_vals: dict | None) -> list[dict]:
     qs: list[dict] = []
 
-    def q(tier, question, gold_value, gold_unit, concept, context=None):
+    def q(tier, question, gold_value, gold_unit, concept, reasoning_type, context=None):
         if gold_value is None:
             return
         qs.append({
@@ -156,41 +220,44 @@ def make_questions(ticker: str, fy: int, vals: dict, prev_vals: dict | None) -> 
             "gold_unit": gold_unit,
             "source_concept": concept,
             "context": context if context is not None else render_snippet(vals, ticker, fy),
+            "reasoning_type": reasoning_type,
+            "tolerance": DEFAULT_TOLERANCE,
         })
 
     # T1 — single lookup (answer in raw dollars; snippet shows thousands → unit trap)
     q("T1", f"What were {ticker}'s total assets for fiscal year {fy}? Answer in USD.",
-      vals.get("assets"), "USD", "Assets")
+      vals.get("assets"), "USD", "Assets", "direct_retrieval")
     q("T1", f"What was {ticker}'s net income for fiscal year {fy}? Answer in USD.",
-      vals.get("net_income"), "USD", "NetIncomeLoss")
+      vals.get("net_income"), "USD", "NetIncomeLoss", "direct_retrieval")
 
     # T2 — computation
     if vals.get("assets_current") and vals.get("liabilities_current"):
         q("T2", f"What was {ticker}'s current ratio for fiscal year {fy}? "
                 f"(current assets / current liabilities, 2 decimals)",
           vals["assets_current"] / vals["liabilities_current"], "ratio",
-          "AssetsCurrent/LiabilitiesCurrent")
+          "AssetsCurrent/LiabilitiesCurrent", "ratio")
     if vals.get("gross_profit") and vals.get("revenue"):
         q("T2", f"What was {ticker}'s gross margin for fiscal year {fy}? "
                 f"(gross profit / revenue, as a percentage)",
           100 * vals["gross_profit"] / vals["revenue"], "percent",
-          "GrossProfit/Revenue")
+          "GrossProfit/Revenue", "ratio")
     if prev_vals and prev_vals.get("revenue") and vals.get("revenue"):
         q("T2", f"What was {ticker}'s year-over-year revenue growth from FY{fy - 1} "
                 f"to FY{fy}? (as a percentage)",
           100 * (vals["revenue"] - prev_vals["revenue"]) / prev_vals["revenue"],
-          "percent", "Revenue YoY",
+          "percent", "Revenue YoY", "percentage_change",
           context=render_two_year_snippet(vals, prev_vals, ticker, fy))
 
     # T3 — distractor / multi-hop (siblings present in snippet to mislead)
     if vals.get("liabilities_current"):
         q("T3", f"From {ticker}'s FY{fy} balance sheet, what were total CURRENT "
                 f"liabilities (not total liabilities)? Answer in USD.",
-          vals["liabilities_current"], "USD", "LiabilitiesCurrent (distractor: Liabilities)")
+          vals["liabilities_current"], "USD", "LiabilitiesCurrent (distractor: Liabilities)",
+          "direct_retrieval")
     if prev_vals and prev_vals.get("assets") and vals.get("assets"):
         q("T3", f"By how much did {ticker}'s total assets change from FY{fy - 1} to "
                 f"FY{fy}? Answer the dollar difference in USD (positive if increased).",
-          vals["assets"] - prev_vals["assets"], "USD", "Assets delta",
+          vals["assets"] - prev_vals["assets"], "USD", "Assets delta", "multi_period_comparison",
           context=render_two_year_snippet(vals, prev_vals, ticker, fy))
     return qs
 
@@ -207,12 +274,18 @@ def generate(email: str, out_path=DEFAULT_QUESTIONS_PATH) -> list[dict]:
             continue
         by_year = {}
         for fy in YEARS + [min(YEARS) - 1]:  # include y-1 for growth/delta
+            period_end = fiscal_year_end(facts, fy)
+            if period_end is None:
+                print(f"[warn] {ticker}: no FY{fy} 10-K found in companyfacts")
+                continue
             vals = {}
             for name, cands in CONCEPTS.items():
-                v, _ = annual_value(facts, cands, fy)
+                v, _ = annual_value(facts, cands, fy, period_end=period_end)
                 vals[name] = v
-            by_year[fy] = vals
+            by_year[fy] = derive_total_liabilities(vals)
         for fy in YEARS:
+            if fy not in by_year:
+                continue
             all_q += make_questions(ticker, fy, by_year[fy], by_year.get(fy - 1))
         print(f"[ok] {ticker}: cumulative {len(all_q)} questions")
         time.sleep(0.2)  # be polite to SEC

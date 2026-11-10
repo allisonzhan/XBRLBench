@@ -14,7 +14,6 @@ import json
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Optional
 
 from . import BENCHMARK_VERSION, __version__
 from .paths import REPO_ROOT
@@ -29,7 +28,7 @@ def utc_now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def git_commit_hash() -> Optional[str]:
+def git_commit_hash() -> str | None:
     """Best-effort current commit hash of the repo this package is running
     from. Returns None if git isn't available, this isn't a git checkout, or
     anything else goes wrong -- capturing metadata must never block a run."""
@@ -50,7 +49,7 @@ def build_metadata(
     started_at: str,
     models: list[str],
     temperature: float,
-    max_tokens: Optional[int],
+    max_tokens: int | None,
     prompt_version: str,
     question_count: int,
     resume: bool,

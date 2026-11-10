@@ -108,3 +108,9 @@ identifies the benchmark's *content*, separately from `xbrlbench.__version__`
 `v0.2` adds `reasoning_type` and `tolerance` to every record with no changes
 to `question`, `gold_value`, or `gold_unit` — existing results remain valid,
 but any tooling built against the `v0.1` field set needs the two new fields.
+`v0.3` regenerates the bank from SEC with fiscal-period-correct fact
+selection: `v0.1`/`v0.2` gold values and contexts came from the wrong fiscal
+year (companyfacts `fy` labels the filing, not the period), so results
+against earlier versions are not comparable. KO and WMT don't tag `Liabilities`, so their
+"Total liabilities" line is derived (total liabilities-and-equity minus equity
+including noncontrolling interest), which gives their T3 questions a real distractor line.

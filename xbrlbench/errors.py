@@ -26,7 +26,6 @@ import argparse
 import csv
 import json
 from collections import Counter
-from typing import Optional
 
 from .grading import summarize
 from .io_utils import load_jsonl
@@ -36,7 +35,7 @@ from .reporting import enrich_reasoning_type
 DEFAULT_ERRORS_PREFIX = RESULTS_DIR / "errors"
 
 
-def _error_magnitudes(model_val: Optional[float], gold_val: Optional[float]) -> tuple:
+def _error_magnitudes(model_val: float | None, gold_val: float | None) -> tuple:
     if model_val is None or gold_val is None:
         return None, None
     abs_err = abs(model_val - gold_val)
@@ -44,7 +43,7 @@ def _error_magnitudes(model_val: Optional[float], gold_val: Optional[float]) -> 
     return abs_err, rel_err
 
 
-def build_error_records(rows: list[dict], questions_path=DEFAULT_QUESTIONS_PATH, epsilon: Optional[float] = None) -> list[dict]:
+def build_error_records(rows: list[dict], questions_path=DEFAULT_QUESTIONS_PATH, epsilon: float | None = None) -> list[dict]:
     rows = enrich_reasoning_type(rows, questions_path)
     graded, *_ = summarize(rows, epsilon)
 
@@ -129,7 +128,7 @@ def errors(
     responses_path=DEFAULT_RESPONSES_PATH,
     questions_path=DEFAULT_QUESTIONS_PATH,
     out_prefix=DEFAULT_ERRORS_PREFIX,
-    epsilon: Optional[float] = None,
+    epsilon: float | None = None,
 ) -> list[dict]:
     rows = load_jsonl(responses_path)
     records = build_error_records(rows, questions_path, epsilon)
