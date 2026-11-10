@@ -237,3 +237,16 @@ def test_report_has_ci_table_and_breakdowns(tmp_path, questions_file):
     assert sizes == {"mid ($1-10B)", "large (>$10B)"}
     md = to_markdown(rep)
     assert "95% confidence intervals" in md and "## Accuracy by task family" in md
+
+
+def test_classify_error_kinds():
+    from xbrlbench.grading import classify_error
+    assert classify_error(1_643_000, 1_643_000, "USD") == "correct"
+    assert classify_error(1_643, 1_643_000, "USD") == "scale"
+    assert classify_error(1.643, 1_643_000, "USD") == "scale"
+    assert classify_error(1_643_000, -1_643_000, "USD") == "sign"
+    assert classify_error(1_643, -1_643_000, "USD") == "scale_and_sign"
+    assert classify_error(0.2512, 25.12, "percent") == "percent_vs_fraction"
+    assert classify_error(999, 1_643_000, "USD") == "other"
+    assert classify_error(None, 1.0, "ratio") == "invalid"
+    assert classify_error(1.0, 1.0, "ratio", status="invalid_response") == "invalid"
