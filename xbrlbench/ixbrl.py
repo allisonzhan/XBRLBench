@@ -304,6 +304,9 @@ _STATEMENT_MARKERS = {
                    "NetCashProvidedByUsedInFinancingActivities")),
 }
 
+# Page numbers and "Table of Contents" links that sit between pages.
+_PAGE_FURNITURE = re.compile(r"^(\d{1,3}|[ivxl]{1,5}|table of contents|page \d+)$", re.IGNORECASE)
+
 # Words that mark a heading line as a statement title.
 _TITLE_PATTERN = re.compile(r"statements?\s+of|balance\s+sheets?|financial\s+condition|financial\s+position",
                             re.IGNORECASE)
@@ -419,6 +422,7 @@ def statement_tables(doc: IXBRLDocument, min_facts: int = 3) -> list[StatementTa
         text = "".join(parts).translate(_INVISIBLE)
         recent = [" ".join(line.split()) for line in text.split("\n") if line.strip()]
         parts.clear()
+        recent = [line for line in recent if not _PAGE_FURNITURE.match(line)]
         heading = _heading(recent[-_HEADING_SNIPPETS:])
         # The scale line is in the heading or in the column-header rows above
         # the first number; rows below that may say "(in thousands)" about

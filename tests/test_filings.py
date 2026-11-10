@@ -325,3 +325,12 @@ def test_zero_width_space_cells_are_dropped(doc):
     text = ixbrl.primary_statements(doc)["balance_sheet"].render()
     assert "\u200b" not in text
     assert "Commitments and contingencies (Note 9)\n" in text
+
+
+def test_page_number_and_toc_link_are_not_heading(raw):
+    # CAT's balance-sheet heading came out as "59 / Table of Contents".
+    paged = raw.replace("<span>CONSOLIDATED BALANCE SHEETS</span></div>",
+                        "<span>CONSOLIDATED BALANCE SHEETS</span></div><div><span>59</span></div>"
+                        "<div><a>Table of Contents</a></div>", 1)
+    bs = ixbrl.statement_tables(ixbrl.parse_ixbrl(paged))[1]
+    assert bs.heading == "CONSOLIDATED BALANCE SHEETS\n(In thousands, except par value)"
