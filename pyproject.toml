@@ -12,6 +12,9 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.6"]
+# RL training (scripts/train_grpo.py). Pinned to the versions the script was
+# written against; vLLM is installed separately on the GPU machine.
+train = ["trl==1.17.1", "peft==0.21.2", "transformers>=4.56.2", "datasets>=4.7.0", "accelerate>=1.11.0"]
 
 [project.scripts]
 xbrlbench = "xbrlbench.cli:main"

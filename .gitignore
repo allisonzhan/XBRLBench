@@ -16,3 +16,7 @@ results/runs/
 
 # real-filing corpus build outputs (large; published separately)
 data/filings/
+
+# RL exports and training runs (large; rebuilt from the corpus)
+data/rl/
+runs/
