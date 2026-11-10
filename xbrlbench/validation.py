@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import math
+import re
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from typing import Optional
@@ -193,6 +194,102 @@ def _check_duplicates(rows: list[dict]) -> list[ValidationIssue]:
     return issues
 
 
+# Matches the header line render_snippet writes for each fiscal-year block,
+# e.g. "AAPL — Consolidated Financial Statements (excerpt), FY2023".
+_STATEMENT_HEADER = re.compile(r"^(?P<ticker>\S+) \S+ Consolidated Financial Statements \(excerpt\), FY(?P<year>\d{4})$")
+_LINE_ITEM = re.compile(r"^\s+(?P<label>.+?) \.{3,} (?P<value>\S+)$")
+_MISSING_VALUE = "\u2014"  # em dash -- render_snippet's placeholder for a missing fact
+
+# Line items that should essentially never repeat to the dollar across two
+# consecutive fiscal years. Two or more repeating means the same period was
+# rendered under two fiscal-year labels (the companyfacts `fy` pitfall
+# fixed in xbrlbench.generation.annual_value).
+_REPEAT_THRESHOLD = 2
+
+# source_concept "X (distractor: Y)" -> the rendered label of Y that must be
+# present for the question to actually contain its distractor.
+_DISTRACTOR_LABELS = {
+    "Liabilities": "Total liabilities",
+}
+
+
+def _statement_blocks(context: str) -> dict[tuple[str, int], dict[str, str]]:
+    """Parse a rendered context into {(ticker, year): {label: value}}."""
+    blocks: dict[tuple[str, int], dict[str, str]] = {}
+    current = None
+    for line in context.splitlines():
+        header = _STATEMENT_HEADER.match(line.strip())
+        if header:
+            current = (header["ticker"], int(header["year"]))
+            blocks[current] = {}
+            continue
+        item = _LINE_ITEM.match(line)
+        if current is not None and item:
+            blocks[current][item["label"].strip()] = item["value"]
+    return blocks
+
+
+def _check_cross_year_consistency(rows: list[dict]) -> list[ValidationIssue]:
+    """Catch fiscal-period mix-ups that per-row checks can't see: the same
+    (ticker, year) rendered differently in two contexts, or two consecutive
+    years of one company rendering the same figures."""
+    issues: list[ValidationIssue] = []
+    snapshots: dict[tuple[str, int], dict[str, str]] = {}
+    seen_in: dict[tuple[str, int], str] = {}
+    for r in rows:
+        for key, items in _statement_blocks(r.get("context") or "").items():
+            if key not in snapshots:
+                snapshots[key] = items
+                seen_in[key] = r.get("id")
+            elif snapshots[key] != items:
+                issues.append(ValidationIssue(
+                    ERROR, "inconsistent_year_snapshot",
+                    f"{key[0]} FY{key[1]} renders differently here than in {seen_in[key]}", r.get("id")))
+
+    for (ticker, year), items in sorted(snapshots.items()):
+        prev = snapshots.get((ticker, year - 1))
+        if not prev:
+            continue
+        repeated = sorted(
+            label for label, value in items.items()
+            if value != _MISSING_VALUE and prev.get(label) == value)
+        if len(repeated) >= _REPEAT_THRESHOLD:
+            issues.append(ValidationIssue(
+                ERROR, "repeated_values_across_years",
+                f"{ticker} FY{year - 1} and FY{year} show identical values for {repeated} -- "
+                f"likely the same period rendered under two fiscal-year labels"))
+    return issues
+
+
+def _check_degenerate_gold(row: dict) -> list[ValidationIssue]:
+    """A change/comparison question whose gold answer is exactly 0 almost
+    always means both periods resolved to the same data."""
+    if row.get("reasoning_type") in ("percentage_change", "multi_period_comparison") \
+            and row.get("gold_value") == 0:
+        return [ValidationIssue(
+            WARNING, "zero_change_gold",
+            "change/comparison question has a gold_value of exactly 0", row.get("id"))]
+    return []
+
+
+def _check_distractor_present(row: dict) -> list[ValidationIssue]:
+    """A T3 distractor question is only a distractor question if the
+    distractor line actually has a value in the context."""
+    match = re.search(r"\(distractor: (\w+)\)", row.get("source_concept") or "")
+    if not match:
+        return []
+    label = _DISTRACTOR_LABELS.get(match.group(1))
+    if label is None:
+        return []
+    for items in _statement_blocks(row.get("context") or "").values():
+        if items.get(label, _MISSING_VALUE) != _MISSING_VALUE:
+            return []
+    return [ValidationIssue(
+        WARNING, "missing_distractor",
+        f"distractor line {label!r} has no value in the context, so this is a plain lookup",
+        row.get("id"))]
+
+
 def validate_questions(rows: list[dict]) -> list[ValidationIssue]:
     """Run every integrity check over a list of raw question dicts (as
     loaded from questions.jsonl)."""
@@ -201,7 +298,10 @@ def validate_questions(rows: list[dict]) -> list[ValidationIssue]:
         issues += _check_required_fields(row)
         issues += _check_unit_wording(row)
         issues += _check_answer_leakage(row)
+        issues += _check_degenerate_gold(row)
+        issues += _check_distractor_present(row)
     issues += _check_duplicates(rows)
+    issues += _check_cross_year_consistency(rows)
     return issues
 
 

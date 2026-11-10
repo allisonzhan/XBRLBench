@@ -221,3 +221,91 @@ def test_small_gold_value_does_not_false_positive_on_leakage():
         question="What was AAPL's current ratio for fiscal year 2023?",
     )])
     assert "answer_leaked_in_question" not in codes(issues)
+
+
+# ---------------------------------------------------------------------------
+# Cross-year consistency / degenerate gold / missing distractor
+# (catch the companyfacts fiscal-period mix-up fixed in generation.py)
+# ---------------------------------------------------------------------------
+
+from xbrlbench.generation import render_snippet, render_two_year_snippet  # noqa: E402
+
+YEAR_A = {"revenue": 1_000_000, "cogs": 600_000, "gross_profit": 400_000, "net_income": 100_000,
+          "assets": 5_000_000, "liabilities": 3_000_000, "liabilities_current": 1_000_000}
+YEAR_B = {"revenue": 1_200_000, "cogs": 700_000, "gross_profit": 500_000, "net_income": 150_000,
+          "assets": 5_500_000, "liabilities": 3_100_000, "liabilities_current": 1_100_000}
+
+
+def q_with_context(qid, year, context, **overrides):
+    return good_question(id=qid, fiscal_year=year, context=context,
+                         question=f"Question {qid}?", source_concept=f"Concept-{qid}", **overrides)
+
+
+def test_distinct_years_pass_cross_year_check():
+    rows = [
+        q_with_context("A-2023", 2023, render_snippet(YEAR_A, "AAA", 2023)),
+        q_with_context("A-2024", 2024, render_snippet(YEAR_B, "AAA", 2024)),
+    ]
+    assert "repeated_values_across_years" not in codes(validate_questions(rows))
+
+
+def test_same_income_statement_in_consecutive_years_is_an_error():
+    # The NVDA/WMT symptom: FY2024 income statement identical to FY2023's.
+    year_b_bad = {**YEAR_B, "revenue": YEAR_A["revenue"], "cogs": YEAR_A["cogs"],
+                  "gross_profit": YEAR_A["gross_profit"], "net_income": YEAR_A["net_income"]}
+    rows = [
+        q_with_context("A-2023", 2023, render_snippet(YEAR_A, "AAA", 2023)),
+        q_with_context("A-2024", 2024, render_snippet(year_b_bad, "AAA", 2024)),
+    ]
+    assert "repeated_values_across_years" in codes(validate_questions(rows), ERROR)
+
+
+def test_single_coincidental_repeat_is_tolerated():
+    rows = [
+        q_with_context("A-2023", 2023, render_snippet(YEAR_A, "AAA", 2023)),
+        q_with_context("A-2024", 2024, render_snippet({**YEAR_B, "assets": YEAR_A["assets"]}, "AAA", 2024)),
+    ]
+    assert "repeated_values_across_years" not in codes(validate_questions(rows))
+
+
+def test_missing_values_are_not_counted_as_repeats():
+    a = {k: None for k in YEAR_A} | {"assets": 1}
+    b = {k: None for k in YEAR_B} | {"assets": 2}
+    rows = [
+        q_with_context("A-2023", 2023, render_snippet(a, "AAA", 2023)),
+        q_with_context("A-2024", 2024, render_snippet(b, "AAA", 2024)),
+    ]
+    assert "repeated_values_across_years" not in codes(validate_questions(rows))
+
+
+def test_inconsistent_snapshot_of_same_year_is_an_error():
+    rows = [
+        q_with_context("A-2023", 2023, render_snippet(YEAR_A, "AAA", 2023)),
+        q_with_context("A-2024", 2024, render_two_year_snippet(YEAR_B, {**YEAR_A, "assets": 1}, "AAA", 2024)),
+    ]
+    assert ids_with_code(validate_questions(rows), "inconsistent_year_snapshot") == {"A-2024"}
+
+
+def test_zero_gold_on_change_question_warns():
+    rows = [good_question(reasoning_type="percentage_change", gold_unit="percent",
+                          question="What was growth? (as a percentage)", gold_value=0.0)]
+    assert "zero_change_gold" in codes(validate_questions(rows), WARNING)
+
+
+def test_zero_gold_on_lookup_question_does_not_warn():
+    rows = [good_question(gold_value=0.0)]
+    assert "zero_change_gold" not in codes(validate_questions(rows))
+
+
+def test_missing_distractor_line_warns():
+    ctx = render_snippet({**YEAR_A, "liabilities": None}, "AAA", 2023)
+    rows = [good_question(context=ctx, tier="T3",
+                          source_concept="LiabilitiesCurrent (distractor: Liabilities)")]
+    assert "missing_distractor" in codes(validate_questions(rows), WARNING)
+
+
+def test_present_distractor_line_does_not_warn():
+    ctx = render_snippet(YEAR_A, "AAA", 2023)
+    rows = [good_question(context=ctx, tier="T3",
+                          source_concept="LiabilitiesCurrent (distractor: Liabilities)")]
+    assert "missing_distractor" not in codes(validate_questions(rows))
