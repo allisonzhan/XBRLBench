@@ -108,6 +108,7 @@ class Item:
     value: float
     label: str
     end: str
+    displayed: str = ""
 
 
 @dataclass
@@ -186,7 +187,7 @@ def find_item(doc: ixbrl.IXBRLDocument, table: ixbrl.StatementTable, name: str, 
         if not label or label not in unique:
             return None
         fact = hits[0][0]
-        return Item(name, fact.concept, fact.value, label, end)
+        return Item(name, fact.concept, fact.value, label, end, fact.displayed)
     return None
 
 
@@ -250,7 +251,7 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
 
     questions: list[dict] = []
 
-    def add(slug, tier, reasoning, question, gold, unit, source, kinds):
+    def add(slug, tier, reasoning, question, gold, unit, source, kinds, *items: Item):
         questions.append({
             "id": f"{ticker}-{fiscal_year}-{slug}",
             "ticker": ticker,
@@ -272,6 +273,10 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
             "period_end": cur,
             "sic": meta.sic,
             "split": assign_split(meta.cik, meta.filing_date) if meta.filing_date else None,
+            # The tagged facts the gold value was computed from, in formula
+            # order, so `audit` can re-derive it from the context text.
+            "inputs": [{"label": i.label, "displayed": i.displayed, "value": i.value, "period_end": i.end}
+                       for i in items],
         })
 
     when = long_date(cur)
@@ -285,7 +290,7 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
         period = f"as of {when}" if kind == "balance_sheet" else f"for the fiscal year ended {when}"
         add(f"lookup_{name}", "T1", "direct_retrieval",
             f"According to {company}'s {meta.form}, what was {_q(it.label)} {period}? Answer in USD.",
-            it.value, "USD", it.concept, [kind])
+            it.value, "USD", it.concept, [kind], it)
 
     # --- T2: ratios and margins ----------------------------------------------
     ca, cl = get("assets_current", cur), get("liabilities_current", cur)
@@ -293,7 +298,7 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
         add("current_ratio", "T2", "ratio",
             f"What was {company}'s current ratio as of {when}, computed as {_q(ca.label)} divided by "
             f"{_q(cl.label)}? Answer as a ratio with 2 decimals.",
-            ca.value / cl.value, "ratio", f"{ca.concept}/{cl.concept}", ["balance_sheet"])
+            ca.value / cl.value, "ratio", f"{ca.concept}/{cl.concept}", ["balance_sheet"], ca, cl)
 
     rev = get("revenue", cur)
     if rev and rev.value > 0:
@@ -302,13 +307,13 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
             add("gross_margin", "T2", "ratio",
                 f"What was {company}'s gross margin for the fiscal year ended {when}, computed as "
                 f"{_q(gp.label)} divided by {_q(rev.label)}? Answer as a percentage.",
-                100 * gp.value / rev.value, "percent", f"{gp.concept}/{rev.concept}", ["income_statement"])
+                100 * gp.value / rev.value, "percent", f"{gp.concept}/{rev.concept}", ["income_statement"], gp, rev)
         oi = get("operating_income", cur)
         if oi:
             add("operating_margin", "T2", "ratio",
                 f"What was {company}'s operating margin for the fiscal year ended {when}, computed as "
                 f"{_q(oi.label)} divided by {_q(rev.label)}? Answer as a percentage.",
-                100 * oi.value / rev.value, "percent", f"{oi.concept}/{rev.concept}", ["income_statement"])
+                100 * oi.value / rev.value, "percent", f"{oi.concept}/{rev.concept}", ["income_statement"], oi, rev)
 
     # --- T2: year-over-year change -------------------------------------------
     rev_prev = get("revenue", prev)
@@ -318,7 +323,7 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
             f"{long_date(prev)} to the fiscal year ended {when}? Answer as a percentage "
             f"(negative if it decreased).",
             100 * (rev.value - rev_prev.value) / rev_prev.value, "percent",
-            f"{rev.concept} YoY", ["income_statement"])
+            f"{rev.concept} YoY", ["income_statement"], rev, rev_prev)
 
     # --- T3: multi-period and derived ----------------------------------------
     ni, ni_prev = get("net_income", cur), get("net_income", prev)
@@ -327,7 +332,7 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
             f"By how much did {company}'s {_q(ni.label)} change from the fiscal year ended "
             f"{long_date(prev)} to the fiscal year ended {when}? Answer the difference in USD "
             f"(positive if it increased, negative if it decreased).",
-            ni.value - ni_prev.value, "USD", f"{ni.concept} delta", ["income_statement"])
+            ni.value - ni_prev.value, "USD", f"{ni.concept} delta", ["income_statement"], ni, ni_prev)
 
     ocf, capex = get("operating_cash_flow", cur), get("capex", cur)
     if ocf and capex and capex.value >= 0:
@@ -335,7 +340,7 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
             f"What was {company}'s free cash flow for the fiscal year ended {when}, defined as "
             f"{_q(ocf.label)} minus {_q(capex.label)} (capital expenditures, as a positive amount)? "
             f"Answer in USD.",
-            ocf.value - capex.value, "USD", f"{ocf.concept}-{capex.concept}", ["cash_flow"])
+            ocf.value - capex.value, "USD", f"{ocf.concept}-{capex.concept}", ["cash_flow"], ocf, capex)
 
     report.questions = len(questions)
     if not questions:
