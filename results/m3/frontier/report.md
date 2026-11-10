@@ -20,6 +20,17 @@
 | anthropic/claude-sonnet-5.5 | 500 | 96.6% | 94.9-98.1% | 0 | -3.2 pts (-4.8 to -1.7) | $2.20 | 212 |
 | qwen/qwen3-14b | 500 | 43.4% | 37.9-49.3% | 27 | -56.4 pts (-61.9 to -50.5) | $0.28 | 1953 |
 
+## Why answers missed
+
+Mechanical slips are a wrong scale (an answer left in the table's thousands or millions) or a flipped sign; the last column forgives them.
+
+| model | invalid | scale | sign | scale and sign | percent vs fraction | other | accuracy forgiving scale and sign |
+|---|---|---|---|---|---|---|---|
+| google/gemini-3.1-pro-preview | 0 | 0 | 1 | 0 | 0 | 0 | 100.0% |
+| openai/gpt-5.6-terra | 0 | 1 | 5 | 0 | 0 | 1 | 99.8% |
+| anthropic/claude-sonnet-5.5 | 0 | 10 | 6 | 0 | 0 | 1 | 99.8% |
+| qwen/qwen3-14b | 27 | 237 | 3 | 12 | 2 | 2 | 93.8% |
+
 ## Accuracy by task family
 
 | task family | n | anthropic/claude-sonnet-5.5 | google/gemini-3.1-pro-preview | openai/gpt-5.6-terra | qwen/qwen3-14b |
