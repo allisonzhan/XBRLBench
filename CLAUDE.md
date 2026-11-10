@@ -93,8 +93,10 @@ docs/                     SCHEMA.md, METADATA.md, PRD.md
 
 - Milestone 1 (data correctness): done. Generator and validation fixed,
   `data/questions.jsonl` regenerated at v0.3, and `results/baseline/`
-  re-run against it (run `20261110T023920Z`, commit `cea1514`). The
-  `spotcheck` against filed 10-Ks still needs a run with SEC access.
+  re-run against it (run `20261110T023920Z`, commit `cea1514`).
+  `spotcheck --n 10` passed 10/10 against the filed 10-Ks on 2026-11-10
+  (all ten samples were `Assets`; net income and current liabilities
+  have not been spot-checked yet).
 - Milestone 2 (real filings): started. `ixbrl.py` parses facts and
   statement tables from a filed 10-K; it is tested on a fixture only and
   must be validated on real filings next, then wired into question
