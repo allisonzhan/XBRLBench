@@ -135,9 +135,11 @@ class FilingReport:
 
 def table_scale_problem(table: ixbrl.StatementTable) -> str | None:
     """None if the table's stated scale matches its USD facts' ix scale."""
-    # Facts inside label wording ("$0.01 par value") aren't in the value columns.
+    # Facts inside label wording ("$0.01 par value") aren't in the value
+    # columns, and a fact showing no digits (an empty CommitmentsAndContingencies
+    # placeholder, a "—") reads the same at any scale.
     scales = {f.scale for f, wordy in zip(table.facts, table.in_text, strict=True)
-              if f.unit == "USD" and not wordy}
+              if f.unit == "USD" and not wordy and any(ch.isdigit() for ch in f.displayed)}
     if not scales:
         return "no USD facts"
     if len(scales) > 1:

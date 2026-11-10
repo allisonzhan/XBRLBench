@@ -38,7 +38,27 @@ _ZERO_TEXT = {"", "-", "—", "–", "‒"}
 _COMMA_DECIMAL_FORMATS = ("numcommadecimal", "num-comma-decimal")
 
 _SCALE_WORDS = {"thousands": 3, "millions": 6, "billions": 9}
-_SCALE_PATTERN = re.compile(r"\bin\s+(thousands|millions|billions)\b", re.IGNORECASE)
+# "(In millions...)", "(millions, except per share amounts)", "(MILLIONS)",
+# "Millions of dollars", "Dollars in millions" -- but not a shares row such
+# as "Average shares outstanding (in millions of shares)".
+_SCALE_PATTERN = re.compile(r"\b(thousands|millions|billions)\b(?!\s+of\s+shares)", re.IGNORECASE)
+
+# Zero-width characters some filing tools put in empty cells and headings.
+_INVISIBLE = dict.fromkeys(map(ord, "\u200b\u200c\u200d\ufeff\u2060"))
+
+
+# A value cell: a comma-grouped number or a dollar sign. Bare years in the
+# column headers ("2025") don't match.
+_VALUE_CELL = re.compile(r"\d,\d{3}|\$")
+
+
+def find_scale(*texts: str) -> str | None:
+    """The first scale word ("thousands"/"millions"/"billions") in `texts`, lowercased."""
+    for text in texts:
+        m = _SCALE_PATTERN.search(text or "")
+        if m:
+            return m.group(1).lower()
+    return None
 
 
 @dataclass(frozen=True)
@@ -149,7 +169,8 @@ def _lines(el: ET.Element, skip_tables: bool = False) -> list[str]:
             parts.append("\n")
 
     walk(el)
-    return [" ".join(line.split()) for line in "".join(parts).split("\n") if line.strip()]
+    text = "".join(parts).translate(_INVISIBLE)
+    return [" ".join(line.split()) for line in text.split("\n") if line.strip()]
 
 
 def _cell_text(td: ET.Element) -> str:
@@ -389,16 +410,24 @@ def statement_tables(doc: IXBRLDocument, min_facts: int = 3) -> list[StatementTa
     parts: list[str] = []  # visible text since the previous table, with "\n" at block boundaries
 
     def visit(table: ET.Element) -> None:
-        recent = [" ".join(line.split()) for line in "".join(parts).split("\n") if line.strip()]
-        parts.clear()
-        heading = _heading(recent[-_HEADING_SNIPPETS:])
         facts, labels, in_text, rows = _table_rows(doc, table)
         if sum(not t for t in in_text) < min_facts:
+            # Not a data table: a title or "(Dollars in millions)" line laid
+            # out as a small table. Keep its text as part of the next heading.
+            parts.append("\n" + "\n".join(" | ".join(r) for r in rows) + "\n")
             return
-        scale = _SCALE_PATTERN.search(_text(table)) or _SCALE_PATTERN.search(heading)
+        text = "".join(parts).translate(_INVISIBLE)
+        recent = [" ".join(line.split()) for line in text.split("\n") if line.strip()]
+        parts.clear()
+        heading = _heading(recent[-_HEADING_SNIPPETS:])
+        # The scale line is in the heading or in the column-header rows above
+        # the first number; rows below that may say "(in thousands)" about
+        # share counts, so they are not searched.
+        first_value_row = next((i for i, r in enumerate(rows) if any(_VALUE_CELL.search(c) for c in r[1:])), len(rows))
+        header_text = "\n".join(" ".join(r) for r in rows[:first_value_row])
         tables.append(StatementTable(
             rows=rows, facts=facts, kind=_classify(facts, doc.contexts),
-            scale_label=scale.group(1).lower() if scale else None,
+            scale_label=find_scale(heading, header_text),
             heading=heading, labels=labels, position=len(tables), in_text=in_text,
         ))
 

@@ -265,7 +265,7 @@ def test_par_value_inside_label_does_not_count_as_a_scale(doc, built):
 
 def test_small_caps_title_is_one_line(doc):
     cash = ixbrl.primary_statements(doc)["cash_flow"]
-    assert cash.heading.startswith("CONSOLIDATED STATEMENTS OF CASH FLOWS\n(In thousands)")
+    assert cash.heading.startswith("CONSOLIDATED STATEMENTS OF CASH FLOWS\n(thousands of dollars)")
 
 
 def test_date_split_over_two_divs_keeps_a_space(doc):
@@ -283,3 +283,45 @@ def test_company_without_filings_is_logged(monkeypatch, tmp_path):
     filings.build_corpus("x@example.com", out, n_companies=1, tickers=["XOM"])
     [rec] = [json.loads(line) for line in open(out + ".log.jsonl", encoding="utf-8")]
     assert rec["status"] == "no_filings" and "k.txt" in rec["note"]
+
+
+# --- regressions from the second trial (30 companies) ------------------------------
+
+@pytest.mark.parametrize("text,expected", [
+    ("(In millions, except per share amounts)", "millions"),
+    ("(millions, except per share amounts)", "millions"),       # NEE
+    ("(MILLIONS, EXCEPT PER SHARE DATA)", "millions"),          # PFE
+    ("(Millions of dollars)", "millions"),                      # CAT
+    ("Dollars in millions except per share amounts", "millions"),  # T
+    ("Average Shares Outstanding (in millions of shares)", None),  # DE: shares, not dollars
+    ("Years ended December 31", None),
+])
+def test_find_scale(text, expected):
+    assert ixbrl.find_scale(text) == expected
+
+
+def test_shares_row_scale_does_not_override_heading(doc):
+    # AAL: heading "(In millions...)" but a shares row says "(in thousands)".
+    income = ixbrl.primary_statements(doc)["income_statement"]
+    assert any("Basic shares (in millions)" in r[0] for r in income.rows)
+    assert income.scale_label == "thousands"
+
+
+def test_title_laid_out_as_its_own_table_reaches_the_heading(doc):
+    # T sets "Dollars in millions..." in a small table of its own above each statement.
+    second_half = ixbrl.statement_tables(doc)[2]
+    assert second_half.heading == "CONSOLIDATED BALANCE SHEETS (continued)\n(In thousands, except par value)"
+    assert second_half.scale_label == "thousands"
+
+
+def test_empty_placeholder_fact_is_not_a_scale(doc):
+    # 18 balance sheets tag an empty CommitmentsAndContingencies at scale 0.
+    bs = ixbrl.primary_statements(doc)["balance_sheet"]
+    assert any(f.concept == "us-gaap:CommitmentsAndContingencies" and f.scale == 0 for f in bs.facts)
+    assert filings.table_scale_problem(bs) is None
+
+
+def test_zero_width_space_cells_are_dropped(doc):
+    text = ixbrl.primary_statements(doc)["balance_sheet"].render()
+    assert "\u200b" not in text
+    assert "Commitments and contingencies (Note 9)\n" in text
