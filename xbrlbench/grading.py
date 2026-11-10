@@ -249,11 +249,24 @@ def grade_row(row: dict, epsilon_override: float | None) -> dict:
     }
 
 
+def latest_rows(rows: list[dict]) -> list[dict]:
+    """One row per (id, model): the last one written. `run --resume` retries
+    calls that failed and appends the retry after the failed row, so the
+    retry wins. Order follows each key's first appearance."""
+    by_key: dict = {}
+    for i, row in enumerate(rows):
+        # A row without an id can't be matched to a retry; keep each one.
+        key = (row["id"], row.get("model")) if row.get("id") is not None else i
+        by_key[key] = row
+    return list(by_key.values())
+
+
 def summarize(rows: list[dict], epsilon: float | None = None):
     """Returns (graded, tier_table, model_table, grid, overall). Each bucket
     cell is {"n", "correct", "invalid"}; "incorrect" is implicit
-    (n - correct - invalid)."""
-    graded = [grade_row(row, epsilon) for row in rows]
+    (n - correct - invalid). Rows are de-duplicated per (id, model) first,
+    keeping the latest (see latest_rows)."""
+    graded = [grade_row(row, epsilon) for row in latest_rows(rows)]
 
     def bucket(rows_, key):
         b: dict = {}
