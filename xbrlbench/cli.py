@@ -9,6 +9,7 @@
     python -m xbrlbench spotcheck --email you@example.com [--n 10]
     python -m xbrlbench build --email you@example.com [--companies 500]
     python -m xbrlbench audit --in data/filings/questions.jsonl [--n 1000]
+    python -m xbrlbench sample --in data/filings/questions.jsonl --out <file> [--n 500]
 
 Inference (`run`) and everything downstream of it (`grade`/`report`/
 `errors`) are deliberately separate commands backed by separate modules:
@@ -22,7 +23,19 @@ from __future__ import annotations
 import argparse
 import sys
 
-from . import __version__, audit, errors, filings, generation, grading, inference, reporting, spotcheck, validation
+from . import (
+    __version__,
+    audit,
+    errors,
+    filings,
+    generation,
+    grading,
+    heldout,
+    inference,
+    reporting,
+    spotcheck,
+    validation,
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -52,6 +65,8 @@ def build_parser() -> argparse.ArgumentParser:
         "build", help="build questions from real 10-K statement tables (network)"))
     audit.build_arg_parser(subparsers.add_parser(
         "audit", help="re-derive real-filing gold values from the context text"))
+    heldout.build_arg_parser(subparsers.add_parser(
+        "sample", help="draw the fixed held-out evaluation sample from a real-filing corpus"))
 
     return parser
 
@@ -64,7 +79,7 @@ def main(argv: list[str] | None = None) -> None:
     if args.command == "generate":
         generation.generate(args.email, args.out)
     elif args.command == "run":
-        inference.run(args.inp, args.out_dir, args.models, args.limit, args.resume, args.tier, args.question_ids)
+        inference.run_from_args(args)
     elif args.command == "grade":
         grading.grade(args.inp, args.out_prefix, args.epsilon)
     elif args.command == "validate":
@@ -72,7 +87,7 @@ def main(argv: list[str] | None = None) -> None:
         if any(i.severity == validation.ERROR for i in issues):
             raise SystemExit(1)
     elif args.command == "report":
-        reporting.report(args.inp, args.questions, args.out_prefix, args.epsilon)
+        reporting.report(args.inp, args.questions, args.out_prefix, args.epsilon, args.cluster)
     elif args.command == "errors":
         errors.errors(args.inp, args.questions, args.out_prefix, args.epsilon)
     elif args.command == "spotcheck":
@@ -81,6 +96,8 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
     elif args.command == "build":
         filings.run(args)
+    elif args.command == "sample":
+        heldout.run(args)
     elif args.command == "audit":
         if not audit.run(args):
             raise SystemExit(1)
