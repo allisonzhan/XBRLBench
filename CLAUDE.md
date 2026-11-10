@@ -26,9 +26,10 @@ python -m xbrlbench validate                     # question-bank integrity; CI r
 python -m xbrlbench generate --email <contact>   # rebuild data/questions.jsonl from SEC (network)
 python -m xbrlbench run --limit 4                # live model eval (needs OPENROUTER_API_KEY, costs money)
 python -m xbrlbench grade|report|errors --in <responses.jsonl>   # offline, free
+python -m xbrlbench spotcheck --email <contact> # compare gold values with the filed 10-Ks (network)
 ```
 
-Network: `generate` needs `data.sec.gov`. The "XBRLBench" cloud environment
+Network: `generate` and `spotcheck` need `data.sec.gov` and `www.sec.gov`. The "XBRLBench" cloud environment
 allows it; the Default environment does not. SEC requires a real contact
 email in the User-Agent (`--email`) — ask the user, never invent one.
 
@@ -41,6 +42,10 @@ xbrlbench/inference.py    questions -> responses via OpenRouter
 xbrlbench/grading.py      responses -> correct / incorrect / invalid_response
 xbrlbench/reporting.py, errors.py   accuracy tables, failure detail
 xbrlbench/schema.py       Question dataclass + allowed values
+xbrlbench/ixbrl.py        inline-XBRL 10-K -> facts + statement tables (milestone 2)
+xbrlbench/edgar.py        EDGAR submissions lookup + rate-limited downloads
+xbrlbench/spotcheck.py    gold values vs. the filed 10-K's own tags
+tests/fixtures/           hand-written iXBRL sample mirroring EDGAR filings
 data/questions.jsonl      the benchmark (generated, committed)
 results/baseline/         the committed reference run
 docs/                     SCHEMA.md, METADATA.md, PRD.md
@@ -88,4 +93,9 @@ docs/                     SCHEMA.md, METADATA.md, PRD.md
 
 - Milestone 1 (data correctness): done. Generator and validation fixed,
   `data/questions.jsonl` regenerated at v0.3, and `results/baseline/`
-  re-run against it (run `20261110T023920Z`, commit `cea1514`).
+  re-run against it (run `20261110T023920Z`, commit `cea1514`). The
+  `spotcheck` against filed 10-Ks still needs a run with SEC access.
+- Milestone 2 (real filings): started. `ixbrl.py` parses facts and
+  statement tables from a filed 10-K; it is tested on a fixture only and
+  must be validated on real filings next, then wired into question
+  generation.
