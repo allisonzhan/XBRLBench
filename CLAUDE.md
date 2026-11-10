@@ -86,7 +86,6 @@ docs/                     SCHEMA.md, METADATA.md, PRD.md
 
 ## Current status (update as milestones land)
 
-- Milestone 1 (data correctness): generator and validation fixed;
-  `data/questions.jsonl` and `results/baseline/` still need regenerating from
-  live SEC data, after which `BENCHMARK_VERSION` goes to v0.3. Until then the
-  real-bank validation tests fail on purpose.
+- Milestone 1 (data correctness): done. Generator and validation fixed,
+  `data/questions.jsonl` regenerated at v0.3, and `results/baseline/`
+  re-run against it (run `20261110T023920Z`, commit `cea1514`).
