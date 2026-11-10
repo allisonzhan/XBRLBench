@@ -237,3 +237,29 @@ def test_report_has_ci_table_and_breakdowns(tmp_path, questions_file):
     assert sizes == {"mid ($1-10B)", "large (>$10B)"}
     md = to_markdown(rep)
     assert "95% confidence intervals" in md and "## Accuracy by task family" in md
+
+
+def test_classify_error_kinds():
+    from xbrlbench.grading import classify_error
+    assert classify_error(1_643_000, 1_643_000, "USD") == "correct"
+    assert classify_error(1_643, 1_643_000, "USD") == "scale"
+    assert classify_error(1.643, 1_643_000, "USD") == "scale"
+    assert classify_error(1_643_000, -1_643_000, "USD") == "sign"
+    assert classify_error(1_643, -1_643_000, "USD") == "scale_and_sign"
+    assert classify_error(0.2512, 25.12, "percent") == "percent_vs_fraction"
+    assert classify_error(999, 1_643_000, "USD") == "other"
+    assert classify_error(None, 1.0, "ratio") == "invalid"
+    assert classify_error(1.0, 1.0, "ratio", status="invalid_response") == "invalid"
+
+
+def test_second_run_on_the_same_directory_is_refused(tmp_path, monkeypatch, questions_file):
+    monkeypatch.setenv("OPENROUTER_API_KEY", "sk-or-test")
+    monkeypatch.setattr(inference, "call_with_retry", lambda *a, **k: fake())
+    out = tmp_path / "run"
+    out.mkdir()
+    (out / inference.LOCK_NAME).write_text("pid 1")
+    with pytest.raises(SystemExit, match="Another run"):
+        inference.run(questions_file, str(out), models=["a/m"], limit=1)
+    (out / inference.LOCK_NAME).unlink()
+    inference.run(questions_file, str(out), models=["a/m"], limit=1)
+    assert not (out / inference.LOCK_NAME).exists()

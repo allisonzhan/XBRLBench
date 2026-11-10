@@ -29,7 +29,7 @@ import csv
 import json
 import random
 
-from .grading import summarize
+from .grading import ERROR_KINDS, summarize
 from .io_utils import load_jsonl
 from .paths import DEFAULT_QUESTIONS_PATH, DEFAULT_REPORT_PREFIX, DEFAULT_RESPONSES_PATH
 from .schema import VALID_REASONING_TYPES
@@ -264,6 +264,10 @@ def model_summary(graded: list[dict], cluster: str = "company") -> dict:
     out = {}
     by_model = {m: [r for r in graded if r.get("model") == m] for m in _models_of(graded)}
     for model, rows in by_model.items():
+        kinds = {k: 0 for k in ERROR_KINDS if k != "correct"}
+        for r in rows:
+            if r.get("error_kind") in kinds:
+                kinds[r["error_kind"]] += 1
         n = len(rows)
         correct = sum(r["status"] == "correct" for r in rows)
         costs = [r["cost"] for r in rows if isinstance(r.get("cost"), (int, float))]
@@ -276,6 +280,11 @@ def model_summary(graded: list[dict], cluster: str = "company") -> dict:
             "ci95": list(bootstrap_ci(rows, cluster) or []),
             "cost_usd": round(sum(costs), 4) if costs else None,
             "mean_completion_tokens": round(sum(toks) / len(toks)) if toks else None,
+            "error_kinds": kinds,
+            # Accuracy if mechanical slips (scale, sign) were forgiven: an upper
+            # bound on what better answer formatting alone could buy.
+            "accuracy_forgiving_scale_and_sign": (correct + kinds["scale"] + kinds["sign"]
+                                                  + kinds["scale_and_sign"]) / n if n else 0.0,
         }
     if out:
         best = max(out, key=lambda m: (out[m]["accuracy"], m))
@@ -492,6 +501,17 @@ def _ci_table(report: dict) -> list[str]:
         toks = s.get("mean_completion_tokens")
         lines.append(f"| {model} | {s['n']} | {_fmt_pct(s['accuracy'])} | {_fmt_ci(s['ci95'])} | "
                      f"{s['invalid']} | {gap_txt} | {cost} | {toks if toks is not None else 'n/a'} |")
+    lines.append("")
+    kinds = [k for k in ERROR_KINDS if k != "correct"]
+    lines += ["## Why answers missed", "",
+              "Mechanical slips are a wrong scale (an answer left in the table's thousands or millions) "
+              "or a flipped sign; the last column forgives them.", "",
+              "| model | " + " | ".join(k.replace("_", " ") for k in kinds) + " | accuracy forgiving scale and sign |",
+              "|" + "---|" * (len(kinds) + 2)]
+    for model, s in sorted(summary.items(), key=lambda kv: -kv[1]["accuracy"]):
+        ek = s.get("error_kinds") or {}
+        lines.append(f"| {model} | " + " | ".join(str(ek.get(k, 0)) for k in kinds)
+                     + f" | {_fmt_pct(s.get('accuracy_forgiving_scale_and_sign'))} |")
     lines.append("")
     return lines
 
