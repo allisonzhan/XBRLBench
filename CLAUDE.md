@@ -29,6 +29,7 @@ python -m xbrlbench grade|report|errors --in <responses.jsonl>   # offline, free
 python -m xbrlbench spotcheck --email <contact> # compare gold values with the filed 10-Ks (network)
 python -m xbrlbench build --email <contact> --tickers AAPL,JPM   # real-filing questions, trial (network)
 python -m xbrlbench build --email <contact> --companies 500      # full real-filing corpus (network, resumable)
+python -m xbrlbench audit --in data/filings/questions.jsonl --n 1000   # re-derive gold from context text (offline)
 ```
 
 Network: `generate`, `spotcheck` and `build` need `data.sec.gov` and `www.sec.gov`. The "XBRLBench" cloud environment
@@ -48,6 +49,7 @@ xbrlbench/ixbrl.py        inline-XBRL 10-K -> facts + statement tables (mileston
 xbrlbench/edgar.py        EDGAR submissions lookup + rate-limited downloads
 xbrlbench/spotcheck.py    gold values vs. the filed 10-K's own tags
 xbrlbench/filings.py      real 10-K tables -> questions, train/test split, corpus build
+xbrlbench/audit.py        checks real-filing gold values against the context text
 tests/fixtures/           hand-written iXBRL samples (realistic_10k.htm mirrors EDGAR markup)
 data/questions.jsonl      the benchmark (generated, committed)
 results/baseline/         the committed reference run

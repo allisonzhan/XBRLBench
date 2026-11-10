@@ -104,9 +104,15 @@ every field above, with these differences:
 - `source_concept` is the full prefixed concept (`us-gaap:Assets`).
 
 Extra fields: `family` (question template), `cik`, `company`, `form`,
-`accession`, `filing_date`, `period_end`, `sic`, and `split`: `train`,
+`accession`, `filing_date`, `period_end`, `sic`, `inputs` (the tagged facts the
+gold value was computed from, in formula order: row `label`, `displayed`
+text, scaled `value`, `period_end`), and `split`: `train`,
 `test` (held-out companies, filed on or after 2026-07-01), or `null` (the
 filing falls outside its company's split, e.g. a `--tickers` trial run).
+
+`python -m xbrlbench audit` re-derives each gold value from the context
+text alone (row label, displayed number, stated scale, formula) and reports
+any question where text and tags disagree.
 
 Each build also writes `<out>.log.jsonl`, one line per filing tried, with
 its status (`ok`, `not_ixbrl`, `no_statements`, `no_questions`, `error`)

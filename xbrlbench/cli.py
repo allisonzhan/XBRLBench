@@ -8,6 +8,7 @@
     python -m xbrlbench errors [--epsilon 0.01]
     python -m xbrlbench spotcheck --email you@example.com [--n 10]
     python -m xbrlbench build --email you@example.com [--companies 500]
+    python -m xbrlbench audit --in data/filings/questions.jsonl [--n 1000]
 
 Inference (`run`) and everything downstream of it (`grade`/`report`/
 `errors`) are deliberately separate commands backed by separate modules:
@@ -21,7 +22,7 @@ from __future__ import annotations
 import argparse
 import sys
 
-from . import __version__, errors, filings, generation, grading, inference, reporting, spotcheck, validation
+from . import __version__, audit, errors, filings, generation, grading, inference, reporting, spotcheck, validation
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -49,6 +50,8 @@ def build_parser() -> argparse.ArgumentParser:
         "spotcheck", help="check sampled gold values against the filed 10-Ks (network)"))
     filings.build_arg_parser(subparsers.add_parser(
         "build", help="build questions from real 10-K statement tables (network)"))
+    audit.build_arg_parser(subparsers.add_parser(
+        "audit", help="re-derive real-filing gold values from the context text"))
 
     return parser
 
@@ -78,6 +81,9 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
     elif args.command == "build":
         filings.run(args)
+    elif args.command == "audit":
+        if not audit.run(args):
+            raise SystemExit(1)
     else:  # pragma: no cover - argparse enforces `required=True` above
         parser.error(f"unknown command: {args.command}")
 
