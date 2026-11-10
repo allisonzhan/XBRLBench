@@ -26,9 +26,13 @@ python -m xbrlbench validate                     # question-bank integrity; CI r
 python -m xbrlbench generate --email <contact>   # rebuild data/questions.jsonl from SEC (network)
 python -m xbrlbench run --limit 4                # live model eval (needs OPENROUTER_API_KEY, costs money)
 python -m xbrlbench grade|report|errors --in <responses.jsonl>   # offline, free
+python -m xbrlbench spotcheck --email <contact> # compare gold values with the filed 10-Ks (network)
+python -m xbrlbench build --email <contact> --tickers AAPL,JPM   # real-filing questions, trial (network)
+python -m xbrlbench build --email <contact> --companies 500      # full real-filing corpus (network, resumable)
+python -m xbrlbench audit --in data/filings/questions.jsonl --n 1000   # re-derive gold from context text (offline)
 ```
 
-Network: `generate` needs `data.sec.gov`. The "XBRLBench" cloud environment
+Network: `generate`, `spotcheck` and `build` need `data.sec.gov` and `www.sec.gov`. The "XBRLBench" cloud environment
 allows it; the Default environment does not. SEC requires a real contact
 email in the User-Agent (`--email`) — ask the user, never invent one.
 
@@ -41,6 +45,12 @@ xbrlbench/inference.py    questions -> responses via OpenRouter
 xbrlbench/grading.py      responses -> correct / incorrect / invalid_response
 xbrlbench/reporting.py, errors.py   accuracy tables, failure detail
 xbrlbench/schema.py       Question dataclass + allowed values
+xbrlbench/ixbrl.py        inline-XBRL 10-K -> facts + statement tables (milestone 2)
+xbrlbench/edgar.py        EDGAR submissions lookup + rate-limited downloads
+xbrlbench/spotcheck.py    gold values vs. the filed 10-K's own tags
+xbrlbench/filings.py      real 10-K tables -> questions, train/test split, corpus build
+xbrlbench/audit.py        checks real-filing gold values against the context text
+tests/fixtures/           hand-written iXBRL samples (realistic_10k.htm mirrors EDGAR markup)
 data/questions.jsonl      the benchmark (generated, committed)
 results/baseline/         the committed reference run
 docs/                     SCHEMA.md, METADATA.md, PRD.md
@@ -83,9 +93,28 @@ docs/                     SCHEMA.md, METADATA.md, PRD.md
   reported).
 - Large filers report "in millions"; the current synthetic snippet renders
   "in thousands". Real-filing rendering is milestone 2 in the PRD.
+- In filed 10-Ks, unit ids (`unitRef`) are arbitrary: compare `Fact.unit`
+  (the resolved measure), never the id. The "(In millions...)" line and the
+  statement title usually sit in divs above the table, not inside it, and
+  a balance sheet can be split over two tables by a page break
+  (`ixbrl.primary_statements` merges them).
+- Never trust a stated scale blindly: `filings.table_scale_problem` drops a
+  statement whose "(In thousands/millions)" text disagrees with its tags'
+  `scale`.
 
 ## Current status (update as milestones land)
 
 - Milestone 1 (data correctness): done. Generator and validation fixed,
   `data/questions.jsonl` regenerated at v0.3, and `results/baseline/`
   re-run against it (run `20261110T023920Z`, commit `cea1514`).
+  `spotcheck --n 30` passed 30/30 against the filed 10-Ks on 2026-11-10,
+  covering every checkable question (total assets, net income and current
+  liabilities for all 5 companies, FY2023–2024).
+- Milestone 2 (real filings): built. On 2026-11-10 `build --companies 500
+  --per-company 2` produced 8,208 questions from 968 10-Ks of 500 companies
+  (all SIC divisions), and `audit` passed 8,208/8,208. Trials on 30 named
+  companies fixed the parser against real markup; 10 hand-checked questions
+  all matched. The corpus (~22 MB) is not committed: `data/filings/` is
+  gitignored. Open gap: only 126 held-out (`test`) questions, because few
+  10-Ks are filed after 2026-07-01; the PRD's fix is adding 10-Qs to the
+  held-out set. `data/questions.jsonl` (synthetic bank) is at v0.4.

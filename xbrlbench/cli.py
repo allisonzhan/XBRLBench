@@ -6,6 +6,9 @@
     python -m xbrlbench grade [--epsilon 0.01]
     python -m xbrlbench report [--epsilon 0.01]
     python -m xbrlbench errors [--epsilon 0.01]
+    python -m xbrlbench spotcheck --email you@example.com [--n 10]
+    python -m xbrlbench build --email you@example.com [--companies 500]
+    python -m xbrlbench audit --in data/filings/questions.jsonl [--n 1000]
 
 Inference (`run`) and everything downstream of it (`grade`/`report`/
 `errors`) are deliberately separate commands backed by separate modules:
@@ -19,7 +22,7 @@ from __future__ import annotations
 import argparse
 import sys
 
-from . import __version__, errors, generation, grading, inference, reporting, validation
+from . import __version__, audit, errors, filings, generation, grading, inference, reporting, spotcheck, validation
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -43,6 +46,12 @@ def build_parser() -> argparse.ArgumentParser:
         "report", help="generate accuracy/failure breakdowns from a responses file"))
     errors.build_arg_parser(subparsers.add_parser(
         "errors", help="deterministic per-response detail on every non-correct answer"))
+    spotcheck.build_arg_parser(subparsers.add_parser(
+        "spotcheck", help="check sampled gold values against the filed 10-Ks (network)"))
+    filings.build_arg_parser(subparsers.add_parser(
+        "build", help="build questions from real 10-K statement tables (network)"))
+    audit.build_arg_parser(subparsers.add_parser(
+        "audit", help="re-derive real-filing gold values from the context text"))
 
     return parser
 
@@ -66,6 +75,15 @@ def main(argv: list[str] | None = None) -> None:
         reporting.report(args.inp, args.questions, args.out_prefix, args.epsilon)
     elif args.command == "errors":
         errors.errors(args.inp, args.questions, args.out_prefix, args.epsilon)
+    elif args.command == "spotcheck":
+        results = spotcheck.spotcheck(args.email, args.n, args.inp, args.out)
+        if any(r.status != "match" for r in results):
+            raise SystemExit(1)
+    elif args.command == "build":
+        filings.run(args)
+    elif args.command == "audit":
+        if not audit.run(args):
+            raise SystemExit(1)
     else:  # pragma: no cover - argparse enforces `required=True` above
         parser.error(f"unknown command: {args.command}")
 

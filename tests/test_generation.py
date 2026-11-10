@@ -247,6 +247,14 @@ def test_t3_assets_delta_can_be_negative():
     assert q["gold_value"] == -1000.0
 
 
+def test_change_questions_say_a_decrease_is_negative():
+    # Without this, "by how much did X change" invites the unsigned size of
+    # the change, and graders can't tell a sign error from a reading error.
+    qs = by_concept(make_questions("AAPL", 2023, FULL_VALS, PREV_VALS))
+    assert "negative if it decreased" in qs["Revenue YoY"]["question"]
+    assert "negative if it decreased" in qs["Assets delta"]["question"]
+
+
 def test_missing_source_value_skips_that_question_not_crashes():
     vals = {**FULL_VALS, "assets": None}
     qs = by_concept(make_questions("AAPL", 2023, vals, None))

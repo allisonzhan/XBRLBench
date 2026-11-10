@@ -53,6 +53,7 @@ other value).
 | `ratio`                    | Combine two values from the *same* period by division into a financial ratio. | "What was AAPL's current ratio for fiscal year 2023?"                |
 | `percentage_change`        | `(new - old) / old` across two periods, expressed as a percentage.            | "What was AAPL's year-over-year revenue growth from FY2022 to FY2023?" |
 | `multi_period_comparison`  | A value compared/subtracted across two fiscal years, not expressed as a percentage. | "By how much did AAPL's total assets change from FY2022 to FY2023?"  |
+| `derived_metric`           | A standard metric built from several line items by a formula the question states. Real-filing questions only. | "What was free cash flow ..., defined as \"Net cash provided by operating activities\" minus \"Purchases of property and equipment\"?" |
 
 Note the T3 "distractor" question (current *current* liabilities, next to a
 total-liabilities sibling line) is tagged `direct_retrieval` — it's still a
@@ -87,6 +88,36 @@ Because gold values come straight from SEC-filed structured data (see the
 main README's Methodology section for the exact XBRL lookup rules), they are
 machine-verified, not manually curated.
 
+## Real-filing questions (milestone 2)
+
+`python -m xbrlbench build` (`xbrlbench.filings`) writes questions about
+real 10-K statement tables to `data/filings/questions.jsonl`. Records have
+every field above, with these differences:
+
+- `id` is `{ticker}-{fiscal_year}-{family}`, e.g. `AAPL-2025-current_ratio`.
+- `context` is the filing's own statement table(s), tags stripped, under a
+  `{company} — Form 10-K for the fiscal year ended {date}` line and the
+  table's own title and "(In millions...)" heading. Only the statement(s) a
+  question needs are included.
+- `question` quotes the filing's row labels (`"Total net sales"`) instead of
+  generic names, and states any formula.
+- `source_concept` is the full prefixed concept (`us-gaap:Assets`).
+
+Extra fields: `family` (question template), `cik`, `company`, `form`,
+`accession`, `filing_date`, `period_end`, `sic`, `inputs` (the tagged facts the
+gold value was computed from, in formula order: row `label`, `displayed`
+text, scaled `value`, `period_end`), and `split`: `train`,
+`test` (held-out companies, filed on or after 2026-07-01), or `null` (the
+filing falls outside its company's split, e.g. a `--tickers` trial run).
+
+`python -m xbrlbench audit` re-derives each gold value from the context
+text alone (row label, displayed number, stated scale, formula) and reports
+any question where text and tags disagree.
+
+Each build also writes `<out>.log.jsonl`, one line per filing tried, with
+its status (`ok`, `not_ixbrl`, `no_statements`, `no_questions`, `error`)
+and the reasons any statement or question was dropped.
+
 ## Benchmark versioning
 
 `xbrlbench.BENCHMARK_VERSION` (in [`xbrlbench/__init__.py`](../xbrlbench/__init__.py))
@@ -114,3 +145,5 @@ year (companyfacts `fy` labels the filing, not the period), so results
 against earlier versions are not comparable. KO and WMT don't tag `Liabilities`, so their
 "Total liabilities" line is derived (total liabilities-and-equity minus equity
 including noncontrolling interest), which gives their T3 questions a real distractor line.
+`v0.4` adds "negative if it decreased" to the two change templates (revenue
+growth, total-assets change); gold values are unchanged.

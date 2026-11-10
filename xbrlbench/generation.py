@@ -243,7 +243,7 @@ def make_questions(ticker: str, fy: int, vals: dict, prev_vals: dict | None) -> 
           "GrossProfit/Revenue", "ratio")
     if prev_vals and prev_vals.get("revenue") and vals.get("revenue"):
         q("T2", f"What was {ticker}'s year-over-year revenue growth from FY{fy - 1} "
-                f"to FY{fy}? (as a percentage)",
+                f"to FY{fy}? (as a percentage, negative if it decreased)",
           100 * (vals["revenue"] - prev_vals["revenue"]) / prev_vals["revenue"],
           "percent", "Revenue YoY", "percentage_change",
           context=render_two_year_snippet(vals, prev_vals, ticker, fy))
@@ -256,7 +256,8 @@ def make_questions(ticker: str, fy: int, vals: dict, prev_vals: dict | None) -> 
           "direct_retrieval")
     if prev_vals and prev_vals.get("assets") and vals.get("assets"):
         q("T3", f"By how much did {ticker}'s total assets change from FY{fy - 1} to "
-                f"FY{fy}? Answer the dollar difference in USD (positive if increased).",
+                f"FY{fy}? Answer the dollar difference in USD "
+                f"(positive if it increased, negative if it decreased).",
           vals["assets"] - prev_vals["assets"], "USD", "Assets delta", "multi_period_comparison",
           context=render_two_year_snippet(vals, prev_vals, ticker, fy))
     return qs

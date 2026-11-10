@@ -4,6 +4,7 @@ and the dataclass round-trips through dict conversion."""
 
 from xbrlbench.paths import DEFAULT_QUESTIONS_PATH
 from xbrlbench.schema import (
+    FILINGS_ONLY_REASONING_TYPES,
     REQUIRED_FIELDS,
     VALID_GOLD_UNITS,
     VALID_REASONING_TYPES,
@@ -35,10 +36,22 @@ def test_every_question_has_a_valid_tier_unit_and_reasoning_type():
 def test_every_reasoning_type_is_actually_used():
     """Guards against the taxonomy drifting from the real question bank in
     either direction: every declared category should describe at least one
-    real question (see docs/SCHEMA.md's "deliberately exhaustive" note)."""
+    real question (see docs/SCHEMA.md's "deliberately exhaustive" note).
+    Categories only real-filing questions use are covered by
+    tests/test_filings.py instead."""
     questions = load_questions(DEFAULT_QUESTIONS_PATH)
     used = {q.reasoning_type for q in questions}
-    assert used == VALID_REASONING_TYPES
+    assert used == VALID_REASONING_TYPES - FILINGS_ONLY_REASONING_TYPES
+
+
+def test_filings_only_types_are_produced_by_the_filings_generator():
+    from pathlib import Path
+
+    from xbrlbench import filings, ixbrl
+    doc = ixbrl.parse_ixbrl((Path(__file__).parent / "fixtures" / "realistic_10k.htm").read_bytes())
+    qs, _ = filings.build_filing_questions(doc, filings.FilingMeta(cik="1"))
+    assert FILINGS_ONLY_REASONING_TYPES <= {q["reasoning_type"] for q in qs}
+
 
 
 def test_question_from_dict_rejects_missing_field():
