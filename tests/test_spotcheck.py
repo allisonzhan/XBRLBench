@@ -73,7 +73,7 @@ def test_sample_is_deterministic_and_checkable_only():
     rows = [{"id": f"X-{i}", "source_concept": c}
             for i, c in enumerate(["Assets", "Revenue YoY", "NetIncomeLoss", "Assets", "GrossProfit/Revenue"])]
     sample = spotcheck.sample_questions(rows, 2)
-    assert [r["id"] for r in sample] == ["X-0", "X-2"]
+    assert [r["id"] for r in sample] == ["X-0", "X-2"]  # one Assets, one NetIncomeLoss
     assert spotcheck.sample_questions(rows, 2) == sample
 
 
@@ -122,3 +122,13 @@ def test_check_question_skips_10k_for_other_fiscal_year(offline):
 
 def test_unknown_ticker_is_an_error(offline):
     assert spotcheck.check_question(question(ticker="ZZZZ"), "a@b.c", {}).status == "error"
+
+
+def test_sample_covers_every_concept_even_when_ids_interleave():
+    # The real bank orders each company-year as Assets, NetIncomeLoss, ...,
+    # LiabilitiesCurrent, so a plain id stride of 3 picked Assets every time.
+    concepts = ["Assets", "NetIncomeLoss", "LiabilitiesCurrent (distractor: Liabilities)"]
+    rows = [{"id": f"T{y:02d}-{j}", "source_concept": c} for y in range(10) for j, c in enumerate(concepts)]
+    sample = spotcheck.sample_questions(rows, 10)
+    assert len(sample) == 10
+    assert {r["source_concept"] for r in sample} == set(concepts)

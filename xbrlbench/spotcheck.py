@@ -49,12 +49,28 @@ class SpotCheck:
 
 
 def sample_questions(rows: list[dict], n: int) -> list[dict]:
-    """A deterministic, evenly spread sample of checkable questions."""
-    checkable = sorted((r for r in rows if r.get("source_concept") in CHECKABLE), key=lambda r: r["id"])
-    if n >= len(checkable):
-        return checkable
-    step = len(checkable) / n
-    return [checkable[int(i * step)] for i in range(n)]
+    """A deterministic sample of checkable questions spread across concepts
+    and companies: n is split as evenly as possible between the checkable
+    concepts, and each concept's share is taken at evenly spaced positions
+    in its id-sorted list. (A single id stride over the whole bank landed on
+    the same concept every time, because each company-year lists its
+    questions in the same order.)"""
+    by_concept: dict[str, list[dict]] = {}
+    for r in sorted((r for r in rows if r.get("source_concept") in CHECKABLE), key=lambda r: r["id"]):
+        by_concept.setdefault(r["source_concept"], []).append(r)
+    pools = [by_concept[c] for c in CHECKABLE if c in by_concept]
+    quota = [0] * len(pools)
+    remaining = min(n, sum(len(p) for p in pools))
+    while remaining:
+        for i, pool in enumerate(pools):
+            if remaining and quota[i] < len(pool):
+                quota[i] += 1
+                remaining -= 1
+    sample = []
+    for pool, k in zip(pools, quota, strict=True):
+        step = len(pool) / k if k else 0
+        sample += [pool[int(j * step)] for j in range(k)]
+    return sample
 
 
 def current_period_fact(doc: ixbrl.IXBRLDocument, concept: str, instant: bool) -> ixbrl.Fact | None:
