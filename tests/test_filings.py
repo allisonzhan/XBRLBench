@@ -248,3 +248,38 @@ def test_build_corpus_trial_tickers_take_newest_filing_any_split(monkeypatch, tm
     assert stats["ok"] == 1 and stats["companies_ok"] == 1
     rows = [json.loads(line) for line in open(out, encoding="utf-8")]
     assert {r["split"] for r in rows} == {None}  # held-out company, filed before the cutoff
+
+
+# --- regressions from the first real-filing trial (AAPL, AMZN, WMT, JPM, JNJ, MSFT) ---
+
+def test_par_value_inside_label_does_not_count_as_a_scale(doc, built):
+    # "Common stock ..., $0.001 par value" tags a scale-0 USD fact inside the
+    # label. It used to make the whole balance sheet "mixed USD scales [0, 3]".
+    bs = ixbrl.primary_statements(doc)["balance_sheet"]
+    par = [w for f, w in zip(bs.facts, bs.in_text, strict=True)
+           if f.concept == "us-gaap:CommonStockParOrStatedValuePerShare"]
+    assert par == [True]
+    assert filings.table_scale_problem(bs) is None
+    assert "balance_sheet" in built[1].statements
+
+
+def test_small_caps_title_is_one_line(doc):
+    cash = ixbrl.primary_statements(doc)["cash_flow"]
+    assert cash.heading.startswith("CONSOLIDATED STATEMENTS OF CASH FLOWS\n(In thousands)")
+
+
+def test_date_split_over_two_divs_keeps_a_space(doc):
+    income = ixbrl.primary_statements(doc)["income_statement"]
+    assert "June 28, 2025 | June 29, 2024 | July 1, 2023" in income.render()
+
+
+def test_company_without_filings_is_logged(monkeypatch, tmp_path):
+    subs = {"name": "X", "sic": "2911", "filings": {"recent": {
+        "form": ["10-K"], "accessionNumber": ["a"], "primaryDocument": ["k.txt"],
+        "filingDate": ["2025-02-01"], "reportDate": ["2024-12-31"]}}}
+    monkeypatch.setattr(edgar, "company_list", lambda email: [{"cik": "0000034088", "ticker": "XOM", "title": "X"}])
+    monkeypatch.setattr(edgar, "get_submissions", lambda c, email, since="": subs)
+    out = str(tmp_path / "q.jsonl")
+    filings.build_corpus("x@example.com", out, n_companies=1, tickers=["XOM"])
+    [rec] = [json.loads(line) for line in open(out + ".log.jsonl", encoding="utf-8")]
+    assert rec["status"] == "no_filings" and "k.txt" in rec["note"]

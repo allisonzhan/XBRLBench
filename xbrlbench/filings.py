@@ -135,7 +135,9 @@ class FilingReport:
 
 def table_scale_problem(table: ixbrl.StatementTable) -> str | None:
     """None if the table's stated scale matches its USD facts' ix scale."""
-    scales = {f.scale for f in table.facts if f.unit == "USD"}
+    # Facts inside label wording ("$0.01 par value") aren't in the value columns.
+    scales = {f.scale for f, wordy in zip(table.facts, table.in_text, strict=True)
+              if f.unit == "USD" and not wordy}
     if not scales:
         return "no USD facts"
     if len(scales) > 1:
@@ -165,8 +167,8 @@ def find_item(doc: ixbrl.IXBRLDocument, table: ixbrl.StatementTable, name: str, 
     unique = _unique_labels(table)
     for concept in concepts:
         hits = []
-        for fact, label in zip(table.facts, table.labels, strict=True):
-            if fact.concept.split(":", 1)[-1] != concept or fact.value is None or fact.unit != "USD":
+        for fact, label, wordy in zip(table.facts, table.labels, table.in_text, strict=True):
+            if wordy or fact.concept.split(":", 1)[-1] != concept or fact.value is None or fact.unit != "USD":
                 continue
             ctx = doc.contexts.get(fact.context_id)
             if ctx is None or ctx.dimensions or ctx.end != end or not _is_annual(ctx):
@@ -189,9 +191,9 @@ def find_item(doc: ixbrl.IXBRLDocument, table: ixbrl.StatementTable, name: str, 
 def annual_ends(doc: ixbrl.IXBRLDocument, table: ixbrl.StatementTable) -> list[str]:
     """Distinct period ends of the table's dimensionless annual USD facts, newest first."""
     ends = set()
-    for f in table.facts:
+    for f, wordy in zip(table.facts, table.in_text, strict=True):
         ctx = doc.contexts.get(f.context_id)
-        if f.unit == "USD" and ctx is not None and not ctx.dimensions and _is_annual(ctx):
+        if f.unit == "USD" and not wordy and ctx is not None and not ctx.dimensions and _is_annual(ctx):
             ends.add(ctx.end)
     return sorted(ends, reverse=True)
 
@@ -434,10 +436,16 @@ def build_corpus(email: str, out: str, n_companies: int = 500, per_company: int 
             if sic in SKIP_SIC:
                 stats["skipped_sic"] += 1
                 continue
-            refs = _filings_for_split(edgar.annual_filings(subs, cik), cik, per_company, since,
-                                      any_split=bool(tickers))
+            all_10k = edgar.annual_filings(subs, cik)
+            refs = _filings_for_split(all_10k, cik, per_company, since, any_split=bool(tickers))
             if not refs:
                 stats["no_filings"] += 1
+                latest = all_10k[0] if all_10k else None
+                note = (f"{len(all_10k)} 10-Ks listed; newest {latest.filing_date} {latest.primary_document}"
+                        if latest else "no 10-K listed in submissions")
+                lf.write(json.dumps({"accession": None, "cik": cik, "status": "no_filings", "note": note,
+                                     "ticker": comp["ticker"], "sic": sic}) + "\n")
+                print(f"no_filings    {comp['ticker']:6} {note}")
                 continue
             for ref in refs:
                 if ref.accession in done:

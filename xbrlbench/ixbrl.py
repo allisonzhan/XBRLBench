@@ -124,6 +124,40 @@ def _text(el: ET.Element) -> str:
     return " ".join("".join(el.itertext()).split())
 
 
+# Elements that start a new line of text. Everything else (span, font, a, b,
+# ix:*) is inline: filings style small caps as adjacent spans ("S" + "TATEMENTS"),
+# so inline text must be joined with no separator at all.
+_BLOCK_TAGS = {"div", "p", "br", "tr", "td", "th", "li", "h1", "h2", "h3", "h4", "h5", "h6",
+               "table", "hr", "ul", "ol", "center", "section", "body"}
+
+
+def _lines(el: ET.Element, skip_tables: bool = False) -> list[str]:
+    """Visible text of `el` split into lines at block-element boundaries,
+    whitespace-normalised, empty lines dropped."""
+    parts: list[str] = []
+
+    def walk(node: ET.Element) -> None:
+        block = _local(node.tag) in _BLOCK_TAGS
+        if block:
+            parts.append("\n")
+        parts.append(node.text or "")
+        for child in node:
+            if not (skip_tables and _local(child.tag) == "table"):
+                walk(child)
+            parts.append(child.tail or "")
+        if block:
+            parts.append("\n")
+
+    walk(el)
+    return [" ".join(line.split()) for line in "".join(parts).split("\n") if line.strip()]
+
+
+def _cell_text(td: ET.Element) -> str:
+    """A table cell's text, with line breaks inside the cell (a date split
+    over two divs) turned into spaces."""
+    return " ".join(_lines(td))
+
+
 def parse_number(displayed: str, fmt: str | None = None, scale: str | None = None,
                  sign: str | None = None) -> float:
     """Turn an ix:nonFraction's displayed text into its XBRL value."""
@@ -265,6 +299,7 @@ class StatementTable:
     heading: str = ""       # text just above the table: statement title, "(In millions...)" line
     labels: list[str | None] = field(default_factory=list)  # row label of each fact, parallel to facts
     position: int = 0       # index among the document's tagged tables
+    in_text: list[bool] = field(default_factory=list)  # fact sits inside label wording, parallel to facts
 
     def render(self) -> str:
         """Plain-text rendering for a prompt: one row per line, cells
@@ -322,62 +357,69 @@ def _heading(snippets: list[str]) -> str:
     return text[-_HEADING_MAX_CHARS:]
 
 
-def statement_tables(doc: IXBRLDocument, min_facts: int = 3) -> list[StatementTable]:
-    """Every XHTML table in the document carrying at least `min_facts`
-    tagged numbers, in document order."""
-    in_table: set[int] = set()
-    for table in doc.root.iter():
-        if _local(table.tag) == "table":
-            in_table.update(id(el) for el in table.iter())
+def _table_rows(doc: IXBRLDocument, table: ET.Element):
+    """(facts, labels, in_text flags, cleaned rows) for one XHTML table.
 
-    tables = []
-    recent: list[str] = []  # text chunks seen since the last table, in document order
-    for el in doc.root.iter():
-        if _local(el.tag) == "header" and _ns(el.tag) in IX_NAMESPACES:
+    A row's label is its first cell containing letters. A fact inside such a
+    cell (a par value or share count tagged in "Common stock, $0.01 par
+    value; 500 shares authorized") is flagged in_text: it is part of the
+    label's wording, not one of the table's value columns."""
+    facts, labels, in_text, rows = [], [], [], []
+    for tr in table.iter():
+        if _local(tr.tag) != "tr":
             continue
-        if _local(el.tag) != "table":
-            if id(el) not in in_table:
-                for chunk in (el.text, el.tail):
-                    chunk = " ".join((chunk or "").split())
-                    if chunk:
-                        recent.append(chunk)
-                del recent[:-_HEADING_SNIPPETS]
-            continue
-        facts, labels, rows = [], [], []
-        for tr in el.iter():
-            if _local(tr.tag) != "tr":
-                continue
-            cells = [td for td in tr if _local(td.tag) in ("td", "th")]
-            texts = [_text(td) for td in cells]
-            label = None
-            for td, text in zip(cells, texts, strict=True):
-                if any(id(x) in doc.tag_facts for x in td.iter()):
-                    break
-                if any(ch.isalpha() for ch in text):
-                    label = text
-                    break
-            for x in tr.iter():
+        cells = [td for td in tr if _local(td.tag) in ("td", "th")]
+        texts = [_cell_text(td) for td in cells]
+        label = next((t for t in texts if any(ch.isalpha() for ch in t)), None)
+        for td, text in zip(cells, texts, strict=True):
+            wordy = any(ch.isalpha() for ch in text)
+            for x in td.iter():
                 if id(x) in doc.tag_facts:
                     facts.append(doc.tag_facts[id(x)])
                     labels.append(label)
-            rows.append(_clean_row(texts))
-        heading = _heading(recent)
-        if el.tail and el.tail.strip():
-            recent = [" ".join(el.tail.split())]
-        else:
-            recent = []
-        if len(facts) < min_facts:
-            continue
-        scale = _SCALE_PATTERN.search(_text(el)) or _SCALE_PATTERN.search(heading)
+                    in_text.append(wordy)
+        rows.append(_clean_row(texts))
+    return facts, labels, in_text, [r for r in rows if r]
+
+
+def statement_tables(doc: IXBRLDocument, min_facts: int = 3) -> list[StatementTable]:
+    """Every XHTML table in the document carrying at least `min_facts`
+    tagged numbers (outside label text), in document order."""
+    tables: list[StatementTable] = []
+    parts: list[str] = []  # visible text since the previous table, with "\n" at block boundaries
+
+    def visit(table: ET.Element) -> None:
+        recent = [" ".join(line.split()) for line in "".join(parts).split("\n") if line.strip()]
+        parts.clear()
+        heading = _heading(recent[-_HEADING_SNIPPETS:])
+        facts, labels, in_text, rows = _table_rows(doc, table)
+        if sum(not t for t in in_text) < min_facts:
+            return
+        scale = _SCALE_PATTERN.search(_text(table)) or _SCALE_PATTERN.search(heading)
         tables.append(StatementTable(
-            rows=[r for r in rows if r],
-            facts=facts,
-            kind=_classify(facts, doc.contexts),
+            rows=rows, facts=facts, kind=_classify(facts, doc.contexts),
             scale_label=scale.group(1).lower() if scale else None,
-            heading=heading,
-            labels=labels,
-            position=len(tables),
+            heading=heading, labels=labels, position=len(tables), in_text=in_text,
         ))
+
+    def walk(node: ET.Element) -> None:
+        name = _local(node.tag)
+        if name == "header" and _ns(node.tag) in IX_NAMESPACES:
+            return
+        if name == "table":
+            visit(node)
+            return
+        block = name in _BLOCK_TAGS
+        if block:
+            parts.append("\n")
+        parts.append(node.text or "")
+        for child in node:
+            walk(child)
+            parts.append(child.tail or "")
+        if block:
+            parts.append("\n")
+
+    walk(doc.root)
     return tables
 
 
@@ -390,7 +432,8 @@ def _merge(first: StatementTable, second: StatementTable, kind: str) -> Statemen
     return StatementTable(
         rows=first.rows + second.rows, facts=first.facts + second.facts, kind=kind,
         scale_label=first.scale_label if first.scale_label == second.scale_label else None,
-        heading=first.heading, labels=first.labels + second.labels, position=first.position)
+        heading=first.heading, labels=first.labels + second.labels, position=first.position,
+        in_text=first.in_text + second.in_text)
 
 
 def primary_statements(doc: IXBRLDocument, tables: list[StatementTable] | None = None
