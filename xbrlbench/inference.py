@@ -238,6 +238,29 @@ def already_done(out_path) -> set:
     return done
 
 
+LOCK_NAME = "run.lock"
+
+
+def acquire_lock(out_dir: Path) -> Path:
+    """Refuse to start if another run is writing to out_dir. Two runs on the
+    same directory both pay for every question and interleave their writes
+    (seen in M3 after a process restart). A crash leaves the lock behind;
+    the message says how to clear it."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    lock = out_dir / LOCK_NAME
+    try:
+        fd = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+    except FileExistsError:
+        holder = lock.read_text(encoding="utf-8", errors="replace").strip()
+        raise SystemExit(
+            f"Another run appears to be writing to {out_dir} ({holder}). If it is not "
+            f"running any more (e.g. it crashed), delete {lock} and try again."
+        ) from None
+    with os.fdopen(fd, "w", encoding="utf-8") as f:
+        f.write(f"pid {os.getpid()} started {experiment.utc_now_iso()}\n")
+    return lock
+
+
 def select_questions(questions: list[dict], tier: str | None = None, split: str | None = None,
                      question_ids: list[str] | None = None, limit: int | None = None,
                      source: str = "") -> list[dict]:
@@ -362,6 +385,16 @@ def run(
         "api_base": api_base,
         "reasoning": reasoning,
     })
+    lock = acquire_lock(out_dir)
+    try:
+        _run_jobs(questions, models, done, api_key, responses_path, metadata, metadata_path,
+                  workers, api_base, max_tokens, reasoning, max_cost, questions_path)
+    finally:
+        lock.unlink(missing_ok=True)
+
+
+def _run_jobs(questions, models, done, api_key, responses_path, metadata, metadata_path,
+              workers, api_base, max_tokens, reasoning, max_cost, questions_path) -> None:
     experiment.write_metadata(metadata, metadata_path)
 
     # Interleave models so a run stopped by --max-cost (or by hand) leaves
