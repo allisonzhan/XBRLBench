@@ -42,9 +42,11 @@ import argparse
 import json as _json
 import os
 import random
+import threading
 import time
 import urllib.error
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from . import experiment
@@ -53,6 +55,15 @@ from .paths import DEFAULT_QUESTIONS_PATH, RUNS_DIR
 from .schema import VALID_TIERS
 
 API_BASE = "https://openrouter.ai/api/v1"
+
+# Real-filing question fields copied into each response row, so reports can
+# break results down by family, sector, company and form without the corpus.
+CARRY_FIELDS = ("family", "fiscal_period", "cik", "company", "form", "sic", "split", "period_end")
+
+# --reasoning choices. "default" sends nothing (the provider's default);
+# "off" disables thinking (e.g. Qwen3's /no_think mode); the others set an
+# effort level. Only OpenRouter's `reasoning` parameter is used.
+REASONING_CHOICES = ("default", "off", "low", "medium", "high")
 
 # Pinned, paid model IDs — one per major provider plus one strong open model.
 # Pin exact IDs (not "-latest" aliases) so a run is reproducible months later.
@@ -66,13 +77,13 @@ MODELS = [
 # Bump PROMPT_VERSION whenever SYSTEM_PROMPT's wording changes materially, so
 # a run's metadata.json makes it obvious old and new runs weren't prompted
 # identically.
-PROMPT_VERSION = "v1"
+PROMPT_VERSION = "v2"
 SYSTEM_PROMPT = (
-    "You are a careful financial analyst. You will be shown a messy excerpt "
+    "You are a careful financial analyst. You will be shown an excerpt "
     "from a company's financial statements and asked a question about it. "
     "Reason step by step, showing your work. Watch for unit traps (values "
-    "may be presented in thousands) and for sibling line items that are "
-    "similar but not what was asked for.\n\n"
+    "may be presented in thousands or millions) and for sibling line items "
+    "that are similar but not what was asked for.\n\n"
     "End your response with your final answer alone on the very last line, "
     "in exactly this format (a bare number, no units, no commas, no $ sign, "
     "percentages as a plain number like 12.34 not 0.1234):\n"
@@ -99,8 +110,12 @@ def extract_answer(text: str | None) -> str | None:
     return None
 
 
-def call_openrouter(api_key: str, model: str, question: str, context: str) -> dict:
-    url = f"{API_BASE}/chat/completions"
+def is_openrouter(api_base: str) -> bool:
+    return "openrouter.ai" in api_base
+
+
+def build_payload(model: str, question: str, context: str, api_base: str = API_BASE,
+                  max_tokens: int | None = MAX_TOKENS, reasoning: str = "default") -> dict:
     payload = {
         "model": model,
         "messages": [
@@ -109,41 +124,74 @@ def call_openrouter(api_key: str, model: str, question: str, context: str) -> di
         ],
         "temperature": TEMPERATURE,
     }
-    if MAX_TOKENS is not None:
-        payload["max_tokens"] = MAX_TOKENS
+    if max_tokens is not None:
+        payload["max_tokens"] = max_tokens
+    if is_openrouter(api_base):
+        # Ask OpenRouter to report each call's cost, which --max-cost enforces.
+        payload["usage"] = {"include": True}
+        if reasoning == "off":
+            payload["reasoning"] = {"enabled": False}
+        elif reasoning != "default":
+            payload["reasoning"] = {"effort": reasoning}
+    elif reasoning == "off":
+        # OpenAI-compatible local servers (vLLM, Ollama) serving Qwen3 honor
+        # its chat-template switch; other models ignore the extra field.
+        payload["chat_template_kwargs"] = {"enable_thinking": False}
+    return payload
+
+
+def call_openrouter(api_key: str | None, model: str, question: str, context: str,
+                    api_base: str = API_BASE, max_tokens: int | None = MAX_TOKENS,
+                    reasoning: str = "default", timeout: float = 600) -> dict:
+    url = f"{api_base.rstrip('/')}/chat/completions"
+    payload = build_payload(model, question, context, api_base, max_tokens, reasoning)
     data = _json.dumps(payload).encode("utf-8")
-    req = urllib.request.Request(
-        url,
-        data=data,
-        method="POST",
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-            # OpenRouter asks for these two for attribution/rankings; harmless if ignored.
-            "HTTP-Referer": "https://github.com/local/xbrlbench",
-            "X-Title": "xbrlbench",
-        },
-    )
-    with urllib.request.urlopen(req, timeout=120) as r:
+    headers = {
+        "Content-Type": "application/json",
+        # OpenRouter asks for these two for attribution/rankings; harmless if ignored.
+        "HTTP-Referer": "https://github.com/local/xbrlbench",
+        "X-Title": "xbrlbench",
+    }
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
+    req = urllib.request.Request(url, data=data, method="POST", headers=headers)
+    with urllib.request.urlopen(req, timeout=timeout) as r:
         return _json.loads(r.read().decode("utf-8"))
 
 
-def call_with_retry(api_key: str, model: str, question: str, context: str) -> dict:
+def call_with_retry(api_key: str | None, model: str, question: str, context: str, **opts) -> dict:
     last_err = None
     for attempt in range(MAX_RETRIES):
         try:
             t0 = time.time()
-            resp = call_openrouter(api_key, model, question, context)
+            resp = call_openrouter(api_key, model, question, context, **opts)
             latency = time.time() - t0
-            choice = resp["choices"][0]["message"]["content"]
-            usage = resp.get("usage", {})
+            if "choices" not in resp:
+                # OpenRouter reports some upstream failures as a 200 with an error body.
+                raise _UpstreamError(_json.dumps(resp.get("error", resp))[:300])
+            choice = resp["choices"][0]
+            message = choice.get("message") or {}
+            usage = resp.get("usage") or {}
+            details = usage.get("completion_tokens_details") or {}
             return {
-                "raw_response": choice,
+                # A thinking model that runs out of tokens returns no content;
+                # record an empty answer (graded unparseable), not an API error.
+                "raw_response": message.get("content") or "",
                 "latency_s": round(latency, 3),
                 "prompt_tokens": usage.get("prompt_tokens"),
                 "completion_tokens": usage.get("completion_tokens"),
+                "reasoning_tokens": details.get("reasoning_tokens"),
+                "cost": usage.get("cost"),
+                "finish_reason": choice.get("finish_reason"),
+                "provider": resp.get("provider"),
                 "error": None,
             }
+        except _UpstreamError as e:
+            last_err = f"upstream: {e}"
+            sleep_s = BASE_BACKOFF * (2 ** attempt) + random.uniform(0, 1)
+            print(f"    [retry] {model}: {last_err} — sleeping {sleep_s:.1f}s")
+            time.sleep(sleep_s)
+            continue
         except urllib.error.HTTPError as e:
             body = e.read().decode("utf-8", errors="replace")
             last_err = f"HTTP {e.code}: {body[:300]}"
@@ -172,13 +220,72 @@ def call_with_retry(api_key: str, model: str, question: str, context: str) -> di
     }
 
 
+class _UpstreamError(Exception):
+    """A 200 response that carries an error instead of choices."""
+
+
 def already_done(out_path) -> set:
-    """Resume support: (question id, model) pairs already recorded."""
+    """Resume support: (question id, model) pairs already recorded.
+
+    Rows whose call failed (`error` set) don't count, so --resume retries them;
+    the stale error rows stay in the file and are superseded by the retry (see
+    xbrlbench.grading.latest_rows)."""
     done = set()
     if os.path.exists(out_path):
         for row in load_jsonl(out_path):
-            done.add((row.get("id"), row.get("model")))
+            if row.get("error") is None:
+                done.add((row.get("id"), row.get("model")))
     return done
+
+
+def select_questions(questions: list[dict], tier: str | None = None, split: str | None = None,
+                     question_ids: list[str] | None = None, limit: int | None = None,
+                     source: str = "") -> list[dict]:
+    if tier:
+        questions = [q for q in questions if q.get("tier") == tier]
+    if split:
+        questions = [q for q in questions if q.get("split") == split]
+    if question_ids:
+        wanted = set(question_ids)
+        questions = [q for q in questions if q.get("id") in wanted]
+        missing = wanted - {q["id"] for q in questions}
+        if missing:
+            print(f"[warn] --question-id not found in {source}: {sorted(missing)}")
+    if limit:
+        questions = questions[:limit]
+    return questions
+
+
+def response_row(q: dict, model: str, result: dict) -> dict:
+    row = {
+        "id": q["id"],
+        "ticker": q.get("ticker"),
+        "fiscal_year": q.get("fiscal_year"),
+        "tier": q.get("tier"),
+        "model": model,
+        "question": q["question"],
+        "gold_value": q.get("gold_value"),
+        "gold_unit": q.get("gold_unit"),
+        "source_concept": q.get("source_concept"),
+        "reasoning_type": q.get("reasoning_type"),
+        "tolerance": q.get("tolerance"),
+    }
+    for field in CARRY_FIELDS:
+        if field in q:
+            row[field] = q[field]
+    row.update({
+        "raw_response": result.get("raw_response"),
+        "extracted_answer": extract_answer(result.get("raw_response")),
+        "latency_s": result.get("latency_s"),
+        "prompt_tokens": result.get("prompt_tokens"),
+        "completion_tokens": result.get("completion_tokens"),
+        "reasoning_tokens": result.get("reasoning_tokens"),
+        "cost": result.get("cost"),
+        "finish_reason": result.get("finish_reason"),
+        "provider": result.get("provider"),
+        "error": result.get("error"),
+    })
+    return row
 
 
 def run(
@@ -189,10 +296,18 @@ def run(
     resume: bool = False,
     tier: str | None = None,
     question_ids: list[str] | None = None,
+    split: str | None = None,
+    workers: int = 1,
+    api_base: str | None = None,
+    max_tokens: int | None = MAX_TOKENS,
+    reasoning: str = "default",
+    max_cost: float | None = None,
 ) -> None:
     load_dotenv()
-    api_key = os.environ.get("OPENROUTER_API_KEY")
-    if not api_key:
+    api_base = api_base or os.environ.get("XBRLBENCH_API_BASE") or API_BASE
+    api_key = os.environ.get("OPENROUTER_API_KEY") if is_openrouter(api_base) \
+        else os.environ.get("XBRLBENCH_API_KEY")
+    if is_openrouter(api_base) and not api_key:
         raise SystemExit(
             "Set OPENROUTER_API_KEY in the environment (or in a .env file — "
             "see .env.example) first."
@@ -209,21 +324,12 @@ def run(
     metadata_path = out_dir / "metadata.json"
 
     models = models if models else MODELS
-    print("Models used for this run:")
+    print(f"Models used for this run (via {api_base}):")
     for m in models:
         print(f"  - {m}")
 
-    questions = load_jsonl(questions_path)
-    if tier:
-        questions = [q for q in questions if q.get("tier") == tier]
-    if question_ids:
-        wanted = set(question_ids)
-        questions = [q for q in questions if q.get("id") in wanted]
-        missing = wanted - {q["id"] for q in questions}
-        if missing:
-            print(f"[warn] --question-id not found in {questions_path}: {sorted(missing)}")
-    if limit:
-        questions = questions[:limit]
+    questions = select_questions(load_jsonl(questions_path), tier, split, question_ids, limit,
+                                 source=str(questions_path))
     print(f"\nLoaded {len(questions)} questions from {questions_path}")
 
     if resume:
@@ -245,58 +351,70 @@ def run(
         started_at=experiment.utc_now_iso(),
         models=models,
         temperature=TEMPERATURE,
-        max_tokens=MAX_TOKENS,
+        max_tokens=max_tokens,
         prompt_version=PROMPT_VERSION,
         question_count=len(questions),
         resume=resume,
     )
+    metadata.update({
+        "questions_path": str(questions_path),
+        "split": split,
+        "api_base": api_base,
+        "reasoning": reasoning,
+    })
     experiment.write_metadata(metadata, metadata_path)
 
+    # Interleave models so a run stopped by --max-cost (or by hand) leaves
+    # every model with a comparable set of answered questions.
+    jobs = [(q, model) for q in questions for model in models if (q["id"], model) not in done]
     total = len(questions) * len(models)
-    n = 0
-    n_written = 0
-    for q in questions:
-        for model in models:
-            n += 1
-            if (q["id"], model) in done:
-                continue
-            print(f"[{n}/{total}] {q['id']} :: {model}")
-            result = call_with_retry(api_key, model, q["question"], q["context"])
-            extracted = extract_answer(result["raw_response"])
-            row = {
-                "id": q["id"],
-                "ticker": q.get("ticker"),
-                "fiscal_year": q.get("fiscal_year"),
-                "tier": q.get("tier"),
-                "model": model,
-                "question": q["question"],
-                "gold_value": q.get("gold_value"),
-                "gold_unit": q.get("gold_unit"),
-                "source_concept": q.get("source_concept"),
-                "reasoning_type": q.get("reasoning_type"),
-                "tolerance": q.get("tolerance"),
-                "raw_response": result["raw_response"],
-                "extracted_answer": extracted,
-                "latency_s": result["latency_s"],
-                "prompt_tokens": result["prompt_tokens"],
-                "completion_tokens": result["completion_tokens"],
-                "error": result["error"],
-            }
-            # Append immediately so a crash mid-run only loses the in-flight call.
-            append_jsonl(responses_path, row)
-            n_written += 1
-            if result["error"]:
-                print(f"    [error] {result['error']}")
+    print(f"{len(jobs)} call(s) to make ({total - len(jobs)} already done).")
 
-    metadata["completed_at"] = experiment.utc_now_iso()
-    metadata["response_count"] = len(done) + n_written
+    lock = threading.Lock()
+    state = {"written": 0, "spent": 0.0, "stopped": False}
+    opts = {"api_base": api_base, "max_tokens": max_tokens, "reasoning": reasoning}
+
+    def work(job):
+        q, model = job
+        with lock:
+            if state["stopped"]:
+                return
+        result = call_with_retry(api_key, model, q["question"], q["context"], **opts)
+        row = response_row(q, model, result)
+        with lock:
+            # Append immediately so a crash mid-run only loses the in-flight calls.
+            append_jsonl(responses_path, row)
+            state["written"] += 1
+            state["spent"] += result.get("cost") or 0.0
+            n = state["written"]
+            tag = f"[{n}/{len(jobs)}] {q['id']} :: {model}"
+            if result.get("error"):
+                print(f"{tag} [error] {result['error']}")
+            elif n % 25 == 0 or workers == 1:
+                print(f"{tag} (spent ${state['spent']:.2f})")
+            if max_cost is not None and state["spent"] >= max_cost and not state["stopped"]:
+                state["stopped"] = True
+                print(f"[stop] spend ${state['spent']:.2f} reached --max-cost ${max_cost:.2f}; "
+                      f"finishing in-flight calls. Continue later with --resume.")
+
+    if workers <= 1:
+        for job in jobs:
+            work(job)
+    else:
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            list(pool.map(work, jobs))
+
+    metadata["completed_at"] = None if state["stopped"] else experiment.utc_now_iso()
+    metadata["response_count"] = len(done) + state["written"]
+    metadata["cost_usd_this_session"] = round(state["spent"], 4)
     experiment.write_metadata(metadata, metadata_path)
 
-    print(f"\nDone. Wrote {n_written} new response(s) -> {responses_path}")
+    print(f"\nDone. Wrote {state['written']} new response(s) -> {responses_path} "
+          f"(spent ${state['spent']:.2f})")
     print(f"Run metadata -> {metadata_path}")
     print("\nNext:")
     print(f"  python -m xbrlbench grade --in {responses_path}")
-    print(f"  python -m xbrlbench report --in {responses_path}")
+    print(f"  python -m xbrlbench report --in {responses_path} --questions {questions_path}")
     print(f"  python -m xbrlbench errors --in {responses_path}")
 
 
@@ -317,12 +435,30 @@ def build_arg_parser(parser: argparse.ArgumentParser | None = None) -> argparse.
                          help="only run these specific question id(s)")
     parser.add_argument("--resume", action="store_true",
                          help="continue an existing run -- requires --out-dir pointing at it")
+    parser.add_argument("--split", choices=["train", "test"], default=None,
+                         help="only run real-filing questions in this split (see docs/SCHEMA.md)")
+    parser.add_argument("--workers", type=int, default=1,
+                         help="parallel API calls (default 1)")
+    parser.add_argument("--api-base", default=None,
+                         help="OpenAI-compatible endpoint (default: OpenRouter, or $XBRLBENCH_API_BASE); "
+                              "e.g. http://localhost:8000/v1 for a local vLLM server")
+    parser.add_argument("--max-tokens", type=int, default=MAX_TOKENS,
+                         help="completion token cap (default: provider default)")
+    parser.add_argument("--reasoning", choices=REASONING_CHOICES, default="default",
+                         help="thinking mode: provider default, off, or an effort level")
+    parser.add_argument("--max-cost", type=float, default=None,
+                         help="stop starting new calls once OpenRouter-reported spend reaches this many USD")
     return parser
 
 
+def run_from_args(args: argparse.Namespace) -> None:
+    run(args.inp, args.out_dir, args.models, args.limit, args.resume, args.tier, args.question_ids,
+        split=args.split, workers=args.workers, api_base=args.api_base, max_tokens=args.max_tokens,
+        reasoning=args.reasoning, max_cost=args.max_cost)
+
+
 def main(argv: list[str] | None = None) -> None:
-    args = build_arg_parser().parse_args(argv)
-    run(args.inp, args.out_dir, args.models, args.limit, args.resume, args.tier, args.question_ids)
+    run_from_args(build_arg_parser().parse_args(argv))
 
 
 if __name__ == "__main__":
