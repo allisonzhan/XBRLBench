@@ -225,6 +225,7 @@ def test_build_corpus_end_to_end(monkeypatch, tmp_path, raw):
     assert len(rows) == 11 and {r["split"] for r in rows} == {"train"}
     log = [json.loads(line) for line in open(out + ".log.jsonl", encoding="utf-8")]
     assert [r["status"] for r in log] == ["ok", "not_ixbrl"]
+    assert [r["form"] for r in log] == ["10-K", "10-K"]
 
     # Resume: nothing is fetched again, and the company already counts.
     fetched.clear()
@@ -344,3 +345,75 @@ def test_heading_without_title_keeps_only_the_scale_line(raw):
         '<div><span>See accompanying notes to Consolidated Financial Statements.</span></div>', 1)
     bs = ixbrl.statement_tables(ixbrl.parse_ixbrl(moved))[1]
     assert bs.heading == "(In thousands, except par value)"
+
+
+# --- 10-Qs (held-out set) ------------------------------------------------------------
+
+FIXTURE_10Q = Path(__file__).parent / "fixtures" / "realistic_10q.htm"
+
+
+@pytest.fixture(scope="module")
+def built_10q():
+    doc = ixbrl.parse_ixbrl(FIXTURE_10Q.read_bytes())
+    meta = filings.FilingMeta(cik="0009999999", ticker="NWIN", form="10-Q",
+                              accession="0009999999-26-000002", filing_date="2026-02-03")
+    return filings.build_filing_questions(doc, meta)
+
+
+@pytest.mark.parametrize("family,gold,period", [
+    ("lookup_revenue", 334_200_000, "for the three months ended December 27, 2025"),   # not the 6-month 652,900
+    ("lookup_net_income", 40_050_000, "for the three months ended December 27, 2025"),
+    ("lookup_assets", 1_030_000_000, "as of December 27, 2025"),                       # not year-end 1,000,000
+    ("lookup_operating_cash_flow", 96_000_000, "for the six months ended December 27, 2025"),
+    ("current_ratio", 3.2, "as of December 27, 2025"),                                 # 560,000 / 175,000
+    ("gross_margin", 42.9982, "for the three months ended December 27, 2025"),         # 143,700 / 334,200
+    ("revenue_growth", 9.5379, "from the three months ended December 28, 2024"),       # vs same quarter last year
+    ("net_income_change", 6_090_000, "from the three months ended December 28, 2024"), # 40,050 - 33,960
+    ("free_cash_flow", 66_500_000, "for the six months ended December 27, 2025"),      # 96,000 - 29,500
+])
+def test_10q_gold_values_and_periods(built_10q, family, gold, period):
+    q = by_family(built_10q[0])[family]
+    assert q["gold_value"] == pytest.approx(gold, abs=1e-4)
+    assert period in q["question"]
+
+
+def test_10q_ids_and_header_name_the_quarter(built_10q):
+    q = by_family(built_10q[0])["lookup_revenue"]
+    assert q["id"] == "NWIN-2026Q2-lookup_revenue"
+    assert q["fiscal_year"] == 2026 and q["fiscal_period"] == "Q2" and q["period_end"] == "2025-12-27"
+    assert q["context"].startswith("Northwind Instruments, Inc. — Form 10-Q for the quarterly period ended December 27, 2025")
+
+
+def test_10q_questions_pass_audit_and_validation(built_10q):
+    from xbrlbench import audit
+    assert all(audit.audit_question(q) == [] for q in built_10q[0])
+    assert [i for i in validate_questions(built_10q[0]) if i.severity == ERROR] == []
+
+
+def test_quarters_of_one_year_are_not_duplicate_facts(built_10q):
+    q2 = built_10q[0]
+    q3 = [{**q, "id": q["id"].replace("Q2", "Q3"), "period_end": "2026-03-28"} for q in q2]
+    assert [i for i in validate_questions(q2 + q3) if i.severity == ERROR] == []
+
+
+def test_ytd_lookup_is_ambiguous_without_a_span(built_10q):
+    # With no span, a 10-Q income statement's 3- and 6-month facts share an end date.
+    doc = ixbrl.parse_ixbrl(FIXTURE_10Q.read_bytes())
+    income = ixbrl.primary_statements(doc)["income_statement"]
+    assert filings.find_item(doc, income, "revenue", "2025-12-27", span=None) is None
+    assert filings.find_item(doc, income, "revenue", "2025-12-27", span=filings.QUARTER).value == 334_200_000
+
+
+def test_test_companies_use_10qs_and_train_companies_do_not():
+    test_cik = next(c for c in range(1, 1000) if filings.company_group(c) == "test")
+    train_cik = next(c for c in range(1, 1000) if filings.company_group(c) == "train")
+    refs = [edgar.FilingRef("x", "10-Q", "q3", "q.htm", "2026-11-05", "2026-09-30"),
+            edgar.FilingRef("x", "10-Q", "q2", "q.htm", "2026-08-05", "2026-06-30"),
+            edgar.FilingRef("x", "10-K", "k", "k.htm", "2026-02-20", "2025-12-31")]
+    assert [r.accession for r in filings._filings_for_split(refs, test_cik, 2, "2021-01-01")] == ["q3", "q2"]
+    assert [r.accession for r in filings._filings_for_split(refs, train_cik, 2, "2021-01-01")] == ["k"]
+
+
+@pytest.mark.parametrize("ticker,skip", [("GRAPF", True), ("CRAUY", True), ("AAPL", False), ("GOOGL", False)])
+def test_likely_non_10k_filer(ticker, skip):
+    assert filings.likely_non_10k_filer(ticker) is skip

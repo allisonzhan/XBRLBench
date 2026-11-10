@@ -51,6 +51,13 @@ _SPLIT_SALT = "xbrlbench-split-v1"
 SKIP_SIC = {"6770"}
 
 ANNUAL_MIN_DAYS, ANNUAL_MAX_DAYS = 350, 380
+QUARTER_MIN_DAYS, QUARTER_MAX_DAYS = 80, 100   # 13-week quarters are 91 days; 14-week ones 98
+
+# Forms each company group draws from. Held-out companies also use 10-Qs:
+# few 10-Ks are filed after the cutoff (most filers file in Feb-Mar), so
+# 10-Ks alone leave the test split nearly empty (PRD, Decisions).
+TRAIN_FORMS = ("10-K",)
+TEST_FORMS = ("10-K", "10-Q")
 
 # name -> (statement kind, us-gaap concepts in order of preference)
 LINE_ITEMS: dict[str, tuple[str, tuple[str, ...]]] = {
@@ -159,13 +166,28 @@ def _unique_labels(table: ixbrl.StatementTable) -> set[str]:
     return {label for label, n in counts.items() if n == 1}
 
 
+Span = tuple[int, int]
+ANNUAL: Span = (ANNUAL_MIN_DAYS, ANNUAL_MAX_DAYS)
+QUARTER: Span = (QUARTER_MIN_DAYS, QUARTER_MAX_DAYS)
+
+
+def _in_span(ctx: ixbrl.Context, span: Span | None) -> bool:
+    """Instants always match (balance sheets); durations must fall in `span`
+    (None = any duration, used for a 10-Q's year-to-date cash flow)."""
+    if ctx.is_instant or span is None:
+        return True
+    return span[0] <= (ctx.days or 0) <= span[1]
+
+
 def _is_annual(ctx: ixbrl.Context) -> bool:
-    return ctx.is_instant or ANNUAL_MIN_DAYS <= (ctx.days or 0) <= ANNUAL_MAX_DAYS
+    return _in_span(ctx, ANNUAL)
 
 
-def find_item(doc: ixbrl.IXBRLDocument, table: ixbrl.StatementTable, name: str, end: str) -> Item | None:
-    """The value of line item `name` for the period ending `end`, read from
-    `table`. None if absent, ambiguous, or its row label isn't unique."""
+def find_item(doc: ixbrl.IXBRLDocument, table: ixbrl.StatementTable, name: str, end: str,
+              span: Span | None = ANNUAL) -> Item | None:
+    """The value of line item `name` for the period ending `end` whose length
+    is within `span`, read from `table`. None if absent, ambiguous, or its
+    row label isn't unique."""
     _, concepts = LINE_ITEMS[name]
     unique = _unique_labels(table)
     for concept in concepts:
@@ -174,13 +196,15 @@ def find_item(doc: ixbrl.IXBRLDocument, table: ixbrl.StatementTable, name: str, 
             if wordy or fact.concept.split(":", 1)[-1] != concept or fact.value is None or fact.unit != "USD":
                 continue
             ctx = doc.contexts.get(fact.context_id)
-            if ctx is None or ctx.dimensions or ctx.end != end or not _is_annual(ctx):
+            if ctx is None or ctx.dimensions or ctx.end != end or not _in_span(ctx, span):
                 continue
             hits.append((fact, label))
         if not hits:
             continue
         values = {f.value for f, _ in hits}
         labels = {lbl for _, lbl in hits}
+        if span is None and len({doc.contexts[f.context_id].days for f, _ in hits}) > 1:
+            return None  # several durations end on `end` (3-month and YTD): ambiguous
         if len(values) != 1 or len(labels) != 1:
             return None  # same concept on two rows with different numbers: ambiguous
         [label] = labels
@@ -191,14 +215,45 @@ def find_item(doc: ixbrl.IXBRLDocument, table: ixbrl.StatementTable, name: str, 
     return None
 
 
-def annual_ends(doc: ixbrl.IXBRLDocument, table: ixbrl.StatementTable) -> list[str]:
-    """Distinct period ends of the table's dimensionless annual USD facts, newest first."""
+def period_ends(doc: ixbrl.IXBRLDocument, table: ixbrl.StatementTable, span: Span | None = ANNUAL) -> list[str]:
+    """Distinct period ends of the table's dimensionless USD facts whose
+    length is within `span`, newest first."""
     ends = set()
     for f, wordy in zip(table.facts, table.in_text, strict=True):
         ctx = doc.contexts.get(f.context_id)
-        if f.unit == "USD" and not wordy and ctx is not None and not ctx.dimensions and _is_annual(ctx):
+        if f.unit == "USD" and not wordy and ctx is not None and not ctx.dimensions and _in_span(ctx, span):
             ends.add(ctx.end)
     return sorted(ends, reverse=True)
+
+
+def annual_ends(doc: ixbrl.IXBRLDocument, table: ixbrl.StatementTable) -> list[str]:
+    return period_ends(doc, table, ANNUAL)
+
+
+def year_earlier(ends: list[str], cur: str) -> str | None:
+    """The end in `ends` about one year before `cur` (the comparative period)."""
+    d = date.fromisoformat(cur)
+    for e in ends:
+        if ANNUAL_MIN_DAYS <= (d - date.fromisoformat(e)).days <= ANNUAL_MAX_DAYS:
+            return e
+    return None
+
+
+def ytd_days(doc: ixbrl.IXBRLDocument, table: ixbrl.StatementTable, end: str) -> int | None:
+    """The longest duration ending `end` among the table's facts: a 10-Q's
+    year-to-date column."""
+    days = [ctx.days for f in table.facts if (ctx := doc.contexts.get(f.context_id)) is not None
+            and not ctx.dimensions and ctx.end == end and ctx.days]
+    return max(days) if days else None
+
+
+def duration_phrase(days: int, end: str) -> str:
+    """"for the fiscal year ended June 28, 2025" / "for the three months ended ..."."""
+    if ANNUAL_MIN_DAYS <= days <= ANNUAL_MAX_DAYS:
+        return f"for the fiscal year ended {long_date(end)}"
+    months = round(days / 30.4)
+    words = {3: "three", 6: "six", 9: "nine"}.get(months, str(months))
+    return f"for the {words} months ended {long_date(end)}"
 
 
 # ---------------------------------------------------------------------------
@@ -224,26 +279,48 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
         report.status = "no_statements"
         return [], report
 
-    # The filing's own fiscal period: the latest annual end on the income
-    # statement (or whichever statement we have).
+    # The filing's own period. A 10-K's income statement and cash flow are
+    # annual; a 10-Q's income statement is compared quarter to quarter
+    # (three months ended X vs the same quarter a year earlier), and its cash
+    # flow statement covers the year to date.
+    quarterly = meta.form.upper().startswith("10-Q")
+    is_span: Span = QUARTER if quarterly else ANNUAL
     anchor = usable.get("income_statement") or usable.get("cash_flow") or usable.get("balance_sheet")
-    ends = annual_ends(doc, anchor)
+    anchor_span = is_span if anchor is usable.get("income_statement") else (None if quarterly else ANNUAL)
+    ends = period_ends(doc, anchor, anchor_span)
     if not ends:
-        report.status, report.note = "no_statements", "no annual periods"
+        report.status, report.note = "no_statements", "no periods of the expected length"
         return [], report
     cur = ends[0]
-    prev = ends[1] if len(ends) > 1 else None
+    prev = year_earlier(ends, cur) if quarterly else (ends[1] if len(ends) > 1 else None)
+    cf_days = ytd_days(doc, usable["cash_flow"], cur) if "cash_flow" in usable else None
+    cf_span: Span | None = (cf_days, cf_days) if quarterly and cf_days else ANNUAL
+    spans = {"income_statement": is_span, "cash_flow": cf_span, "balance_sheet": None}
 
     company = doc.dei.get("EntityRegistrantName") or meta.company or meta.ticker
     ticker = (meta.ticker or doc.dei.get("TradingSymbol") or meta.cik).upper()
     fiscal_year = int(doc.dei.get("DocumentFiscalYearFocus") or cur[:4])
-    header = f"{company} — Form {meta.form} for the fiscal year ended {long_date(cur)}"
+    fiscal_period = (doc.dei.get("DocumentFiscalPeriodFocus") or "").upper() if quarterly else ""
+    if quarterly and fiscal_period not in ("Q1", "Q2", "Q3"):
+        fiscal_period = ""  # unknown quarter: period_end in the record still identifies it
+    period_key = f"{fiscal_year}{fiscal_period}" if fiscal_period else str(fiscal_year)
+    if quarterly:
+        header = f"{company} — Form {meta.form} for the quarterly period ended {long_date(cur)}"
+    else:
+        header = f"{company} — Form {meta.form} for the fiscal year ended {long_date(cur)}"
 
     def get(name: str, end: str | None) -> Item | None:
         kind = LINE_ITEMS[name][0]
         if end is None or kind not in usable:
             return None
-        return find_item(doc, usable[kind], name, end)
+        return find_item(doc, usable[kind], name, end, spans[kind])
+
+    def phrase(kind: str, end: str) -> str:
+        if kind == "balance_sheet":
+            return f"as of {long_date(end)}"
+        if kind == "cash_flow":
+            return duration_phrase(cf_days if quarterly and cf_days else 365, end)
+        return duration_phrase(91 if quarterly else 365, end)
 
     def context(*kinds: str) -> str:
         parts = [header] + [usable[k].render_with_heading() for k in STATEMENT_ORDER if k in kinds]
@@ -253,9 +330,10 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
 
     def add(slug, tier, reasoning, question, gold, unit, source, kinds, *items: Item):
         questions.append({
-            "id": f"{ticker}-{fiscal_year}-{slug}",
+            "id": f"{ticker}-{period_key}-{slug}",
             "ticker": ticker,
             "fiscal_year": fiscal_year,
+            "fiscal_period": fiscal_period or ("FY" if not quarterly else ""),
             "tier": tier,
             "question": question,
             "gold_value": round(gold, 4),
@@ -280,6 +358,7 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
         })
 
     when = long_date(cur)
+    is_when = phrase("income_statement", cur)
 
     # --- T1: single lookups --------------------------------------------------
     for name in ("revenue", "net_income", "assets", "liabilities_current", "operating_cash_flow"):
@@ -287,9 +366,8 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
         if it is None:
             continue
         kind = LINE_ITEMS[name][0]
-        period = f"as of {when}" if kind == "balance_sheet" else f"for the fiscal year ended {when}"
         add(f"lookup_{name}", "T1", "direct_retrieval",
-            f"According to {company}'s {meta.form}, what was {_q(it.label)} {period}? Answer in USD.",
+            f"According to {company}'s {meta.form}, what was {_q(it.label)} {phrase(kind, cur)}? Answer in USD.",
             it.value, "USD", it.concept, [kind], it)
 
     # --- T2: ratios and margins ----------------------------------------------
@@ -305,22 +383,23 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
         gp = get("gross_profit", cur)
         if gp:
             add("gross_margin", "T2", "ratio",
-                f"What was {company}'s gross margin for the fiscal year ended {when}, computed as "
+                f"What was {company}'s gross margin {is_when}, computed as "
                 f"{_q(gp.label)} divided by {_q(rev.label)}? Answer as a percentage.",
                 100 * gp.value / rev.value, "percent", f"{gp.concept}/{rev.concept}", ["income_statement"], gp, rev)
         oi = get("operating_income", cur)
         if oi:
             add("operating_margin", "T2", "ratio",
-                f"What was {company}'s operating margin for the fiscal year ended {when}, computed as "
+                f"What was {company}'s operating margin {is_when}, computed as "
                 f"{_q(oi.label)} divided by {_q(rev.label)}? Answer as a percentage.",
                 100 * oi.value / rev.value, "percent", f"{oi.concept}/{rev.concept}", ["income_statement"], oi, rev)
 
     # --- T2: year-over-year change -------------------------------------------
+    period_word = "three months" if quarterly else "fiscal year"
     rev_prev = get("revenue", prev)
     if rev and rev_prev and rev_prev.value > 0 and rev_prev.label == rev.label:
         add("revenue_growth", "T2", "percentage_change",
-            f"By what percentage did {company}'s {_q(rev.label)} change from the fiscal year ended "
-            f"{long_date(prev)} to the fiscal year ended {when}? Answer as a percentage "
+            f"By what percentage did {company}'s {_q(rev.label)} change from the {period_word} ended "
+            f"{long_date(prev)} to the {period_word} ended {when}? Answer as a percentage "
             f"(negative if it decreased).",
             100 * (rev.value - rev_prev.value) / rev_prev.value, "percent",
             f"{rev.concept} YoY", ["income_statement"], rev, rev_prev)
@@ -329,15 +408,15 @@ def build_filing_questions(doc: ixbrl.IXBRLDocument, meta: FilingMeta) -> tuple[
     ni, ni_prev = get("net_income", cur), get("net_income", prev)
     if ni and ni_prev and ni.label == ni_prev.label and ni.value != ni_prev.value:
         add("net_income_change", "T3", "multi_period_comparison",
-            f"By how much did {company}'s {_q(ni.label)} change from the fiscal year ended "
-            f"{long_date(prev)} to the fiscal year ended {when}? Answer the difference in USD "
+            f"By how much did {company}'s {_q(ni.label)} change from the {period_word} ended "
+            f"{long_date(prev)} to the {period_word} ended {when}? Answer the difference in USD "
             f"(positive if it increased, negative if it decreased).",
             ni.value - ni_prev.value, "USD", f"{ni.concept} delta", ["income_statement"], ni, ni_prev)
 
     ocf, capex = get("operating_cash_flow", cur), get("capex", cur)
     if ocf and capex and capex.value >= 0:
         add("free_cash_flow", "T3", "derived_metric",
-            f"What was {company}'s free cash flow for the fiscal year ended {when}, defined as "
+            f"What was {company}'s free cash flow {phrase('cash_flow', cur)}, defined as "
             f"{_q(ocf.label)} minus {_q(capex.label)} (capital expenditures, as a positive amount)? "
             f"Answer in USD.",
             ocf.value - capex.value, "USD", f"{ocf.concept}-{capex.concept}", ["cash_flow"], ocf, capex)
@@ -379,9 +458,22 @@ def interleaved_order(items: list) -> list:
 
 def _filings_for_split(refs: list[edgar.FilingRef], cik: str, per_company: int, since: str,
                        any_split: bool = False) -> list[edgar.FilingRef]:
-    refs = [r for r in refs if r.filing_date >= since and r.primary_document.lower().endswith((".htm", ".html"))]
+    """The newest `per_company` filings this company's split can use. `refs`
+    may mix 10-Ks and 10-Qs; a train company uses only TRAIN_FORMS."""
+    forms = TEST_FORMS if company_group(cik) == "test" else TRAIN_FORMS
+    if any_split:
+        forms = ("10-K",)
+    refs = [r for r in refs if r.form in forms and r.filing_date >= since
+            and r.primary_document.lower().endswith((".htm", ".html"))]
     keep = refs if any_split else [r for r in refs if assign_split(cik, r.filing_date) is not None]
     return keep[:per_company]  # refs are newest first
+
+
+def likely_non_10k_filer(ticker: str) -> bool:
+    """Five-letter tickers ending in F or Y are OTC foreign ordinaries and
+    ADRs, which file 20-F/40-F or nothing; skipping them saves a
+    submissions request each (about 90 of every 900 companies tried)."""
+    return len(ticker) == 5 and ticker[-1] in "FY"
 
 
 def _read_done(log_path: str) -> set[str]:
@@ -432,6 +524,9 @@ def build_corpus(email: str, out: str, n_companies: int = 500, per_company: int 
             cik = comp["cik"]
             if cik in ok_companies:
                 continue
+            if not tickers and likely_non_10k_filer(comp["ticker"]):
+                stats["skipped_foreign"] += 1
+                continue
             attempts += 1
             try:
                 subs = edgar.get_submissions(cik, email, since=since)
@@ -443,13 +538,13 @@ def build_corpus(email: str, out: str, n_companies: int = 500, per_company: int 
             if sic in SKIP_SIC:
                 stats["skipped_sic"] += 1
                 continue
-            all_10k = edgar.annual_filings(subs, cik)
+            all_10k = edgar.annual_filings(subs, cik, ("10-K", "10-Q"))
             refs = _filings_for_split(all_10k, cik, per_company, since, any_split=bool(tickers))
             if not refs:
                 stats["no_filings"] += 1
-                latest = all_10k[0] if all_10k else None
-                note = (f"{len(all_10k)} 10-Ks listed; newest {latest.filing_date} {latest.primary_document}"
-                        if latest else "no 10-K listed in submissions")
+                latest = all_10k[0] if all_10k else None  # 10-Ks and 10-Qs, newest first
+                note = (f"{len(all_10k)} 10-K/10-Q filings listed; newest {latest.filing_date} {latest.primary_document}"
+                        if latest else "no 10-K or 10-Q listed in submissions")
                 lf.write(json.dumps({"accession": None, "cik": cik, "status": "no_filings", "note": note,
                                      "ticker": comp["ticker"], "sic": sic}) + "\n")
                 print(f"no_filings    {comp['ticker']:6} {note}")
@@ -472,7 +567,7 @@ def build_corpus(email: str, out: str, n_companies: int = 500, per_company: int 
                     report.status, report.note, qs = "error", f"{type(e).__name__}: {e}"[:200], []
                 for q in qs:
                     qf.write(json.dumps(q, ensure_ascii=False) + "\n")
-                rec = asdict(report) | {"ticker": meta.ticker, "filing_date": meta.filing_date,
+                rec = asdict(report) | {"ticker": meta.ticker, "form": ref.form, "filing_date": meta.filing_date,
                                         "sic": sic, "url": ref.url}
                 lf.write(json.dumps(rec) + "\n")
                 qf.flush()

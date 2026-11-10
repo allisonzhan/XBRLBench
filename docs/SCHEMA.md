@@ -94,7 +94,12 @@ machine-verified, not manually curated.
 real 10-K statement tables to `data/filings/questions.jsonl`. Records have
 every field above, with these differences:
 
-- `id` is `{ticker}-{fiscal_year}-{family}`, e.g. `AAPL-2025-current_ratio`.
+- `id` is `{ticker}-{fiscal_year}-{family}`, e.g. `AAPL-2025-current_ratio`;
+  for a 10-Q the fiscal quarter is appended to the year, e.g.
+  `AAPL-2027Q1-current_ratio`.
+- 10-Q questions ask about the three months ended on the quarter's end date
+  (income statement, compared with the same quarter a year earlier), the
+  year to date (cash flow), and the quarter-end balance sheet.
 - `context` is the filing's own statement table(s), tags stripped, under a
   `{company} — Form 10-K for the fiscal year ended {date}` line and the
   table's own title and "(In millions...)" heading. Only the statement(s) a
@@ -103,11 +108,12 @@ every field above, with these differences:
   generic names, and states any formula.
 - `source_concept` is the full prefixed concept (`us-gaap:Assets`).
 
-Extra fields: `family` (question template), `cik`, `company`, `form`,
+Extra fields: `family` (question template), `fiscal_period` (`FY`, `Q1`–`Q3`), `cik`, `company`, `form`,
 `accession`, `filing_date`, `period_end`, `sic`, `inputs` (the tagged facts the
 gold value was computed from, in formula order: row `label`, `displayed`
 text, scaled `value`, `period_end`), and `split`: `train`,
-`test` (held-out companies, filed on or after 2026-07-01), or `null` (the
+`test` (held-out companies' 10-Ks and 10-Qs filed on or after 2026-07-01;
+train companies use 10-Ks only), or `null` (the
 filing falls outside its company's split, e.g. a `--tickers` trial run).
 
 `python -m xbrlbench audit` re-derives each gold value from the context
