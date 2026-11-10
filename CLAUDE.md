@@ -10,7 +10,7 @@ XBRLBench builds questions about company financial statements whose
 answers are computed exactly from SEC XBRL data, then measures how well
 LLMs answer them. The **end goal** (see the PRD) is to use that
 automatically verifiable data as a reinforcement-learning environment and
-train a small open model (~3B) that matches frontier models at reading real
+train a small open model (Qwen3-4B) that matches frontier models at reading real
 10-K filings it has never seen, on a budget of under ~$100.
 
 Today the repo is the benchmark half: 68 questions, 5 companies, FY2023–2024,
