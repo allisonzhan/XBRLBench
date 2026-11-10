@@ -75,31 +75,75 @@ def _days(start: str, end: str) -> int:
     return (b - a).days
 
 
-def annual_value(facts: dict, concept_candidates: list[str], fy: int):
-    """Return the annual (FY, 10-K) USD value for the first matching concept."""
+# A fiscal year is 52 or 53 weeks for many filers (e.g. AAPL, WMT, NVDA), so a
+# full-year duration fact spans roughly 357-372 days. Anything outside this
+# window is a quarter, a partial period, or a multi-year cumulative figure.
+MIN_ANNUAL_DAYS = 350
+MAX_ANNUAL_DAYS = 380
+
+
+def fiscal_year_end(facts: dict, fy: int) -> str | None:
+    """Return the balance-sheet date (ISO string) of `fy`'s own 10-K.
+
+    In companyfacts, `fy`/`fp` describe the FILING a fact appeared in, not the
+    period the fact covers: a FY2023 10-K also carries FY2022 (and, for income
+    statement items, FY2021) comparatives, all tagged fy=2023. The filing's
+    own reporting period is the latest `end` date among its facts, so that is
+    what we anchor every lookup for `fy` to.
+    """
+    latest = None
+    for node in facts.get("facts", {}).get("us-gaap", {}).values():
+        for rows in node.get("units", {}).values():
+            for row in rows:
+                if row.get("fy") != fy or row.get("fp") != "FY":
+                    continue
+                if not str(row.get("form", "")).startswith("10-K"):
+                    continue
+                end = row.get("end")
+                if end and (latest is None or end > latest):
+                    latest = end
+    return latest
+
+
+def annual_value(facts: dict, concept_candidates: list[str], fy: int,
+                 period_end: str | None = None):
+    """Return (value, concept) for the fiscal year `fy`, or (None, None).
+
+    Facts are selected by the PERIOD they describe (end date == the fiscal
+    year end, and a ~1-year span for duration items), never by the `fy` tag
+    alone -- see fiscal_year_end for why. If the same period was reported more
+    than once (the original 10-K, a later 10-K's comparative column, a 10-K/A),
+    the earliest-filed value wins: it is the figure as originally reported in
+    that year's own annual report, which is what the rendered statement for
+    that year represents.
+
+    `period_end` can be passed in to avoid recomputing it per concept.
+    """
+    if period_end is None:
+        period_end = fiscal_year_end(facts, fy)
+    if period_end is None:
+        return None, None
     gaap = facts.get("facts", {}).get("us-gaap", {})
     for concept in concept_candidates:
         node = gaap.get(concept)
         if not node:
             continue
         usd = node.get("units", {}).get("USD", [])
-        # annual figures: full-year period, 10-K form. For duration items keep
-        # the longest period per FY; for instant items there's one 'end'.
-        best = None
+        best = None  # (filed, value)
         for row in usd:
-            if row.get("fy") != fy or "FY" != row.get("fp"):
+            if row.get("end") != period_end:
                 continue
             if not str(row.get("form", "")).startswith("10-K"):
                 continue
-            span = 999
-            if row.get("start") and row.get("end"):
+            if row.get("start"):
                 span = _days(row["start"], row["end"])
-                if span < 300:  # drop quarterly/partial
-                    continue
-            if best is None or span < best[0]:
-                best = (span, row["val"], concept)
+                if not MIN_ANNUAL_DAYS <= span <= MAX_ANNUAL_DAYS:
+                    continue  # quarterly, partial, or multi-year figure
+            filed = row.get("filed", "")
+            if best is None or filed < best[0]:
+                best = (filed, row["val"])
         if best:
-            return best[1], best[2]
+            return best[1], concept
     return None, None
 
 
@@ -207,12 +251,18 @@ def generate(email: str, out_path=DEFAULT_QUESTIONS_PATH) -> list[dict]:
             continue
         by_year = {}
         for fy in YEARS + [min(YEARS) - 1]:  # include y-1 for growth/delta
+            period_end = fiscal_year_end(facts, fy)
+            if period_end is None:
+                print(f"[warn] {ticker}: no FY{fy} 10-K found in companyfacts")
+                continue
             vals = {}
             for name, cands in CONCEPTS.items():
-                v, _ = annual_value(facts, cands, fy)
+                v, _ = annual_value(facts, cands, fy, period_end=period_end)
                 vals[name] = v
             by_year[fy] = vals
         for fy in YEARS:
+            if fy not in by_year:
+                continue
             all_q += make_questions(ticker, fy, by_year[fy], by_year.get(fy - 1))
         print(f"[ok] {ticker}: cumulative {len(all_q)} questions")
         time.sleep(0.2)  # be polite to SEC

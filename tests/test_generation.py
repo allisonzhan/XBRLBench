@@ -12,6 +12,7 @@ calls.
 from xbrlbench.generation import (
     _days,
     annual_value,
+    fiscal_year_end,
     make_questions,
     render_snippet,
     render_two_year_snippet,
@@ -83,19 +84,19 @@ def test_keeps_full_year_period_at_or_above_300_days():
     assert val == 100
 
 
-def test_instant_values_without_start_end_are_kept():
-    # Balance-sheet concepts like Assets are "instant" facts -- no start/end.
+def test_instant_values_without_start_are_kept():
+    # Balance-sheet concepts like Assets are "instant" facts -- an `end`
+    # date but no `start`.
     row = usd_row(val=999)
     del row["start"]
-    del row["end"]
     facts = facts_with("Assets", [row])
     val, _ = annual_value(facts, ["Assets"], 2023)
     assert val == 999
 
 
-def test_prefers_tightest_matching_span_when_multiple_rows_qualify():
-    # Two qualifying rows for the same FY (e.g. a restated figure filed
-    # twice) -- the shorter (tighter) span wins.
+def test_rejects_multi_year_span_ending_on_fiscal_year_end():
+    # A cumulative figure ending on the fiscal-year end but spanning more
+    # than a year is not the annual value.
     facts = facts_with("Revenues", [
         usd_row(val=100, start="2022-06-01", end="2023-12-31"),   # ~578 days, too long a span
         usd_row(val=200, start="2023-01-01", end="2023-12-31"),   # 364 days, the real annual figure
@@ -249,3 +250,90 @@ def test_gold_value_rounded_to_four_decimals():
     vals = {**FULL_VALS, "assets_current": 1.0, "liabilities_current": 3.0}
     qs = by_concept(make_questions("AAPL", 2023, vals, None))
     assert qs["AssetsCurrent/LiabilitiesCurrent"]["gold_value"] == 0.3333
+
+
+# ---------------------------------------------------------------------------
+# Regression: companyfacts `fy` is the FILING's fiscal year, not the period's.
+# A FY2023 10-K carries FY2021-FY2023 income-statement facts and FY2022-FY2023
+# balance-sheet facts, all tagged fy=2023. The original implementation picked
+# the earliest of those (so "FY2023" questions used FY2021/FY2022 numbers, and
+# two consecutive years could render identical income statements).
+# ---------------------------------------------------------------------------
+
+def _filing_rows(fy, filed, periods, accn="x"):
+    """Rows as companyfacts lists them for one 10-K: every period it reports,
+    all tagged with the filing's own fy/fp."""
+    rows = []
+    for start, end, val in periods:
+        row = {"fy": fy, "fp": "FY", "form": "10-K", "filed": filed, "accn": accn,
+               "end": end, "val": val}
+        if start:
+            row["start"] = start
+        rows.append(row)
+    return rows
+
+
+def realistic_facts():
+    """Two consecutive 10-Ks for a filer with a late-September, 52/53-week
+    fiscal year (like AAPL), each including its comparative periods."""
+    revenue = (
+        _filing_rows(2023, "2023-11-03", [
+            ("2020-09-27", "2021-09-25", 365_817),   # FY2021 comparative
+            ("2021-09-26", "2022-09-24", 394_328),   # FY2022 comparative
+            ("2022-09-25", "2023-09-30", 383_285),   # FY2023 -- 53 weeks (371 days)
+        ])
+        + _filing_rows(2024, "2024-11-01", [
+            ("2021-09-26", "2022-09-24", 394_328),
+            ("2022-09-25", "2023-09-30", 383_285),
+            ("2023-10-01", "2024-09-28", 391_035),   # FY2024
+            ("2024-06-30", "2024-09-28", 94_930),    # Q4 -- must be ignored
+        ])
+    )
+    assets = (
+        _filing_rows(2023, "2023-11-03", [(None, "2022-09-24", 352_755), (None, "2023-09-30", 352_583)])
+        + _filing_rows(2024, "2024-11-01", [(None, "2023-09-30", 352_583), (None, "2024-09-28", 364_980)])
+    )
+    return {"facts": {"us-gaap": {
+        "Revenues": {"units": {"USD": revenue}},
+        "Assets": {"units": {"USD": assets}},
+    }}}
+
+
+def test_fiscal_year_end_is_the_filings_own_period_not_a_comparative():
+    facts = realistic_facts()
+    assert fiscal_year_end(facts, 2023) == "2023-09-30"
+    assert fiscal_year_end(facts, 2024) == "2024-09-28"
+    assert fiscal_year_end(facts, 2022) is None  # no FY2022 10-K in this fixture
+
+
+def test_annual_value_uses_current_period_not_earliest_comparative():
+    facts = realistic_facts()
+    assert annual_value(facts, ["Revenues"], 2023) == (383_285, "Revenues")
+    assert annual_value(facts, ["Assets"], 2023) == (352_583, "Assets")
+    assert annual_value(facts, ["Revenues"], 2024) == (391_035, "Revenues")
+    assert annual_value(facts, ["Assets"], 2024) == (364_980, "Assets")
+
+
+def test_consecutive_years_do_not_collapse_to_the_same_value():
+    facts = realistic_facts()
+    assert annual_value(facts, ["Revenues"], 2023)[0] != annual_value(facts, ["Revenues"], 2024)[0]
+
+
+def test_accepts_53_week_fiscal_year():
+    facts = facts_with("Revenues", [usd_row(val=7, start="2022-09-25", end="2023-09-30")])  # 370 days
+    assert annual_value(facts, ["Revenues"], 2023) == (7, "Revenues")
+
+
+def test_restated_comparative_does_not_override_original_report():
+    facts = realistic_facts()
+    # The FY2024 10-K restates FY2023 revenue in its comparative column.
+    facts["facts"]["us-gaap"]["Revenues"]["units"]["USD"].append(
+        {"fy": 2024, "fp": "FY", "form": "10-K", "filed": "2024-11-01",
+         "start": "2022-09-25", "end": "2023-09-30", "val": 380_000})
+    # FY2023 stays as originally reported in the FY2023 10-K.
+    assert annual_value(facts, ["Revenues"], 2023) == (383_285, "Revenues")
+
+
+def test_explicit_period_end_is_respected():
+    facts = realistic_facts()
+    assert annual_value(facts, ["Assets"], 2024, period_end="2023-09-30") == (352_583, "Assets")
