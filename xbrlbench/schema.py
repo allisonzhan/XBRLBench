@@ -32,7 +32,16 @@ VALID_REASONING_TYPES = {
     "multi_period_comparison", # a value compared/subtracted across two
                                 # fiscal years without being expressed as a
                                 # percentage.
+    "derived_metric",          # a standard metric built from several line
+                                # items by a formula the question states
+                                # (e.g. free cash flow = operating cash flow
+                                # minus capex). Real-filing questions only
+                                # (xbrlbench.filings).
 }
+
+# Categories only the real-filing generator (xbrlbench.filings) produces, so
+# they don't appear in the synthetic bank data/questions.jsonl.
+FILINGS_ONLY_REASONING_TYPES = {"derived_metric"}
 
 # The field set a question record must have. Kept in one place so the
 # dataclass, the JSONL loader, and validation all agree.
