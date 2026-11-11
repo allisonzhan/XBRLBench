@@ -263,3 +263,23 @@ def test_second_run_on_the_same_directory_is_refused(tmp_path, monkeypatch, ques
     (out / inference.LOCK_NAME).unlink()
     inference.run(questions_file, str(out), models=["a/m"], limit=1)
     assert not (out / inference.LOCK_NAME).exists()
+
+
+def test_units_prompt_variant_is_an_ablation(tmp_path, monkeypatch, questions_file):
+    default = inference.build_payload("m", "q", "c")["messages"][0]["content"]
+    units = inference.build_payload("m", "q", "c", prompt="units")["messages"][0]["content"]
+    assert default == inference.SYSTEM_PROMPT  # the benchmark prompt is unchanged
+    assert units.startswith(default) and "whole US dollars" in units
+    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+    seen = {}
+
+    def call(api_key, model, q, c, **opts):
+        seen.update(opts)
+        return fake(cost=None)
+
+    monkeypatch.setattr(inference, "call_with_retry", call)
+    out = tmp_path / "r"
+    inference.run(questions_file, str(out), models=["m"], limit=1, api_base="http://localhost:8000/v1",
+                  prompt="units")
+    assert seen["prompt"] == "units"
+    assert json.loads((out / "metadata.json").read_text())["prompt_variant"] == "units"
