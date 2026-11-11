@@ -64,6 +64,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     p.add_argument("--eval-steps", type=int, default=50, help="0 disables in-training evaluation")
     p.add_argument("--eval-limit", type=int, default=64, help="validation prompts per evaluation")
     p.add_argument("--save-steps", type=int, default=50)
+    p.add_argument("--logging-steps", type=int, default=5)
     p.add_argument("--limit", type=int, default=None, help="use only the first N training prompts")
     p.add_argument("--resume", action="store_true", help="continue from the last checkpoint in --out")
     p.add_argument("--merge", action="store_true", help="also save a merged fp16 model for vLLM evaluation")
@@ -166,7 +167,8 @@ def main(argv: list[str] | None = None) -> None:
         vllm_gpu_memory_utilization=args.vllm_gpu_memory,
         vllm_max_model_length=args.max_prompt_tokens + args.max_completion_tokens,
         vllm_enable_sleep_mode=args.vllm == "colocate",
-        logging_steps=5,
+        logging_steps=args.logging_steps,
+        disable_tqdm=True,  # progress bars redraw one line, which a notebook's log never shows
         log_completions=True,
         num_completions_to_print=2,
         save_steps=args.save_steps,
@@ -195,6 +197,8 @@ def main(argv: list[str] | None = None) -> None:
         "eval_prompts": len(eval_ds) if eval_ds is not None else 0, "dtype": str(dtype),
         "reward": {"correct": rl.CORRECT_REWARD, "format": rl.FORMAT_REWARD, "scale_factors": rl.SCALE_FACTORS},
     }, indent=2))
+    print(f"Training: {args.max_steps} steps, {args.per_device_batch * args.grad_accum // args.num_generations} "
+          f"prompts x {args.num_generations} completions per step, vLLM {args.vllm}", flush=True)
     trainer.train(resume_from_checkpoint=args.resume or None)
 
     adapter_dir = out / "adapter"
