@@ -1,6 +1,6 @@
 # Milestone 3: baselines on the held-out set
 
-Status: frontier results final; base models (Kaggle) pending. Owner: Allison. See [PRD.md](PRD.md) and issue #4.
+Status: done. Gate passed: the base model is 66 points below the best frontier model. Owner: Allison. See [PRD.md](PRD.md) and issue #4.
 
 ## Question
 
@@ -59,13 +59,47 @@ than counted wrong ([`excluded_ids.txt`](../results/m3/frontier-v2/excluded_ids.
 | GPT-5.6 Terra | 98.1% | 96.8–99.4% | −1.9 pts (−3.2 to −0.6) |
 | Claude Sonnet 5.5 | 96.9% | 94.7–98.8% | −3.1 pts (−5.3 to −1.2) |
 | Qwen3-14B | 42.5% | 36.9–48.4% | −57.5 pts (−63.1 to −51.6) |
-| Qwen3-4B, Qwen3-1.7B | pending | | |
 
 Full tables, with breakdowns by task family, sector, company size and form:
 [`results/m3/frontier-v2/report.md`](../results/m3/frontier-v2/report.md).
 The first pass on the original wording (all 500 questions:
 Gemini 99.8%, GPT 98.6%, Sonnet 96.6%, Qwen3-14B 43.4%) is in
 [`results/m3/frontier/`](../results/m3/frontier/report.md).
+
+## Base models and the gate
+
+The base models ran on Kaggle (vLLM, 2x T4, fp16, temperature 0, 8,192-token
+cap) on the same 500 questions in their **first wording**: the uploaded
+held-out file predated the sign rewording. So they are compared here with the
+frontier models' first pass on the same text
+([`results/m3/combined/report.md`](../results/m3/combined/report.md)). The
+rewording moved frontier scores by at most 0.5 points, far less than the gaps
+below.
+
+| model | accuracy | 95% CI | gap to best (95% CI) | accuracy forgiving scale and sign |
+|---|---|---|---|---|
+| Gemini 3.1 Pro | 99.8% | 99.4–100.0% | best | 100.0% |
+| GPT-5.6 Terra | 98.6% | 97.6–99.4% | −1.2 (−2.3 to −0.2) | 99.8% |
+| Claude Sonnet 5.5 | 96.6% | 94.9–98.1% | −3.2 (−4.8 to −1.7) | 99.8% |
+| Qwen3-14B | 43.4% | 37.9–49.3% | −56.4 (−61.9 to −50.5) | 93.8% |
+| **Qwen3-4B** (thinking) | **33.6%** | 28.3–39.2% | **−66.2 (−71.5 to −60.5)** | 88.2% |
+| Qwen3-4B (no thinking) | 32.0% | 26.8–37.4% | −67.8 (−72.9 to −62.4) | 94.4% |
+| Qwen3-1.7B (thinking) | 28.6% | 23.9–33.7% | −71.2 (−75.7 to −66.2) | 80.8% |
+| Qwen3-1.7B (no thinking) | 20.8% | 16.5–25.4% | −79.0 (−83.3 to −74.4) | 73.0% |
+
+**The gate passes.** Qwen3-4B is 66 points below the best frontier model,
+with intervals nowhere near overlapping, so the PRD's +20-point target has
+room. Base-model details are in
+[`results/m3/base/report.md`](../results/m3/base/report.md); 26 of Qwen3-4B's
+thinking traces and 9 of Qwen3-1.7B's hit the 8,192-token cap.
+
+What the base models get wrong mirrors Qwen3-14B. Ratios, margins and growth
+rates are mostly right (Qwen3-4B thinking: 97.7% on current ratio, 93.3% on
+revenue growth), while dollar figures are 4–16%, because the answer is left
+in the table's thousands or millions. With scale and sign slips forgiven,
+Qwen3-4B would be at 88–94%. Qwen3-1.7B also has real misreads (87–122
+"other" errors, versus 21–28 for the 4B), so it is a reasonable debugging
+model: it has both kinds of error to fix.
 
 ## What the misses are
 

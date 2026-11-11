@@ -123,3 +123,10 @@ docs/                     SCHEMA.md, METADATA.md, PRD.md
   reworded, 0 gold values changed; `audit --n 1000` passed 1,000/1,000.
   data/filings/v3/heldout_500.jsonl holds the same 500 ids as v2.
   `data/questions.jsonl` (synthetic bank) is at v0.4.
+- Milestone 3 (baselines): done 2026-11-11. 500-question held-out sample
+  (`sample`, ids in results/m3/heldout_500_ids.txt). Frontier: Gemini 3.1
+  Pro 99.8%, GPT-5.6 Terra 98.6%, Sonnet 5.5 96.6%; Qwen3-14B 43.4%; base
+  Qwen3-4B 33.6% (thinking) / 32.0% (no thinking), Qwen3-1.7B 28.6% / 20.8%.
+  Gate passed. Most small-model misses are scale (answer left in thousands
+  or millions). Base models run on Kaggle via notebooks/m3_base_models.ipynb
+  (OpenRouter doesn't serve them). Write-up: docs/M3_BASELINES.md.
