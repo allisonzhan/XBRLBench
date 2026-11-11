@@ -110,3 +110,10 @@ if a clearly better small open model ships before milestone 3.
 
 Check each compared frontier model's published training cutoff before freezing
 the held-out set; move the date later if any cutoff falls after 2026-07-01.
+
+Checked 2026-11-11 for the milestone 3 models: Claude Sonnet 5.5, June 2026
+(training data and reliable knowledge, Anthropic's model page); GPT-5.6
+Terra, February 2026 (llm-stats.com; OpenAI's own page didn't state it);
+Gemini 3.1 Pro, January 2025 (llm-stats.com); Qwen3, released April 2025.
+All fall before 2026-07-01, so the cutoff date stands. Sonnet 5.5 leaves only
+one month of margin, so recheck it for any model released after mid-2026.
