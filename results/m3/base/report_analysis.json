@@ -4534,7 +4534,7 @@
       "qwen3-4b-nothink": "incorrect"
     }
   },
-  "question_bank_size": null,
+  "question_bank_size": 500,
   "questions_evaluated": 500,
   "response_count": 2000,
   "single_vs_multi_step": {
