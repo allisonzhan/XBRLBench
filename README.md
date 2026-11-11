@@ -16,7 +16,22 @@ A model can retrieve a financial figure correctly and still fail the task: filin
 - **Ground truth** comes from SEC's free `companyfacts` XBRL API — machine-verified, not manually curated. See [Methodology](#methodology).
 - **Models evaluated**: `openai/gpt-4o-2024-11-20`, `anthropic/claude-sonnet-4.5`, `google/gemini-2.5-pro`, `qwen/qwen-2.5-72b-instruct`, via [OpenRouter](https://openrouter.ai), pinned to exact IDs for reproducibility.
 
-## Results
+## Held-out real-filing baselines (milestone 3)
+
+500 questions from real 10-Q/10-K statement tables of 95 companies never used for training, all filed on or after 2026-07-01. 95% bootstrap intervals over companies. Full write-up: [docs/M3_BASELINES.md](docs/M3_BASELINES.md).
+
+| model | accuracy | 95% CI |
+|---|---:|---:|
+| google/gemini-3.1-pro-preview | 99.8% | 99.4–100.0% |
+| openai/gpt-5.6-terra | 98.6% | 97.6–99.4% |
+| anthropic/claude-sonnet-5.5 | 96.6% | 94.9–98.1% |
+| qwen/qwen3-14b | 43.4% | 37.9–49.3% |
+| Qwen3-4B (base, thinking) | 33.6% | 28.3–39.2% |
+| Qwen3-1.7B (base, thinking) | 28.6% | 23.9–33.7% |
+
+Small models mostly fail by leaving dollar answers in the table's thousands or millions; ratios and growth rates they largely get right. That gap is what the RL milestones target.
+
+## Results (synthetic bank)
 
 68 questions × 4 models = 272 graded responses on benchmark **v0.3**, each with its own tolerance (see [Methodology](#methodology)). Run `20261110T023920Z`, 2026-11-10, at commit `cea1514`. Reproduce this table with `python -m xbrlbench report --in results/baseline/responses.jsonl` — see [Reproducing Results](#reproducing-results).
 

@@ -245,6 +245,29 @@ def already_done(out_path) -> set:
     return done
 
 
+LOCK_NAME = "run.lock"
+
+
+def acquire_lock(out_dir: Path) -> Path:
+    """Refuse to start if another run is writing to out_dir. Two runs on the
+    same directory both pay for every question and interleave their writes
+    (seen in M3 after a process restart). A crash leaves the lock behind;
+    the message says how to clear it."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    lock = out_dir / LOCK_NAME
+    try:
+        fd = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+    except FileExistsError:
+        holder = lock.read_text(encoding="utf-8", errors="replace").strip()
+        raise SystemExit(
+            f"Another run appears to be writing to {out_dir} ({holder}). If it is not "
+            f"running any more (e.g. it crashed), delete {lock} and try again."
+        ) from None
+    with os.fdopen(fd, "w", encoding="utf-8") as f:
+        f.write(f"pid {os.getpid()} started {experiment.utc_now_iso()}\n")
+    return lock
+
+
 def select_questions(questions: list[dict], tier: str | None = None, split: str | None = None,
                      question_ids: list[str] | None = None, limit: int | None = None,
                      source: str = "") -> list[dict]:
@@ -309,6 +332,7 @@ def run(
     max_tokens: int | None = MAX_TOKENS,
     reasoning: str = "default",
     max_cost: float | None = None,
+    timeout: float = 600,
 ) -> None:
     load_dotenv()
     api_base = api_base or os.environ.get("XBRLBENCH_API_BASE") or API_BASE
@@ -369,6 +393,16 @@ def run(
         "api_base": api_base,
         "reasoning": reasoning,
     })
+    lock = acquire_lock(out_dir)
+    try:
+        _run_jobs(questions, models, done, api_key, responses_path, metadata, metadata_path,
+                  workers, api_base, max_tokens, reasoning, max_cost, questions_path, timeout)
+    finally:
+        lock.unlink(missing_ok=True)
+
+
+def _run_jobs(questions, models, done, api_key, responses_path, metadata, metadata_path,
+              workers, api_base, max_tokens, reasoning, max_cost, questions_path, timeout=600) -> None:
     experiment.write_metadata(metadata, metadata_path)
 
     # Interleave models so a run stopped by --max-cost (or by hand) leaves
@@ -379,7 +413,7 @@ def run(
 
     lock = threading.Lock()
     state = {"written": 0, "spent": 0.0, "stopped": False}
-    opts = {"api_base": api_base, "max_tokens": max_tokens, "reasoning": reasoning}
+    opts = {"api_base": api_base, "max_tokens": max_tokens, "reasoning": reasoning, "timeout": timeout}
 
     def work(job):
         q, model = job
@@ -455,13 +489,16 @@ def build_arg_parser(parser: argparse.ArgumentParser | None = None) -> argparse.
                          help="thinking mode: provider default, off, or an effort level")
     parser.add_argument("--max-cost", type=float, default=None,
                          help="stop starting new calls once OpenRouter-reported spend reaches this many USD")
+    parser.add_argument("--timeout", type=float, default=600,
+                         help="seconds to wait for one response (default 600); raise it for a busy "
+                              "local server, where a long thinking trace queues behind many others")
     return parser
 
 
 def run_from_args(args: argparse.Namespace) -> None:
     run(args.inp, args.out_dir, args.models, args.limit, args.resume, args.tier, args.question_ids,
         split=args.split, workers=args.workers, api_base=args.api_base, max_tokens=args.max_tokens,
-        reasoning=args.reasoning, max_cost=args.max_cost)
+        reasoning=args.reasoning, max_cost=args.max_cost, timeout=args.timeout)
 
 
 def main(argv: list[str] | None = None) -> None:
