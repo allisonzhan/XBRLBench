@@ -1,6 +1,6 @@
 # XBRLBench
 
-[![CI](https://github.com/allisonzhan/financial-reasoning-eval/actions/workflows/ci.yml/badge.svg)](https://github.com/allisonzhan/financial-reasoning-eval/actions/workflows/ci.yml)
+[![CI](https://github.com/allisonzhan/XBRLBench/actions/workflows/ci.yml/badge.svg)](https://github.com/allisonzhan/XBRLBench/actions/workflows/ci.yml)
 
 XBRLBench is a benchmark for evaluating LLM financial reasoning over real SEC XBRL filing data.
 
@@ -100,8 +100,8 @@ The reasoning is entirely correct — including the ×1,000 unit conversion, sta
 ## Quick Start
 
 ```bash
-git clone https://github.com/allisonzhan/financial-reasoning-eval.git
-cd financial-reasoning-eval
+git clone https://github.com/allisonzhan/XBRLBench.git
+cd XBRLBench
 pip install -e ".[dev]"
 
 # Re-grade the committed example run — no API key, no network calls:
