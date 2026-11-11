@@ -216,6 +216,45 @@ def is_correct(model_val: float | None, gold_val: float | None,
     return abs(model_val - gold_val) <= numeric_tolerance(gold_unit, gold_val, tolerance)
 
 
+# Error kinds for a graded answer (see classify_error). Plain arithmetic, no
+# model: an answer is tested against the gold value rescaled by each factor.
+ERROR_KINDS = ("correct", "invalid", "scale", "sign", "scale_and_sign", "percent_vs_fraction", "other")
+_SCALE_FACTORS = (1e-3, 1e-6, 1e-9, 1e3, 1e6, 1e9)
+
+
+def classify_error(model_val: float | None, gold_val: float | None, gold_unit: str | None,
+                   tolerance: float = DEFAULT_TOLERANCE, status: str | None = None) -> str:
+    """Why an answer missed, when the miss is mechanical:
+
+      scale               -- the gold value times 1e+/-3, 6 or 9 (an answer read
+                             off an "(In thousands)" table without rescaling)
+      sign                -- the negated gold value (e.g. a "Net loss" row
+                             reported as a positive number)
+      scale_and_sign      -- both at once
+      percent_vs_fraction -- a percent answered as a fraction or vice versa
+      other               -- any other wrong number
+
+    "invalid" when there is no usable answer; "correct" when it is right."""
+    if status == "invalid_response" or model_val is None or gold_val is None or gold_unit is None:
+        return "invalid"
+    if is_correct(model_val, gold_val, gold_unit, tolerance):
+        return "correct"
+    if gold_val != 0 and is_correct(-model_val, gold_val, gold_unit, tolerance):
+        return "sign"
+    for factor in _SCALE_FACTORS:
+        target = gold_val * factor
+        window = numeric_tolerance(gold_unit, target, tolerance)
+        if abs(model_val - target) <= window:
+            return "scale"
+        if abs(-model_val - target) <= window:
+            return "scale_and_sign"
+    if gold_unit in ("percent", "ratio"):
+        for factor in (100.0, 0.01):
+            if abs(model_val - gold_val * factor) <= numeric_tolerance(gold_unit, gold_val * factor, tolerance):
+                return "percent_vs_fraction"
+    return "other"
+
+
 def grade_row(row: dict, epsilon_override: float | None) -> dict:
     """Grade one response row. Never raises on malformed input -- anything
     it can't confidently judge comes back as status "invalid_response"."""
@@ -245,15 +284,29 @@ def grade_row(row: dict, epsilon_override: float | None) -> dict:
         "parsed_model_answer": model_val,
         "parse_source": source,
         "status": status,
+        "error_kind": classify_error(model_val, gold_val, gold_unit, tolerance, status),
         "correct": status == "correct",  # kept for simple truthiness checks / backward compatibility
     }
+
+
+def latest_rows(rows: list[dict]) -> list[dict]:
+    """One row per (id, model): the last one written. `run --resume` retries
+    calls that failed and appends the retry after the failed row, so the
+    retry wins. Order follows each key's first appearance."""
+    by_key: dict = {}
+    for i, row in enumerate(rows):
+        # A row without an id can't be matched to a retry; keep each one.
+        key = (row["id"], row.get("model")) if row.get("id") is not None else i
+        by_key[key] = row
+    return list(by_key.values())
 
 
 def summarize(rows: list[dict], epsilon: float | None = None):
     """Returns (graded, tier_table, model_table, grid, overall). Each bucket
     cell is {"n", "correct", "invalid"}; "incorrect" is implicit
-    (n - correct - invalid)."""
-    graded = [grade_row(row, epsilon) for row in rows]
+    (n - correct - invalid). Rows are de-duplicated per (id, model) first,
+    keeping the latest (see latest_rows)."""
+    graded = [grade_row(row, epsilon) for row in latest_rows(rows)]
 
     def bucket(rows_, key):
         b: dict = {}

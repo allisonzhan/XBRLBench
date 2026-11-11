@@ -1,0 +1,4457 @@
+{
+  "breakdowns": {
+    "family": {
+      "current_ratio|anthropic/claude-sonnet-5.5": {
+        "accuracy": 1.0,
+        "correct": 43,
+        "invalid": 0,
+        "n": 43
+      },
+      "current_ratio|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 43,
+        "invalid": 0,
+        "n": 43
+      },
+      "current_ratio|openai/gpt-5.6-terra": {
+        "accuracy": 0.9767441860465116,
+        "correct": 42,
+        "invalid": 0,
+        "n": 43
+      },
+      "current_ratio|qwen/qwen3-14b": {
+        "accuracy": 1.0,
+        "correct": 43,
+        "invalid": 0,
+        "n": 43
+      },
+      "free_cash_flow|anthropic/claude-sonnet-5.5": {
+        "accuracy": 0.975,
+        "correct": 39,
+        "invalid": 0,
+        "n": 40
+      },
+      "free_cash_flow|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 40,
+        "invalid": 0,
+        "n": 40
+      },
+      "free_cash_flow|openai/gpt-5.6-terra": {
+        "accuracy": 1.0,
+        "correct": 40,
+        "invalid": 0,
+        "n": 40
+      },
+      "free_cash_flow|qwen/qwen3-14b": {
+        "accuracy": 0.25,
+        "correct": 10,
+        "invalid": 1,
+        "n": 40
+      },
+      "gross_margin|anthropic/claude-sonnet-5.5": {
+        "accuracy": 1.0,
+        "correct": 24,
+        "invalid": 0,
+        "n": 24
+      },
+      "gross_margin|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 24,
+        "invalid": 0,
+        "n": 24
+      },
+      "gross_margin|openai/gpt-5.6-terra": {
+        "accuracy": 1.0,
+        "correct": 24,
+        "invalid": 0,
+        "n": 24
+      },
+      "gross_margin|qwen/qwen3-14b": {
+        "accuracy": 1.0,
+        "correct": 24,
+        "invalid": 0,
+        "n": 24
+      },
+      "lookup_assets|anthropic/claude-sonnet-5.5": {
+        "accuracy": 1.0,
+        "correct": 60,
+        "invalid": 0,
+        "n": 60
+      },
+      "lookup_assets|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 60,
+        "invalid": 0,
+        "n": 60
+      },
+      "lookup_assets|openai/gpt-5.6-terra": {
+        "accuracy": 1.0,
+        "correct": 60,
+        "invalid": 0,
+        "n": 60
+      },
+      "lookup_assets|qwen/qwen3-14b": {
+        "accuracy": 0.23333333333333334,
+        "correct": 14,
+        "invalid": 10,
+        "n": 60
+      },
+      "lookup_liabilities_current|anthropic/claude-sonnet-5.5": {
+        "accuracy": 1.0,
+        "correct": 43,
+        "invalid": 0,
+        "n": 43
+      },
+      "lookup_liabilities_current|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 43,
+        "invalid": 0,
+        "n": 43
+      },
+      "lookup_liabilities_current|openai/gpt-5.6-terra": {
+        "accuracy": 0.9767441860465116,
+        "correct": 42,
+        "invalid": 0,
+        "n": 43
+      },
+      "lookup_liabilities_current|qwen/qwen3-14b": {
+        "accuracy": 0.20930232558139536,
+        "correct": 9,
+        "invalid": 5,
+        "n": 43
+      },
+      "lookup_net_income|anthropic/claude-sonnet-5.5": {
+        "accuracy": 0.9803921568627451,
+        "correct": 50,
+        "invalid": 0,
+        "n": 51
+      },
+      "lookup_net_income|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 51,
+        "invalid": 0,
+        "n": 51
+      },
+      "lookup_net_income|openai/gpt-5.6-terra": {
+        "accuracy": 0.9803921568627451,
+        "correct": 50,
+        "invalid": 0,
+        "n": 51
+      },
+      "lookup_net_income|qwen/qwen3-14b": {
+        "accuracy": 0.23529411764705882,
+        "correct": 12,
+        "invalid": 5,
+        "n": 51
+      },
+      "lookup_operating_cash_flow|anthropic/claude-sonnet-5.5": {
+        "accuracy": 1.0,
+        "correct": 59,
+        "invalid": 0,
+        "n": 59
+      },
+      "lookup_operating_cash_flow|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 59,
+        "invalid": 0,
+        "n": 59
+      },
+      "lookup_operating_cash_flow|openai/gpt-5.6-terra": {
+        "accuracy": 0.9661016949152542,
+        "correct": 57,
+        "invalid": 0,
+        "n": 59
+      },
+      "lookup_operating_cash_flow|qwen/qwen3-14b": {
+        "accuracy": 0.15254237288135594,
+        "correct": 9,
+        "invalid": 3,
+        "n": 59
+      },
+      "lookup_revenue|anthropic/claude-sonnet-5.5": {
+        "accuracy": 0.9565217391304348,
+        "correct": 44,
+        "invalid": 0,
+        "n": 46
+      },
+      "lookup_revenue|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 46,
+        "invalid": 0,
+        "n": 46
+      },
+      "lookup_revenue|openai/gpt-5.6-terra": {
+        "accuracy": 1.0,
+        "correct": 46,
+        "invalid": 0,
+        "n": 46
+      },
+      "lookup_revenue|qwen/qwen3-14b": {
+        "accuracy": 0.1956521739130435,
+        "correct": 9,
+        "invalid": 2,
+        "n": 46
+      },
+      "net_income_change|anthropic/claude-sonnet-5.5": {
+        "accuracy": 0.7450980392156863,
+        "correct": 38,
+        "invalid": 0,
+        "n": 51
+      },
+      "net_income_change|google/gemini-3.1-pro-preview": {
+        "accuracy": 0.9803921568627451,
+        "correct": 50,
+        "invalid": 0,
+        "n": 51
+      },
+      "net_income_change|openai/gpt-5.6-terra": {
+        "accuracy": 0.9607843137254902,
+        "correct": 49,
+        "invalid": 0,
+        "n": 51
+      },
+      "net_income_change|qwen/qwen3-14b": {
+        "accuracy": 0.13725490196078433,
+        "correct": 7,
+        "invalid": 1,
+        "n": 51
+      },
+      "operating_margin|anthropic/claude-sonnet-5.5": {
+        "accuracy": 1.0,
+        "correct": 38,
+        "invalid": 0,
+        "n": 38
+      },
+      "operating_margin|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 38,
+        "invalid": 0,
+        "n": 38
+      },
+      "operating_margin|openai/gpt-5.6-terra": {
+        "accuracy": 1.0,
+        "correct": 38,
+        "invalid": 0,
+        "n": 38
+      },
+      "operating_margin|qwen/qwen3-14b": {
+        "accuracy": 0.9473684210526315,
+        "correct": 36,
+        "invalid": 0,
+        "n": 38
+      },
+      "revenue_growth|anthropic/claude-sonnet-5.5": {
+        "accuracy": 1.0,
+        "correct": 45,
+        "invalid": 0,
+        "n": 45
+      },
+      "revenue_growth|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 45,
+        "invalid": 0,
+        "n": 45
+      },
+      "revenue_growth|openai/gpt-5.6-terra": {
+        "accuracy": 1.0,
+        "correct": 45,
+        "invalid": 0,
+        "n": 45
+      },
+      "revenue_growth|qwen/qwen3-14b": {
+        "accuracy": 0.9777777777777777,
+        "correct": 44,
+        "invalid": 0,
+        "n": 45
+      }
+    },
+    "form": {
+      "10-K|anthropic/claude-sonnet-5.5": {
+        "accuracy": 0.9777777777777777,
+        "correct": 44,
+        "invalid": 0,
+        "n": 45
+      },
+      "10-K|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 45,
+        "invalid": 0,
+        "n": 45
+      },
+      "10-K|openai/gpt-5.6-terra": {
+        "accuracy": 1.0,
+        "correct": 45,
+        "invalid": 0,
+        "n": 45
+      },
+      "10-K|qwen/qwen3-14b": {
+        "accuracy": 0.6666666666666666,
+        "correct": 30,
+        "invalid": 0,
+        "n": 45
+      },
+      "10-Q|anthropic/claude-sonnet-5.5": {
+        "accuracy": 0.9648351648351648,
+        "correct": 439,
+        "invalid": 0,
+        "n": 455
+      },
+      "10-Q|google/gemini-3.1-pro-preview": {
+        "accuracy": 0.9978021978021978,
+        "correct": 454,
+        "invalid": 0,
+        "n": 455
+      },
+      "10-Q|openai/gpt-5.6-terra": {
+        "accuracy": 0.9846153846153847,
+        "correct": 448,
+        "invalid": 0,
+        "n": 455
+      },
+      "10-Q|qwen/qwen3-14b": {
+        "accuracy": 0.41098901098901097,
+        "correct": 187,
+        "invalid": 27,
+        "n": 455
+      }
+    },
+    "sector": {
+      "Agriculture|anthropic/claude-sonnet-5.5": {
+        "accuracy": 1.0,
+        "correct": 7,
+        "invalid": 0,
+        "n": 7
+      },
+      "Agriculture|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 7,
+        "invalid": 0,
+        "n": 7
+      },
+      "Agriculture|openai/gpt-5.6-terra": {
+        "accuracy": 1.0,
+        "correct": 7,
+        "invalid": 0,
+        "n": 7
+      },
+      "Agriculture|qwen/qwen3-14b": {
+        "accuracy": 0.42857142857142855,
+        "correct": 3,
+        "invalid": 0,
+        "n": 7
+      },
+      "Construction|anthropic/claude-sonnet-5.5": {
+        "accuracy": 1.0,
+        "correct": 14,
+        "invalid": 0,
+        "n": 14
+      },
+      "Construction|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 14,
+        "invalid": 0,
+        "n": 14
+      },
+      "Construction|openai/gpt-5.6-terra": {
+        "accuracy": 1.0,
+        "correct": 14,
+        "invalid": 0,
+        "n": 14
+      },
+      "Construction|qwen/qwen3-14b": {
+        "accuracy": 0.42857142857142855,
+        "correct": 6,
+        "invalid": 1,
+        "n": 14
+      },
+      "Finance|anthropic/claude-sonnet-5.5": {
+        "accuracy": 0.96,
+        "correct": 96,
+        "invalid": 0,
+        "n": 100
+      },
+      "Finance|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 100,
+        "invalid": 0,
+        "n": 100
+      },
+      "Finance|openai/gpt-5.6-terra": {
+        "accuracy": 1.0,
+        "correct": 100,
+        "invalid": 0,
+        "n": 100
+      },
+      "Finance|qwen/qwen3-14b": {
+        "accuracy": 0.23,
+        "correct": 23,
+        "invalid": 8,
+        "n": 100
+      },
+      "Manufacturing|anthropic/claude-sonnet-5.5": {
+        "accuracy": 0.9456521739130435,
+        "correct": 174,
+        "invalid": 0,
+        "n": 184
+      },
+      "Manufacturing|google/gemini-3.1-pro-preview": {
+        "accuracy": 0.9945652173913043,
+        "correct": 183,
+        "invalid": 0,
+        "n": 184
+      },
+      "Manufacturing|openai/gpt-5.6-terra": {
+        "accuracy": 0.967391304347826,
+        "correct": 178,
+        "invalid": 0,
+        "n": 184
+      },
+      "Manufacturing|qwen/qwen3-14b": {
+        "accuracy": 0.41304347826086957,
+        "correct": 76,
+        "invalid": 9,
+        "n": 184
+      },
+      "Mining|anthropic/claude-sonnet-5.5": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "invalid": 0,
+        "n": 11
+      },
+      "Mining|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "invalid": 0,
+        "n": 11
+      },
+      "Mining|openai/gpt-5.6-terra": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "invalid": 0,
+        "n": 11
+      },
+      "Mining|qwen/qwen3-14b": {
+        "accuracy": 1.0,
+        "correct": 11,
+        "invalid": 0,
+        "n": 11
+      },
+      "Retail|anthropic/claude-sonnet-5.5": {
+        "accuracy": 0.9473684210526315,
+        "correct": 18,
+        "invalid": 0,
+        "n": 19
+      },
+      "Retail|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 19,
+        "invalid": 0,
+        "n": 19
+      },
+      "Retail|openai/gpt-5.6-terra": {
+        "accuracy": 1.0,
+        "correct": 19,
+        "invalid": 0,
+        "n": 19
+      },
+      "Retail|qwen/qwen3-14b": {
+        "accuracy": 0.3157894736842105,
+        "correct": 6,
+        "invalid": 3,
+        "n": 19
+      },
+      "Services|anthropic/claude-sonnet-5.5": {
+        "accuracy": 0.9919354838709677,
+        "correct": 123,
+        "invalid": 0,
+        "n": 124
+      },
+      "Services|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 124,
+        "invalid": 0,
+        "n": 124
+      },
+      "Services|openai/gpt-5.6-terra": {
+        "accuracy": 1.0,
+        "correct": 124,
+        "invalid": 0,
+        "n": 124
+      },
+      "Services|qwen/qwen3-14b": {
+        "accuracy": 0.5806451612903226,
+        "correct": 72,
+        "invalid": 4,
+        "n": 124
+      },
+      "Transport & utilities|anthropic/claude-sonnet-5.5": {
+        "accuracy": 1.0,
+        "correct": 13,
+        "invalid": 0,
+        "n": 13
+      },
+      "Transport & utilities|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 13,
+        "invalid": 0,
+        "n": 13
+      },
+      "Transport & utilities|openai/gpt-5.6-terra": {
+        "accuracy": 0.9230769230769231,
+        "correct": 12,
+        "invalid": 0,
+        "n": 13
+      },
+      "Transport & utilities|qwen/qwen3-14b": {
+        "accuracy": 0.6153846153846154,
+        "correct": 8,
+        "invalid": 1,
+        "n": 13
+      },
+      "Wholesale|anthropic/claude-sonnet-5.5": {
+        "accuracy": 0.9629629629629629,
+        "correct": 26,
+        "invalid": 0,
+        "n": 27
+      },
+      "Wholesale|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 27,
+        "invalid": 0,
+        "n": 27
+      },
+      "Wholesale|openai/gpt-5.6-terra": {
+        "accuracy": 1.0,
+        "correct": 27,
+        "invalid": 0,
+        "n": 27
+      },
+      "Wholesale|qwen/qwen3-14b": {
+        "accuracy": 0.4444444444444444,
+        "correct": 12,
+        "invalid": 1,
+        "n": 27
+      },
+      "unknown|anthropic/claude-sonnet-5.5": {
+        "accuracy": 1.0,
+        "correct": 1,
+        "invalid": 0,
+        "n": 1
+      },
+      "unknown|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 1,
+        "invalid": 0,
+        "n": 1
+      },
+      "unknown|openai/gpt-5.6-terra": {
+        "accuracy": 1.0,
+        "correct": 1,
+        "invalid": 0,
+        "n": 1
+      },
+      "unknown|qwen/qwen3-14b": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "invalid": 0,
+        "n": 1
+      }
+    },
+    "size": {
+      "large (>$10B)|anthropic/claude-sonnet-5.5": {
+        "accuracy": 0.9583333333333334,
+        "correct": 46,
+        "invalid": 0,
+        "n": 48
+      },
+      "large (>$10B)|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 48,
+        "invalid": 0,
+        "n": 48
+      },
+      "large (>$10B)|openai/gpt-5.6-terra": {
+        "accuracy": 1.0,
+        "correct": 48,
+        "invalid": 0,
+        "n": 48
+      },
+      "large (>$10B)|qwen/qwen3-14b": {
+        "accuracy": 0.2916666666666667,
+        "correct": 14,
+        "invalid": 0,
+        "n": 48
+      },
+      "mid ($1-10B)|anthropic/claude-sonnet-5.5": {
+        "accuracy": 0.9691358024691358,
+        "correct": 157,
+        "invalid": 0,
+        "n": 162
+      },
+      "mid ($1-10B)|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 162,
+        "invalid": 0,
+        "n": 162
+      },
+      "mid ($1-10B)|openai/gpt-5.6-terra": {
+        "accuracy": 0.9814814814814815,
+        "correct": 159,
+        "invalid": 0,
+        "n": 162
+      },
+      "mid ($1-10B)|qwen/qwen3-14b": {
+        "accuracy": 0.37037037037037035,
+        "correct": 60,
+        "invalid": 14,
+        "n": 162
+      },
+      "small (<$1B assets)|anthropic/claude-sonnet-5.5": {
+        "accuracy": 0.9774436090225563,
+        "correct": 130,
+        "invalid": 0,
+        "n": 133
+      },
+      "small (<$1B assets)|google/gemini-3.1-pro-preview": {
+        "accuracy": 0.9924812030075187,
+        "correct": 132,
+        "invalid": 0,
+        "n": 133
+      },
+      "small (<$1B assets)|openai/gpt-5.6-terra": {
+        "accuracy": 0.9699248120300752,
+        "correct": 129,
+        "invalid": 0,
+        "n": 133
+      },
+      "small (<$1B assets)|qwen/qwen3-14b": {
+        "accuracy": 0.5112781954887218,
+        "correct": 68,
+        "invalid": 8,
+        "n": 133
+      },
+      "unknown|anthropic/claude-sonnet-5.5": {
+        "accuracy": 0.9554140127388535,
+        "correct": 150,
+        "invalid": 0,
+        "n": 157
+      },
+      "unknown|google/gemini-3.1-pro-preview": {
+        "accuracy": 1.0,
+        "correct": 157,
+        "invalid": 0,
+        "n": 157
+      },
+      "unknown|openai/gpt-5.6-terra": {
+        "accuracy": 1.0,
+        "correct": 157,
+        "invalid": 0,
+        "n": 157
+      },
+      "unknown|qwen/qwen3-14b": {
+        "accuracy": 0.47770700636942676,
+        "correct": 75,
+        "invalid": 5,
+        "n": 157
+      }
+    }
+  },
+  "by_difficulty": {
+    "T1": {
+      "accuracy": 0.7944015444015444,
+      "correct": 823,
+      "invalid": 25,
+      "n": 1036
+    },
+    "T2": {
+      "accuracy": 0.9933333333333333,
+      "correct": 596,
+      "invalid": 0,
+      "n": 600
+    },
+    "T3": {
+      "accuracy": 0.75,
+      "correct": 273,
+      "invalid": 2,
+      "n": 364
+    }
+  },
+  "by_difficulty_and_model": {
+    "T1|anthropic/claude-sonnet-5.5": {
+      "accuracy": 0.9884169884169884,
+      "correct": 256,
+      "invalid": 0,
+      "n": 259
+    },
+    "T1|google/gemini-3.1-pro-preview": {
+      "accuracy": 1.0,
+      "correct": 259,
+      "invalid": 0,
+      "n": 259
+    },
+    "T1|openai/gpt-5.6-terra": {
+      "accuracy": 0.9845559845559846,
+      "correct": 255,
+      "invalid": 0,
+      "n": 259
+    },
+    "T1|qwen/qwen3-14b": {
+      "accuracy": 0.20463320463320464,
+      "correct": 53,
+      "invalid": 25,
+      "n": 259
+    },
+    "T2|anthropic/claude-sonnet-5.5": {
+      "accuracy": 1.0,
+      "correct": 150,
+      "invalid": 0,
+      "n": 150
+    },
+    "T2|google/gemini-3.1-pro-preview": {
+      "accuracy": 1.0,
+      "correct": 150,
+      "invalid": 0,
+      "n": 150
+    },
+    "T2|openai/gpt-5.6-terra": {
+      "accuracy": 0.9933333333333333,
+      "correct": 149,
+      "invalid": 0,
+      "n": 150
+    },
+    "T2|qwen/qwen3-14b": {
+      "accuracy": 0.98,
+      "correct": 147,
+      "invalid": 0,
+      "n": 150
+    },
+    "T3|anthropic/claude-sonnet-5.5": {
+      "accuracy": 0.8461538461538461,
+      "correct": 77,
+      "invalid": 0,
+      "n": 91
+    },
+    "T3|google/gemini-3.1-pro-preview": {
+      "accuracy": 0.989010989010989,
+      "correct": 90,
+      "invalid": 0,
+      "n": 91
+    },
+    "T3|openai/gpt-5.6-terra": {
+      "accuracy": 0.978021978021978,
+      "correct": 89,
+      "invalid": 0,
+      "n": 91
+    },
+    "T3|qwen/qwen3-14b": {
+      "accuracy": 0.18681318681318682,
+      "correct": 17,
+      "invalid": 2,
+      "n": 91
+    }
+  },
+  "by_model": {
+    "anthropic/claude-sonnet-5.5": {
+      "accuracy": 0.966,
+      "correct": 483,
+      "invalid": 0,
+      "n": 500
+    },
+    "google/gemini-3.1-pro-preview": {
+      "accuracy": 0.998,
+      "correct": 499,
+      "invalid": 0,
+      "n": 500
+    },
+    "openai/gpt-5.6-terra": {
+      "accuracy": 0.986,
+      "correct": 493,
+      "invalid": 0,
+      "n": 500
+    },
+    "qwen/qwen3-14b": {
+      "accuracy": 0.434,
+      "correct": 217,
+      "invalid": 27,
+      "n": 500
+    }
+  },
+  "by_reasoning_type": {
+    "derived_metric": {
+      "accuracy": 0.80625,
+      "correct": 129,
+      "invalid": 1,
+      "n": 160
+    },
+    "direct_retrieval": {
+      "accuracy": 0.7944015444015444,
+      "correct": 823,
+      "invalid": 25,
+      "n": 1036
+    },
+    "multi_period_comparison": {
+      "accuracy": 0.7058823529411765,
+      "correct": 144,
+      "invalid": 1,
+      "n": 204
+    },
+    "percentage_change": {
+      "accuracy": 0.9944444444444445,
+      "correct": 179,
+      "invalid": 0,
+      "n": 180
+    },
+    "ratio": {
+      "accuracy": 0.9928571428571429,
+      "correct": 417,
+      "invalid": 0,
+      "n": 420
+    }
+  },
+  "by_reasoning_type_and_model": {
+    "derived_metric|anthropic/claude-sonnet-5.5": {
+      "accuracy": 0.975,
+      "correct": 39,
+      "invalid": 0,
+      "n": 40
+    },
+    "derived_metric|google/gemini-3.1-pro-preview": {
+      "accuracy": 1.0,
+      "correct": 40,
+      "invalid": 0,
+      "n": 40
+    },
+    "derived_metric|openai/gpt-5.6-terra": {
+      "accuracy": 1.0,
+      "correct": 40,
+      "invalid": 0,
+      "n": 40
+    },
+    "derived_metric|qwen/qwen3-14b": {
+      "accuracy": 0.25,
+      "correct": 10,
+      "invalid": 1,
+      "n": 40
+    },
+    "direct_retrieval|anthropic/claude-sonnet-5.5": {
+      "accuracy": 0.9884169884169884,
+      "correct": 256,
+      "invalid": 0,
+      "n": 259
+    },
+    "direct_retrieval|google/gemini-3.1-pro-preview": {
+      "accuracy": 1.0,
+      "correct": 259,
+      "invalid": 0,
+      "n": 259
+    },
+    "direct_retrieval|openai/gpt-5.6-terra": {
+      "accuracy": 0.9845559845559846,
+      "correct": 255,
+      "invalid": 0,
+      "n": 259
+    },
+    "direct_retrieval|qwen/qwen3-14b": {
+      "accuracy": 0.20463320463320464,
+      "correct": 53,
+      "invalid": 25,
+      "n": 259
+    },
+    "multi_period_comparison|anthropic/claude-sonnet-5.5": {
+      "accuracy": 0.7450980392156863,
+      "correct": 38,
+      "invalid": 0,
+      "n": 51
+    },
+    "multi_period_comparison|google/gemini-3.1-pro-preview": {
+      "accuracy": 0.9803921568627451,
+      "correct": 50,
+      "invalid": 0,
+      "n": 51
+    },
+    "multi_period_comparison|openai/gpt-5.6-terra": {
+      "accuracy": 0.9607843137254902,
+      "correct": 49,
+      "invalid": 0,
+      "n": 51
+    },
+    "multi_period_comparison|qwen/qwen3-14b": {
+      "accuracy": 0.13725490196078433,
+      "correct": 7,
+      "invalid": 1,
+      "n": 51
+    },
+    "percentage_change|anthropic/claude-sonnet-5.5": {
+      "accuracy": 1.0,
+      "correct": 45,
+      "invalid": 0,
+      "n": 45
+    },
+    "percentage_change|google/gemini-3.1-pro-preview": {
+      "accuracy": 1.0,
+      "correct": 45,
+      "invalid": 0,
+      "n": 45
+    },
+    "percentage_change|openai/gpt-5.6-terra": {
+      "accuracy": 1.0,
+      "correct": 45,
+      "invalid": 0,
+      "n": 45
+    },
+    "percentage_change|qwen/qwen3-14b": {
+      "accuracy": 0.9777777777777777,
+      "correct": 44,
+      "invalid": 0,
+      "n": 45
+    },
+    "ratio|anthropic/claude-sonnet-5.5": {
+      "accuracy": 1.0,
+      "correct": 105,
+      "invalid": 0,
+      "n": 105
+    },
+    "ratio|google/gemini-3.1-pro-preview": {
+      "accuracy": 1.0,
+      "correct": 105,
+      "invalid": 0,
+      "n": 105
+    },
+    "ratio|openai/gpt-5.6-terra": {
+      "accuracy": 0.9904761904761905,
+      "correct": 104,
+      "invalid": 0,
+      "n": 105
+    },
+    "ratio|qwen/qwen3-14b": {
+      "accuracy": 0.9809523809523809,
+      "correct": 103,
+      "invalid": 0,
+      "n": 105
+    }
+  },
+  "ci_cluster": "company",
+  "easy_to_hard_drop": {
+    "anthropic/claude-sonnet-5.5": {
+      "T1_accuracy": 0.9884169884169884,
+      "T3_accuracy": 0.8461538461538461,
+      "drop": 0.1422631422631423
+    },
+    "google/gemini-3.1-pro-preview": {
+      "T1_accuracy": 1.0,
+      "T3_accuracy": 0.989010989010989,
+      "drop": 0.01098901098901095
+    },
+    "openai/gpt-5.6-terra": {
+      "T1_accuracy": 0.9845559845559846,
+      "T3_accuracy": 0.978021978021978,
+      "drop": 0.006534006534006598
+    },
+    "overall": {
+      "T1_accuracy": 0.7944015444015444,
+      "T3_accuracy": 0.75,
+      "drop": 0.044401544401544424
+    },
+    "qwen/qwen3-14b": {
+      "T1_accuracy": 0.20463320463320464,
+      "T3_accuracy": 0.18681318681318682,
+      "drop": 0.017820017820017825
+    }
+  },
+  "epsilon": null,
+  "incorrect_question_ids": [
+    "ACT-2026Q2-lookup_revenue",
+    "ADCT-2026Q2-free_cash_flow",
+    "ADCT-2026Q2-lookup_assets",
+    "ADCT-2026Q2-lookup_net_income",
+    "ADCT-2026Q2-net_income_change",
+    "ADCT-2026Q3-lookup_liabilities_current",
+    "AGL-2026Q3-lookup_revenue",
+    "ALKS-2026Q3-lookup_liabilities_current",
+    "ALKS-2026Q3-lookup_operating_cash_flow",
+    "AMRC-2026Q2-free_cash_flow",
+    "AMRC-2026Q2-lookup_assets",
+    "AMRC-2026Q2-lookup_operating_cash_flow",
+    "AMRC-2026Q2-net_income_change",
+    "AOSL-2026-lookup_operating_cash_flow",
+    "AOSL-2026-net_income_change",
+    "ARR-2026Q2-lookup_net_income",
+    "ARR-2026Q2-lookup_operating_cash_flow",
+    "ARR-2026Q2-net_income_change",
+    "ARR-2026Q3-lookup_assets",
+    "ASFT-2026Q2-net_income_change",
+    "ASST-2026Q2-lookup_liabilities_current",
+    "ASST-2026Q2-net_income_change",
+    "ASST-2026Q3-lookup_operating_cash_flow",
+    "ASST-2026Q3-operating_margin",
+    "AVGO-2026Q3-free_cash_flow",
+    "AVGO-2026Q3-lookup_assets",
+    "AVGO-2026Q3-lookup_liabilities_current",
+    "AVGO-2026Q3-lookup_revenue",
+    "AXR-2026-lookup_operating_cash_flow",
+    "AXR-2027Q1-lookup_net_income",
+    "BBDC-2026Q2-lookup_operating_cash_flow",
+    "BKSY-2026Q2-lookup_assets",
+    "BKSY-2026Q2-lookup_operating_cash_flow",
+    "BKSY-2026Q3-lookup_liabilities_current",
+    "BNL-2026Q3-lookup_net_income",
+    "BNY-2026Q2-free_cash_flow",
+    "BNY-2026Q2-lookup_net_income",
+    "BNY-2026Q2-net_income_change",
+    "BNY-2026Q3-lookup_operating_cash_flow",
+    "BRSP-2026Q2-lookup_net_income",
+    "BRSP-2026Q3-net_income_change",
+    "BXC-2026Q2-free_cash_flow",
+    "BXC-2026Q2-lookup_net_income",
+    "BXC-2026Q2-lookup_revenue",
+    "BXC-2026Q2-net_income_change",
+    "CME-2026Q2-lookup_assets",
+    "CME-2026Q2-lookup_liabilities_current",
+    "CME-2026Q3-lookup_operating_cash_flow",
+    "CME-2026Q3-net_income_change",
+    "CNM-2026Q2-lookup_assets",
+    "CNM-2026Q2-lookup_liabilities_current",
+    "CNM-2026Q2-lookup_net_income",
+    "CNM-2026Q2-lookup_operating_cash_flow",
+    "CNM-2026Q2-lookup_revenue",
+    "CNM-2026Q2-net_income_change",
+    "CSQR-2026Q2-free_cash_flow",
+    "CSQR-2026Q2-lookup_assets",
+    "CSQR-2026Q2-lookup_liabilities_current",
+    "CSQR-2026Q2-lookup_net_income",
+    "CSQR-2026Q2-lookup_operating_cash_flow",
+    "CSQR-2026Q2-lookup_revenue",
+    "EAT-2026-lookup_assets",
+    "EAT-2027Q1-free_cash_flow",
+    "EAT-2027Q1-lookup_revenue",
+    "EFSC-2026Q2-lookup_operating_cash_flow",
+    "EFSC-2026Q2-net_income_change",
+    "FDS-2026Q3-lookup_revenue",
+    "FDS-2026Q3-net_income_change",
+    "FHB-2026Q2-lookup_operating_cash_flow",
+    "FLO-2026Q2-lookup_liabilities_current",
+    "FLO-2026Q2-lookup_net_income",
+    "FLO-2026Q2-lookup_operating_cash_flow",
+    "FNB-2026Q2-free_cash_flow",
+    "FNB-2026Q2-lookup_assets",
+    "FNB-2026Q3-lookup_net_income",
+    "FNB-2026Q3-lookup_operating_cash_flow",
+    "FRPT-2026Q3-lookup_net_income",
+    "FSBC-2026Q2-lookup_net_income",
+    "FSBC-2026Q2-net_income_change",
+    "FSBC-2026Q3-free_cash_flow",
+    "FSBC-2026Q3-lookup_operating_cash_flow",
+    "FTNT-2026Q2-lookup_revenue",
+    "FTNT-2026Q3-lookup_assets",
+    "FTNT-2026Q3-lookup_liabilities_current",
+    "FUSB-2026Q3-free_cash_flow",
+    "FUSB-2026Q3-lookup_operating_cash_flow",
+    "FUSB-2026Q3-net_income_change",
+    "GEVO-2026Q2-lookup_assets",
+    "GEVO-2026Q2-lookup_net_income",
+    "GEVO-2026Q2-lookup_operating_cash_flow",
+    "GEVO-2026Q2-lookup_revenue",
+    "GEVO-2026Q2-net_income_change",
+    "GRI-2026Q2-lookup_liabilities_current",
+    "GRI-2026Q2-lookup_net_income",
+    "HFFG-2026Q2-lookup_operating_cash_flow",
+    "HFFG-2026Q2-net_income_change",
+    "HFFG-2026Q3-lookup_liabilities_current",
+    "HFFG-2026Q3-lookup_net_income",
+    "HHH-2026Q3-lookup_assets",
+    "HHH-2026Q3-lookup_net_income",
+    "HHS-2026Q2-free_cash_flow",
+    "HIVE-2027Q1-lookup_operating_cash_flow",
+    "HIVE-2027Q2-lookup_net_income",
+    "HLIO-2026Q2-net_income_change",
+    "HLIO-2026Q3-lookup_net_income",
+    "HLIO-2026Q3-lookup_revenue",
+    "HLNE-2027Q1-lookup_operating_cash_flow",
+    "HLNE-2027Q2-net_income_change",
+    "INGR-2026Q2-lookup_assets",
+    "INGR-2026Q2-lookup_revenue",
+    "INGR-2026Q2-net_income_change",
+    "INGR-2026Q3-lookup_liabilities_current",
+    "INGR-2026Q3-lookup_net_income",
+    "ITGR-2026Q2-lookup_liabilities_current",
+    "ITGR-2026Q3-lookup_operating_cash_flow",
+    "JANL-2026Q3-free_cash_flow",
+    "JANL-2026Q3-lookup_assets",
+    "JANL-2026Q3-lookup_net_income",
+    "JANL-2026Q3-lookup_revenue",
+    "JANL-2026Q3-net_income_change",
+    "JRVR-2026Q2-lookup_net_income",
+    "JRVR-2026Q2-lookup_operating_cash_flow",
+    "JRVR-2026Q2-lookup_revenue",
+    "JRVR-2026Q3-net_income_change",
+    "LMB-2026Q2-lookup_operating_cash_flow",
+    "LMB-2026Q2-net_income_change",
+    "LMB-2026Q3-lookup_revenue",
+    "LOOP-2027Q1-lookup_net_income",
+    "LOOP-2027Q1-lookup_revenue",
+    "LOOP-2027Q1-net_income_change",
+    "LOVE-2027Q2-lookup_liabilities_current",
+    "LOVE-2027Q2-lookup_operating_cash_flow",
+    "LOVE-2027Q2-lookup_revenue",
+    "LOW-2026Q2-lookup_liabilities_current",
+    "LOW-2026Q2-lookup_operating_cash_flow",
+    "LOW-2026Q2-lookup_revenue",
+    "LOW-2026Q2-net_income_change",
+    "MATW-2026Q3-lookup_operating_cash_flow",
+    "MATW-2026Q3-lookup_revenue",
+    "MFIN-2026Q2-lookup_assets",
+    "MFIN-2026Q3-lookup_operating_cash_flow",
+    "MFIN-2026Q3-net_income_change",
+    "MKSI-2026Q2-lookup_operating_cash_flow",
+    "MKSI-2026Q2-net_income_change",
+    "MKSI-2026Q3-free_cash_flow",
+    "MKSI-2026Q3-lookup_assets",
+    "MTB-2026Q2-lookup_operating_cash_flow",
+    "MTB-2026Q2-net_income_change",
+    "NAGE-2026Q2-lookup_revenue",
+    "NAGE-2026Q3-lookup_assets",
+    "NAGE-2026Q3-lookup_liabilities_current",
+    "NAGE-2026Q3-net_income_change",
+    "NBTB-2026Q2-lookup_net_income",
+    "NBTB-2026Q3-lookup_assets",
+    "NET-2026Q2-lookup_liabilities_current",
+    "NET-2026Q3-lookup_operating_cash_flow",
+    "NKE-2026-lookup_liabilities_current",
+    "NKE-2026-lookup_operating_cash_flow",
+    "NKE-2026-net_income_change",
+    "NKE-2027Q1-lookup_assets",
+    "NRDY-2026Q2-free_cash_flow",
+    "NRDY-2026Q2-lookup_liabilities_current",
+    "NRDY-2026Q2-lookup_net_income",
+    "NRDY-2026Q3-lookup_assets",
+    "NXDT-2026Q2-lookup_assets",
+    "NXDT-2026Q2-lookup_operating_cash_flow",
+    "OI-2026Q3-free_cash_flow",
+    "OI-2026Q3-lookup_assets",
+    "OI-2026Q3-lookup_revenue",
+    "PCVX-2026Q3-current_ratio",
+    "PCVX-2026Q3-lookup_assets",
+    "PCVX-2026Q3-net_income_change",
+    "PEPG-2026Q2-lookup_liabilities_current",
+    "PEPG-2026Q2-lookup_operating_cash_flow",
+    "PEPG-2026Q2-net_income_change",
+    "PSNL-2026Q2-lookup_assets",
+    "PSNL-2026Q3-free_cash_flow",
+    "QTWO-2026Q2-free_cash_flow",
+    "QTWO-2026Q2-lookup_revenue",
+    "QTWO-2026Q2-net_income_change",
+    "QTWO-2026Q3-lookup_assets",
+    "QTWO-2026Q3-lookup_liabilities_current",
+    "RCUS-2026Q2-lookup_operating_cash_flow",
+    "RCUS-2026Q3-free_cash_flow",
+    "RCUS-2026Q3-lookup_assets",
+    "RCUS-2026Q3-lookup_liabilities_current",
+    "RCUS-2026Q3-lookup_revenue",
+    "RCUS-2026Q3-net_income_change",
+    "REG-2026Q2-lookup_assets",
+    "REG-2026Q2-lookup_net_income",
+    "REG-2026Q3-net_income_change",
+    "RGR-2026Q2-free_cash_flow",
+    "RGR-2026Q2-lookup_revenue",
+    "RGR-2026Q3-lookup_liabilities_current",
+    "RGR-2026Q3-lookup_net_income",
+    "RGR-2026Q3-lookup_operating_cash_flow",
+    "RHP-2026Q3-lookup_net_income",
+    "RHP-2026Q3-net_income_change",
+    "ROCK-2026Q2-lookup_liabilities_current",
+    "ROCK-2026Q3-lookup_revenue",
+    "SEQC-2026Q2-lookup_net_income",
+    "SEQC-2026Q2-lookup_operating_cash_flow",
+    "SEQC-2026Q2-lookup_revenue",
+    "SLAB-2026Q2-free_cash_flow",
+    "SLAB-2026Q2-lookup_net_income",
+    "SLAB-2026Q2-lookup_operating_cash_flow",
+    "SLAB-2026Q2-lookup_revenue",
+    "SLDP-2026Q2-lookup_assets",
+    "SLDP-2026Q2-lookup_operating_cash_flow",
+    "SLDP-2026Q2-lookup_revenue",
+    "SLDP-2026Q2-revenue_growth",
+    "SLDP-2026Q3-free_cash_flow",
+    "SLDP-2026Q3-operating_margin",
+    "SLNG-2026Q2-lookup_revenue",
+    "SLNG-2026Q2-net_income_change",
+    "SLNG-2026Q3-free_cash_flow",
+    "SLNG-2026Q3-lookup_assets",
+    "SMBC-2026-lookup_net_income",
+    "SMBC-2027Q1-lookup_operating_cash_flow",
+    "SMBC-2027Q1-net_income_change",
+    "SNDK-2026-lookup_assets",
+    "SNDK-2026-lookup_liabilities_current",
+    "SNDK-2026-net_income_change",
+    "SNDK-2027Q1-free_cash_flow",
+    "STCB-2026Q2-lookup_operating_cash_flow",
+    "STLE-2026Q2-free_cash_flow",
+    "STLE-2026Q2-net_income_change",
+    "STLN-2026Q2-free_cash_flow",
+    "STLN-2026Q2-lookup_revenue",
+    "STLN-2026Q3-lookup_net_income",
+    "STLN-2026Q3-net_income_change",
+    "SVC-2026Q2-lookup_assets",
+    "SVC-2026Q2-lookup_operating_cash_flow",
+    "SVC-2026Q3-lookup_net_income",
+    "SVC-2026Q3-lookup_revenue",
+    "TPR-2026-lookup_liabilities_current",
+    "TPR-2026-lookup_operating_cash_flow",
+    "TPR-2027Q1-lookup_assets",
+    "TPR-2027Q1-lookup_revenue",
+    "TWIN-2026-lookup_assets",
+    "TWIN-2026-lookup_revenue",
+    "TWIN-2026Q1-free_cash_flow",
+    "TWIN-2026Q1-lookup_liabilities_current",
+    "VCYT-2026Q2-net_income_change",
+    "VCYT-2026Q3-free_cash_flow",
+    "VCYT-2026Q3-lookup_liabilities_current",
+    "VCYT-2026Q3-lookup_revenue",
+    "VRNO-2026Q2-lookup_net_income",
+    "VRNO-2026Q3-free_cash_flow",
+    "VRNO-2026Q3-lookup_assets",
+    "VRNO-2026Q3-lookup_operating_cash_flow",
+    "WAY-2026Q2-lookup_operating_cash_flow",
+    "WAY-2026Q2-net_income_change",
+    "WAY-2026Q3-lookup_assets",
+    "XYZ-2026Q2-lookup_net_income",
+    "XYZ-2026Q2-lookup_operating_cash_flow",
+    "XYZ-2026Q3-free_cash_flow",
+    "XYZ-2026Q3-lookup_revenue"
+  ],
+  "invalid_question_ids": [
+    "ACT-2026Q2-lookup_assets",
+    "AMRC-2026Q3-lookup_revenue",
+    "APC-2026Q3-lookup_liabilities_current",
+    "ASST-2026Q2-lookup_net_income",
+    "BKSY-2026Q3-lookup_revenue",
+    "BRSP-2026Q3-lookup_assets",
+    "FDS-2026Q3-lookup_assets",
+    "FDS-2026Q3-lookup_operating_cash_flow",
+    "FRPT-2026Q3-lookup_liabilities_current",
+    "FSBC-2026Q3-lookup_assets",
+    "FUSB-2026Q2-lookup_assets",
+    "GRI-2026Q2-lookup_net_income",
+    "GRI-2026Q2-lookup_operating_cash_flow",
+    "LOVE-2027Q2-lookup_assets",
+    "LOVE-2027Q2-lookup_net_income",
+    "LOVE-2027Q2-net_income_change",
+    "MATW-2026Q3-lookup_liabilities_current",
+    "NET-2026Q3-lookup_assets",
+    "NRDY-2026Q3-lookup_operating_cash_flow",
+    "RHP-2026Q3-lookup_assets",
+    "ROCK-2026Q2-free_cash_flow",
+    "SLAB-2026Q2-lookup_assets",
+    "SLDP-2026Q2-lookup_liabilities_current",
+    "SLNG-2026Q3-lookup_liabilities_current",
+    "STLE-2026Q2-lookup_assets",
+    "STLE-2026Q2-lookup_net_income",
+    "TWIN-2026Q1-lookup_net_income"
+  ],
+  "models": {
+    "anthropic/claude-sonnet-5.5": {
+      "accuracy": 0.966,
+      "accuracy_forgiving_scale_and_sign": 0.998,
+      "best_model": "google/gemini-3.1-pro-preview",
+      "ci95": [
+        0.949290060851927,
+        0.9808102345415778
+      ],
+      "correct": 483,
+      "cost_usd": 2.2003,
+      "error_kinds": {
+        "invalid": 0,
+        "other": 1,
+        "percent_vs_fraction": 0,
+        "scale": 10,
+        "scale_and_sign": 0,
+        "sign": 6
+      },
+      "invalid": 0,
+      "mean_completion_tokens": 212,
+      "n": 500,
+      "vs_best": {
+        "ci95": [
+          -0.04809619238476954,
+          -0.017341040462427744
+        ],
+        "difference": -0.032,
+        "n": 500
+      }
+    },
+    "google/gemini-3.1-pro-preview": {
+      "accuracy": 0.998,
+      "accuracy_forgiving_scale_and_sign": 1.0,
+      "best_model": "google/gemini-3.1-pro-preview",
+      "ci95": [
+        0.993801652892562,
+        1.0
+      ],
+      "correct": 499,
+      "cost_usd": 5.3505,
+      "error_kinds": {
+        "invalid": 0,
+        "other": 0,
+        "percent_vs_fraction": 0,
+        "scale": 0,
+        "scale_and_sign": 0,
+        "sign": 1
+      },
+      "invalid": 0,
+      "mean_completion_tokens": 719,
+      "n": 500,
+      "vs_best": null
+    },
+    "openai/gpt-5.6-terra": {
+      "accuracy": 0.986,
+      "accuracy_forgiving_scale_and_sign": 0.998,
+      "best_model": "google/gemini-3.1-pro-preview",
+      "ci95": [
+        0.975609756097561,
+        0.9942084942084942
+      ],
+      "correct": 493,
+      "cost_usd": 1.5117,
+      "error_kinds": {
+        "invalid": 0,
+        "other": 1,
+        "percent_vs_fraction": 0,
+        "scale": 1,
+        "scale_and_sign": 0,
+        "sign": 5
+      },
+      "invalid": 0,
+      "mean_completion_tokens": 109,
+      "n": 500,
+      "vs_best": {
+        "ci95": [
+          -0.023391812865497075,
+          -0.0019880715705765406
+        ],
+        "difference": -0.012,
+        "n": 500
+      }
+    },
+    "qwen/qwen3-14b": {
+      "accuracy": 0.434,
+      "accuracy_forgiving_scale_and_sign": 0.938,
+      "best_model": "google/gemini-3.1-pro-preview",
+      "ci95": [
+        0.3793103448275862,
+        0.4934086629001883
+      ],
+      "correct": 217,
+      "cost_usd": 0.2782,
+      "error_kinds": {
+        "invalid": 27,
+        "other": 2,
+        "percent_vs_fraction": 2,
+        "scale": 237,
+        "scale_and_sign": 12,
+        "sign": 3
+      },
+      "invalid": 27,
+      "mean_completion_tokens": 1953,
+      "n": 500,
+      "vs_best": {
+        "ci95": [
+          -0.619140625,
+          -0.504708097928437
+        ],
+        "difference": -0.564,
+        "n": 500
+      }
+    }
+  },
+  "overall": {
+    "accuracy": 0.846,
+    "correct": 1692,
+    "invalid": 27,
+    "n": 2000
+  },
+  "per_question": {
+    "ACT-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "ACT-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ACT-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ADCT-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ADCT-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ADCT-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ADCT-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "incorrect",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ADCT-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ADCT-2026Q3-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ADCT-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "AGL-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "AGL-2026Q3-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "AGQ-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "AGQ-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "AGQ-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ALKS-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ALKS-2026Q3-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ALKS-2026Q3-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ALKS-2026Q3-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "AMRC-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "AMRC-2026Q2-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "AMRC-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "AMRC-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "AMRC-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "AMRC-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "AMRC-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "AMRC-2026Q3-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "AOSL-2026-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "AOSL-2026-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "AOSL-2026Q1-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "APC-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "APC-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "APC-2026Q3-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "APC-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ARR-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ARR-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ARR-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ARR-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ASFT-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ASFT-2026Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ASFT-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ASFT-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ASFT-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ASFT-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "incorrect",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ASST-2026Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ASST-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "ASST-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ASST-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ASST-2026Q3-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ASST-2026Q3-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "AVGO-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "AVGO-2026Q3-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "AVGO-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "AVGO-2026Q3-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "AVGO-2026Q3-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "AVGO-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "AXR-2026-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "AXR-2026-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "AXR-2027Q1-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "AXR-2027Q1-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "BBDC-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "BKSY-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "BKSY-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "BKSY-2026Q3-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "BKSY-2026Q3-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "BKSY-2026Q3-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "BKSY-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "BNL-2026Q3-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "BNL-2026Q3-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "BNL-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "BNY-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "BNY-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "BNY-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "incorrect",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "BNY-2026Q3-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "BRRR-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "BRRR-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "BRSP-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "BRSP-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "BRSP-2026Q3-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "BXC-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "BXC-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "BXC-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "BXC-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "BXC-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "BXC-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "BXC-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "BXC-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "CCEL-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "CCEL-2026Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "CCEL-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "CCEL-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "CCEL-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "CCEL-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "CCEL-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "CCEL-2026Q3-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "CME-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "CME-2026Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "CME-2026Q3-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "CME-2026Q3-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "incorrect",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "CME-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "CNM-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "CNM-2026Q2-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "CNM-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "CNM-2026Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "CNM-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "CNM-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "CNM-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "CNM-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "incorrect",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "CSQR-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "CSQR-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "CSQR-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "CSQR-2026Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "CSQR-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "CSQR-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "CSQR-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "CSQR-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "CSQR-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "EAT-2026-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "EAT-2026-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "EAT-2026-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "EAT-2027Q1-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "EAT-2027Q1-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "incorrect",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "EFSC-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "EFSC-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FDS-2026-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "FDS-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "FDS-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "FDS-2026Q3-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "FDS-2026Q3-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FDS-2026Q3-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FHB-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FLO-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "FLO-2026Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FLO-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FLO-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FLO-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "FNB-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FNB-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FNB-2026Q3-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FNB-2026Q3-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FRPT-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "FRPT-2026Q3-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "FRPT-2026Q3-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FSBC-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FSBC-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FSBC-2026Q3-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FSBC-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "FSBC-2026Q3-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FTNT-2026Q2-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "FTNT-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FTNT-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "FTNT-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "FTNT-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FTNT-2026Q3-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FTNT-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "FUSB-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "FUSB-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "FUSB-2026Q3-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FUSB-2026Q3-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FUSB-2026Q3-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "FUSB-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "GEVO-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "GEVO-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "GEVO-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "incorrect",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "GEVO-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "GEVO-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "GEVO-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "GRI-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "GRI-2026Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "GRI-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "incorrect",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "GRI-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "HFFG-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "HFFG-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "HFFG-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "HFFG-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "HFFG-2026Q3-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "HFFG-2026Q3-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "HFFG-2026Q3-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "HHH-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "HHH-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "HHH-2026Q3-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "HHH-2026Q3-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "HHS-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "HHS-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "HHS-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "HIVE-2027Q1-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "HIVE-2027Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "HLIO-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "incorrect",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "HLIO-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "HLIO-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "HLIO-2026Q3-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "HLIO-2026Q3-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "HLIO-2026Q3-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "incorrect",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "HLNE-2027Q1-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "HLNE-2027Q1-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "HLNE-2027Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "HLNE-2027Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "INGR-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "INGR-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "INGR-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "incorrect",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "INGR-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "INGR-2026Q3-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "incorrect",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "INGR-2026Q3-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "INGR-2026Q3-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "INGR-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ITGR-2026Q2-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ITGR-2026Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ITGR-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ITGR-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ITGR-2026Q3-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "JANL-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "JANL-2026Q3-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "JANL-2026Q3-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "JANL-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "JANL-2026Q3-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "JANL-2026Q3-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "JANL-2026Q3-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "JANL-2026Q3-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "JANL-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "JRVR-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "JRVR-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "JRVR-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "JRVR-2026Q3-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "LMB-2026Q2-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "LMB-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "LMB-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "LMB-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "LMB-2026Q3-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "LMB-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "LOOP-2027Q1-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "LOOP-2027Q1-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "LOOP-2027Q1-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "LOOP-2027Q1-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "LOOP-2027Q1-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "incorrect",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "LOVE-2027Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "LOVE-2027Q2-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "LOVE-2027Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "LOVE-2027Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "LOVE-2027Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "LOVE-2027Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "LOVE-2027Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "LOVE-2027Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "LOVE-2027Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "LOW-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "LOW-2026Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "LOW-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "LOW-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "LOW-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "LSEB-2026-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "LSEB-2026-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "LSEB-2026-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "LSEB-2026-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "LSEB-2027Q1-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "LSEB-2027Q1-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "LSEB-2027Q1-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "MATW-2026Q3-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "MATW-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "MATW-2026Q3-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "MATW-2026Q3-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "MATW-2026Q3-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "MATW-2026Q3-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "MATW-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "MFIN-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "MFIN-2026Q3-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "MFIN-2026Q3-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "MKSI-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "MKSI-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "MKSI-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "MKSI-2026Q3-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "MKSI-2026Q3-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "MKSI-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "MKSI-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "MTB-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "MTB-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "incorrect",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NAGE-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NAGE-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NAGE-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NAGE-2026Q3-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NAGE-2026Q3-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NAGE-2026Q3-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NBTB-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NBTB-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NET-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NET-2026Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NET-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "NET-2026Q3-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NKE-2026-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NKE-2026-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NKE-2026-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NKE-2026-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "incorrect",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NKE-2027Q1-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NKE-2027Q1-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NRDY-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NRDY-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NRDY-2026Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NRDY-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NRDY-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NRDY-2026Q3-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NRDY-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NRDY-2026Q3-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "NRDY-2026Q3-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NTWK-2026-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NTWK-2026-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NTWK-2026-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NTWK-2026-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NTWK-2026-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NTWK-2026-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NTWK-2026-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NTWK-2026-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NTWK-2026-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NXDT-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NXDT-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "NXDT-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "NXDT-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "OI-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "OI-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "OI-2026Q3-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "OI-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "OI-2026Q3-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "OKUR-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "OKUR-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "PAYS-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "PAYS-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "PAYS-2026Q2-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "PAYS-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "PAYS-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "PCVX-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "incorrect",
+      "qwen/qwen3-14b": "correct"
+    },
+    "PCVX-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "PCVX-2026Q3-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "incorrect",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "PEPG-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "PEPG-2026Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "PEPG-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "PEPG-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "incorrect",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "incorrect",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "PSNL-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "PSNL-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "PSNL-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "PSNL-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "PSNL-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "PSNL-2026Q3-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "QTWO-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "QTWO-2026Q2-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "QTWO-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "QTWO-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "QTWO-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "QTWO-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "QTWO-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "QTWO-2026Q3-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "RCUS-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "RCUS-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "RCUS-2026Q3-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "RCUS-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "RCUS-2026Q3-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "RCUS-2026Q3-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "RCUS-2026Q3-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "incorrect",
+      "google/gemini-3.1-pro-preview": "incorrect",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "RCUS-2026Q3-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "RCUS-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "REG-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "REG-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "REG-2026Q3-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "RGR-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "RGR-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "RGR-2026Q3-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "RGR-2026Q3-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "RGR-2026Q3-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "RHP-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "RHP-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "RHP-2026Q3-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "RHP-2026Q3-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "RHP-2026Q3-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "RITE-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "RITE-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "RITE-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "RITE-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "RITE-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "RITE-2026Q3-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ROCK-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ROCK-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "ROCK-2026Q2-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "ROCK-2026Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "ROCK-2026Q3-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SEQC-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "SEQC-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "SEQC-2026Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "SEQC-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SEQC-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SEQC-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SEQC-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "SEQC-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "SLAB-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "SLAB-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SLAB-2026Q2-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "SLAB-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "SLAB-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "incorrect",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SLAB-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SLAB-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SLAB-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "SLDP-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SLDP-2026Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "SLDP-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "incorrect",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SLDP-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SLDP-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SLDP-2026Q3-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SLDP-2026Q3-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SLNG-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "SLNG-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "SLNG-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SLNG-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "incorrect",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SLNG-2026Q3-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SLNG-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SLNG-2026Q3-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "SMBC-2026-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SMBC-2027Q1-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SMBC-2027Q1-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SNDK-2026-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "SNDK-2026-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SNDK-2026-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SNDK-2026-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SNDK-2026-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "SNDK-2027Q1-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SNDK-2027Q1-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "STCB-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "STLE-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "incorrect",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "STLE-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "STLE-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "STLE-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "STLN-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "STLN-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "STLN-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "STLN-2026Q3-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "STLN-2026Q3-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SVC-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SVC-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SVC-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "SVC-2026Q3-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "SVC-2026Q3-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "TMGI-2026-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "TMGI-2026-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "TMGI-2026-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "TMGI-2027Q1-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "TMGI-2027Q1-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "TMGI-2027Q1-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "TPR-2026-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "TPR-2026-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "TPR-2026-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "TPR-2027Q1-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "TPR-2027Q1-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "TPR-2027Q1-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "TWIN-2026-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "TWIN-2026-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "TWIN-2026-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "TWIN-2026-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "TWIN-2026-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "TWIN-2026Q1-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "TWIN-2026Q1-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "TWIN-2026Q1-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "invalid_response"
+    },
+    "TWIN-2026Q1-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "TWIN-2026Q1-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "UMAC-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "UMAC-2026Q3-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "UMAC-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "UMAC-2026Q3-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "UMAC-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "USAU-2026-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "USAU-2026-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "USAU-2026-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "USAU-2027Q1-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "USAU-2027Q1-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "VCYT-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "VCYT-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "VCYT-2026Q3-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "VCYT-2026Q3-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "VCYT-2026Q3-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "VCYT-2026Q3-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "VENU-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "VENU-2026Q2-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "VENU-2026Q2-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "VENU-2026Q2-lookup_liabilities_current": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "VENU-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "VENU-2026Q2-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "VENU-2026Q2-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "VRNO-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "VRNO-2026Q3-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "VRNO-2026Q3-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "VRNO-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "VRNO-2026Q3-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "VRNO-2026Q3-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "VRNO-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "WAY-2026Q2-current_ratio": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "WAY-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "WAY-2026Q2-net_income_change": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "WAY-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "WAY-2026Q3-lookup_assets": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "WAY-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "XYZ-2026Q2-lookup_net_income": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "XYZ-2026Q2-lookup_operating_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "XYZ-2026Q2-operating_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "XYZ-2026Q3-free_cash_flow": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "XYZ-2026Q3-gross_margin": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    },
+    "XYZ-2026Q3-lookup_revenue": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "incorrect"
+    },
+    "XYZ-2026Q3-revenue_growth": {
+      "anthropic/claude-sonnet-5.5": "correct",
+      "google/gemini-3.1-pro-preview": "correct",
+      "openai/gpt-5.6-terra": "correct",
+      "qwen/qwen3-14b": "correct"
+    }
+  },
+  "question_bank_size": null,
+  "questions_evaluated": 500,
+  "response_count": 2000,
+  "single_vs_multi_step": {
+    "anthropic/claude-sonnet-5.5": {
+      "drop": 0.0465082747240424,
+      "multi_step_accuracy": 0.941908713692946,
+      "single_step_accuracy": 0.9884169884169884
+    },
+    "google/gemini-3.1-pro-preview": {
+      "drop": 0.004149377593360981,
+      "multi_step_accuracy": 0.995850622406639,
+      "single_step_accuracy": 1.0
+    },
+    "openai/gpt-5.6-terra": {
+      "drop": -0.00299588266393247,
+      "multi_step_accuracy": 0.9875518672199171,
+      "single_step_accuracy": 0.9845559845559846
+    },
+    "overall": {
+      "drop": -0.10705073775613194,
+      "multi_step_accuracy": 0.9014522821576764,
+      "single_step_accuracy": 0.7944015444015444
+    },
+    "qwen/qwen3-14b": {
+      "drop": -0.4758647206779987,
+      "multi_step_accuracy": 0.6804979253112033,
+      "single_step_accuracy": 0.20463320463320464
+    }
+  },
+  "strongest_weakest_reasoning_type": {
+    "anthropic/claude-sonnet-5.5": {
+      "strongest": {
+        "accuracy": 1.0,
+        "reasoning_type": "ratio"
+      },
+      "weakest": {
+        "accuracy": 0.7450980392156863,
+        "reasoning_type": "multi_period_comparison"
+      }
+    },
+    "google/gemini-3.1-pro-preview": {
+      "strongest": {
+        "accuracy": 1.0,
+        "reasoning_type": "ratio"
+      },
+      "weakest": {
+        "accuracy": 0.9803921568627451,
+        "reasoning_type": "multi_period_comparison"
+      }
+    },
+    "openai/gpt-5.6-terra": {
+      "strongest": {
+        "accuracy": 1.0,
+        "reasoning_type": "percentage_change"
+      },
+      "weakest": {
+        "accuracy": 0.9607843137254902,
+        "reasoning_type": "multi_period_comparison"
+      }
+    },
+    "overall": {
+      "strongest": {
+        "accuracy": 0.9944444444444445,
+        "reasoning_type": "percentage_change"
+      },
+      "weakest": {
+        "accuracy": 0.7058823529411765,
+        "reasoning_type": "multi_period_comparison"
+      }
+    },
+    "qwen/qwen3-14b": {
+      "strongest": {
+        "accuracy": 0.9809523809523809,
+        "reasoning_type": "ratio"
+      },
+      "weakest": {
+        "accuracy": 0.13725490196078433,
+        "reasoning_type": "multi_period_comparison"
+      }
+    }
+  }
+}

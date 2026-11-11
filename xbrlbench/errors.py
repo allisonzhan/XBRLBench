@@ -71,6 +71,7 @@ def build_error_records(rows: list[dict], questions_path=DEFAULT_QUESTIONS_PATH,
             "source_concept": r.get("source_concept") or q.get("source_concept"),
             "parsed_model_answer": r.get("parsed_model_answer"),
             "parse_source": r.get("parse_source"),
+            "error_kind": r.get("error_kind"),
             "absolute_error": abs_err,
             "relative_error": rel_err,
             "api_error": r.get("error"),
@@ -98,6 +99,7 @@ def print_summary(records: list[dict]) -> None:
         print()
 
     _print_counts("By status", Counter(r["status"] for r in records))
+    _print_counts("By error kind", Counter(r["error_kind"] for r in records))
     _print_counts("By reasoning type", Counter(r["reasoning_type"] for r in records))
     _print_counts("By tier", Counter(r["tier"] for r in records))
     _print_counts("By parse source", Counter(r["parse_source"] for r in records))
@@ -114,7 +116,7 @@ def write_outputs(records: list[dict], out_prefix) -> None:
     csv_path = f"{out_prefix}.csv"
     fieldnames = [k for k in records[0].keys() if k != "raw_response"] if records else [
         "id", "model", "status", "tier", "reasoning_type", "question", "gold_value", "gold_unit",
-        "source_concept", "parsed_model_answer", "parse_source", "absolute_error", "relative_error", "api_error",
+        "source_concept", "parsed_model_answer", "parse_source", "error_kind", "absolute_error", "relative_error", "api_error",
     ]
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)

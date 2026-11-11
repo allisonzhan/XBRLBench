@@ -1,0 +1,141 @@
+dimension,key,model,n,correct,invalid,accuracy
+difficulty,T1,anthropic/claude-sonnet-5.5,259,256,0,0.9884
+difficulty,T1,google/gemini-3.1-pro-preview,259,259,0,1.0
+difficulty,T1,openai/gpt-5.6-terra,259,255,0,0.9846
+difficulty,T1,qwen/qwen3-14b,259,53,25,0.2046
+difficulty,T2,anthropic/claude-sonnet-5.5,150,150,0,1.0
+difficulty,T2,google/gemini-3.1-pro-preview,150,150,0,1.0
+difficulty,T2,openai/gpt-5.6-terra,150,149,0,0.9933
+difficulty,T2,qwen/qwen3-14b,150,147,0,0.98
+difficulty,T3,anthropic/claude-sonnet-5.5,91,77,0,0.8462
+difficulty,T3,google/gemini-3.1-pro-preview,91,90,0,0.989
+difficulty,T3,openai/gpt-5.6-terra,91,89,0,0.978
+difficulty,T3,qwen/qwen3-14b,91,17,2,0.1868
+reasoning_type,derived_metric,anthropic/claude-sonnet-5.5,40,39,0,0.975
+reasoning_type,derived_metric,google/gemini-3.1-pro-preview,40,40,0,1.0
+reasoning_type,derived_metric,openai/gpt-5.6-terra,40,40,0,1.0
+reasoning_type,derived_metric,qwen/qwen3-14b,40,10,1,0.25
+reasoning_type,direct_retrieval,anthropic/claude-sonnet-5.5,259,256,0,0.9884
+reasoning_type,direct_retrieval,google/gemini-3.1-pro-preview,259,259,0,1.0
+reasoning_type,direct_retrieval,openai/gpt-5.6-terra,259,255,0,0.9846
+reasoning_type,direct_retrieval,qwen/qwen3-14b,259,53,25,0.2046
+reasoning_type,multi_period_comparison,anthropic/claude-sonnet-5.5,51,38,0,0.7451
+reasoning_type,multi_period_comparison,google/gemini-3.1-pro-preview,51,50,0,0.9804
+reasoning_type,multi_period_comparison,openai/gpt-5.6-terra,51,49,0,0.9608
+reasoning_type,multi_period_comparison,qwen/qwen3-14b,51,7,1,0.1373
+reasoning_type,percentage_change,anthropic/claude-sonnet-5.5,45,45,0,1.0
+reasoning_type,percentage_change,google/gemini-3.1-pro-preview,45,45,0,1.0
+reasoning_type,percentage_change,openai/gpt-5.6-terra,45,45,0,1.0
+reasoning_type,percentage_change,qwen/qwen3-14b,45,44,0,0.9778
+reasoning_type,ratio,anthropic/claude-sonnet-5.5,105,105,0,1.0
+reasoning_type,ratio,google/gemini-3.1-pro-preview,105,105,0,1.0
+reasoning_type,ratio,openai/gpt-5.6-terra,105,104,0,0.9905
+reasoning_type,ratio,qwen/qwen3-14b,105,103,0,0.981
+family,current_ratio,anthropic/claude-sonnet-5.5,43,43,0,1.0
+family,current_ratio,google/gemini-3.1-pro-preview,43,43,0,1.0
+family,current_ratio,openai/gpt-5.6-terra,43,42,0,0.9767
+family,current_ratio,qwen/qwen3-14b,43,43,0,1.0
+family,free_cash_flow,anthropic/claude-sonnet-5.5,40,39,0,0.975
+family,free_cash_flow,google/gemini-3.1-pro-preview,40,40,0,1.0
+family,free_cash_flow,openai/gpt-5.6-terra,40,40,0,1.0
+family,free_cash_flow,qwen/qwen3-14b,40,10,1,0.25
+family,gross_margin,anthropic/claude-sonnet-5.5,24,24,0,1.0
+family,gross_margin,google/gemini-3.1-pro-preview,24,24,0,1.0
+family,gross_margin,openai/gpt-5.6-terra,24,24,0,1.0
+family,gross_margin,qwen/qwen3-14b,24,24,0,1.0
+family,lookup_assets,anthropic/claude-sonnet-5.5,60,60,0,1.0
+family,lookup_assets,google/gemini-3.1-pro-preview,60,60,0,1.0
+family,lookup_assets,openai/gpt-5.6-terra,60,60,0,1.0
+family,lookup_assets,qwen/qwen3-14b,60,14,10,0.2333
+family,lookup_liabilities_current,anthropic/claude-sonnet-5.5,43,43,0,1.0
+family,lookup_liabilities_current,google/gemini-3.1-pro-preview,43,43,0,1.0
+family,lookup_liabilities_current,openai/gpt-5.6-terra,43,42,0,0.9767
+family,lookup_liabilities_current,qwen/qwen3-14b,43,9,5,0.2093
+family,lookup_net_income,anthropic/claude-sonnet-5.5,51,50,0,0.9804
+family,lookup_net_income,google/gemini-3.1-pro-preview,51,51,0,1.0
+family,lookup_net_income,openai/gpt-5.6-terra,51,50,0,0.9804
+family,lookup_net_income,qwen/qwen3-14b,51,12,5,0.2353
+family,lookup_operating_cash_flow,anthropic/claude-sonnet-5.5,59,59,0,1.0
+family,lookup_operating_cash_flow,google/gemini-3.1-pro-preview,59,59,0,1.0
+family,lookup_operating_cash_flow,openai/gpt-5.6-terra,59,57,0,0.9661
+family,lookup_operating_cash_flow,qwen/qwen3-14b,59,9,3,0.1525
+family,lookup_revenue,anthropic/claude-sonnet-5.5,46,44,0,0.9565
+family,lookup_revenue,google/gemini-3.1-pro-preview,46,46,0,1.0
+family,lookup_revenue,openai/gpt-5.6-terra,46,46,0,1.0
+family,lookup_revenue,qwen/qwen3-14b,46,9,2,0.1957
+family,net_income_change,anthropic/claude-sonnet-5.5,51,38,0,0.7451
+family,net_income_change,google/gemini-3.1-pro-preview,51,50,0,0.9804
+family,net_income_change,openai/gpt-5.6-terra,51,49,0,0.9608
+family,net_income_change,qwen/qwen3-14b,51,7,1,0.1373
+family,operating_margin,anthropic/claude-sonnet-5.5,38,38,0,1.0
+family,operating_margin,google/gemini-3.1-pro-preview,38,38,0,1.0
+family,operating_margin,openai/gpt-5.6-terra,38,38,0,1.0
+family,operating_margin,qwen/qwen3-14b,38,36,0,0.9474
+family,revenue_growth,anthropic/claude-sonnet-5.5,45,45,0,1.0
+family,revenue_growth,google/gemini-3.1-pro-preview,45,45,0,1.0
+family,revenue_growth,openai/gpt-5.6-terra,45,45,0,1.0
+family,revenue_growth,qwen/qwen3-14b,45,44,0,0.9778
+form,10-K,anthropic/claude-sonnet-5.5,45,44,0,0.9778
+form,10-K,google/gemini-3.1-pro-preview,45,45,0,1.0
+form,10-K,openai/gpt-5.6-terra,45,45,0,1.0
+form,10-K,qwen/qwen3-14b,45,30,0,0.6667
+form,10-Q,anthropic/claude-sonnet-5.5,455,439,0,0.9648
+form,10-Q,google/gemini-3.1-pro-preview,455,454,0,0.9978
+form,10-Q,openai/gpt-5.6-terra,455,448,0,0.9846
+form,10-Q,qwen/qwen3-14b,455,187,27,0.411
+sector,Agriculture,anthropic/claude-sonnet-5.5,7,7,0,1.0
+sector,Agriculture,google/gemini-3.1-pro-preview,7,7,0,1.0
+sector,Agriculture,openai/gpt-5.6-terra,7,7,0,1.0
+sector,Agriculture,qwen/qwen3-14b,7,3,0,0.4286
+sector,Construction,anthropic/claude-sonnet-5.5,14,14,0,1.0
+sector,Construction,google/gemini-3.1-pro-preview,14,14,0,1.0
+sector,Construction,openai/gpt-5.6-terra,14,14,0,1.0
+sector,Construction,qwen/qwen3-14b,14,6,1,0.4286
+sector,Finance,anthropic/claude-sonnet-5.5,100,96,0,0.96
+sector,Finance,google/gemini-3.1-pro-preview,100,100,0,1.0
+sector,Finance,openai/gpt-5.6-terra,100,100,0,1.0
+sector,Finance,qwen/qwen3-14b,100,23,8,0.23
+sector,Manufacturing,anthropic/claude-sonnet-5.5,184,174,0,0.9457
+sector,Manufacturing,google/gemini-3.1-pro-preview,184,183,0,0.9946
+sector,Manufacturing,openai/gpt-5.6-terra,184,178,0,0.9674
+sector,Manufacturing,qwen/qwen3-14b,184,76,9,0.413
+sector,Mining,anthropic/claude-sonnet-5.5,11,11,0,1.0
+sector,Mining,google/gemini-3.1-pro-preview,11,11,0,1.0
+sector,Mining,openai/gpt-5.6-terra,11,11,0,1.0
+sector,Mining,qwen/qwen3-14b,11,11,0,1.0
+sector,Retail,anthropic/claude-sonnet-5.5,19,18,0,0.9474
+sector,Retail,google/gemini-3.1-pro-preview,19,19,0,1.0
+sector,Retail,openai/gpt-5.6-terra,19,19,0,1.0
+sector,Retail,qwen/qwen3-14b,19,6,3,0.3158
+sector,Services,anthropic/claude-sonnet-5.5,124,123,0,0.9919
+sector,Services,google/gemini-3.1-pro-preview,124,124,0,1.0
+sector,Services,openai/gpt-5.6-terra,124,124,0,1.0
+sector,Services,qwen/qwen3-14b,124,72,4,0.5806
+sector,Transport & utilities,anthropic/claude-sonnet-5.5,13,13,0,1.0
+sector,Transport & utilities,google/gemini-3.1-pro-preview,13,13,0,1.0
+sector,Transport & utilities,openai/gpt-5.6-terra,13,12,0,0.9231
+sector,Transport & utilities,qwen/qwen3-14b,13,8,1,0.6154
+sector,Wholesale,anthropic/claude-sonnet-5.5,27,26,0,0.963
+sector,Wholesale,google/gemini-3.1-pro-preview,27,27,0,1.0
+sector,Wholesale,openai/gpt-5.6-terra,27,27,0,1.0
+sector,Wholesale,qwen/qwen3-14b,27,12,1,0.4444
+sector,unknown,anthropic/claude-sonnet-5.5,1,1,0,1.0
+sector,unknown,google/gemini-3.1-pro-preview,1,1,0,1.0
+sector,unknown,openai/gpt-5.6-terra,1,1,0,1.0
+sector,unknown,qwen/qwen3-14b,1,0,0,0.0
+size,large (>$10B),anthropic/claude-sonnet-5.5,48,46,0,0.9583
+size,large (>$10B),google/gemini-3.1-pro-preview,48,48,0,1.0
+size,large (>$10B),openai/gpt-5.6-terra,48,48,0,1.0
+size,large (>$10B),qwen/qwen3-14b,48,14,0,0.2917
+size,mid ($1-10B),anthropic/claude-sonnet-5.5,162,157,0,0.9691
+size,mid ($1-10B),google/gemini-3.1-pro-preview,162,162,0,1.0
+size,mid ($1-10B),openai/gpt-5.6-terra,162,159,0,0.9815
+size,mid ($1-10B),qwen/qwen3-14b,162,60,14,0.3704
+size,small (<$1B assets),anthropic/claude-sonnet-5.5,133,130,0,0.9774
+size,small (<$1B assets),google/gemini-3.1-pro-preview,133,132,0,0.9925
+size,small (<$1B assets),openai/gpt-5.6-terra,133,129,0,0.9699
+size,small (<$1B assets),qwen/qwen3-14b,133,68,8,0.5113
+size,unknown,anthropic/claude-sonnet-5.5,157,150,0,0.9554
+size,unknown,google/gemini-3.1-pro-preview,157,157,0,1.0
+size,unknown,openai/gpt-5.6-terra,157,157,0,1.0
+size,unknown,qwen/qwen3-14b,157,75,5,0.4777

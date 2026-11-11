@@ -106,6 +106,11 @@ every field above, with these differences:
   question needs are included.
 - `question` quotes the filing's row labels (`"Total net sales"`) instead of
   generic names, and states any formula.
+- Questions about signed items state the sign convention whatever the
+  filing's value: a net loss, net cash used in operations, an operating loss
+  and a free-cash outflow are negative, and net-income change is current
+  minus prior net income (a narrower loss is a positive change). Without it,
+  a "Net loss" row label reads as a positive magnitude.
 - `source_concept` is the full prefixed concept (`us-gaap:Assets`).
 
 Extra fields: `family` (question template), `fiscal_period` (`FY`, `Q1`–`Q3`), `cik`, `company`, `form`,
