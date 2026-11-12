@@ -95,6 +95,29 @@ def load_prompts(path: str, limit: int | None = None) -> list[dict]:
     return rows[:limit] if limit else rows
 
 
+def ignore_old_torchao() -> None:
+    """Kaggle's image ships torchao 0.10, and peft raises ImportError for any
+    torchao older than 0.16 the moment LoRA is applied, even though nothing
+    here uses torchao. Uninstalling it in the notebook didn't take, so tell
+    peft it isn't there."""
+    import importlib
+
+    import peft.import_utils as iu
+    try:
+        iu.is_torchao_available()
+        return
+    except ImportError as e:
+        print(f"Ignoring torchao ({e}); it is not used here", flush=True)
+
+    def unavailable() -> bool:
+        return False
+
+    for name in ("peft.import_utils", "peft.tuners.lora.torchao", "peft.utils.quantization_utils"):
+        mod = importlib.import_module(name)
+        if hasattr(mod, "is_torchao_available"):
+            mod.is_torchao_available = unavailable
+
+
 def main(argv: list[str] | None = None) -> None:
     args = build_arg_parser().parse_args(argv)
     check_args(args, int(os.environ.get("WORLD_SIZE", "1")))
@@ -104,6 +127,8 @@ def main(argv: list[str] | None = None) -> None:
     from peft import LoraConfig
     from transformers import AutoModelForCausalLM, AutoTokenizer
     from trl import GRPOConfig, GRPOTrainer
+
+    ignore_old_torchao()
 
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
