@@ -1,0 +1,3841 @@
+{
+  "breakdowns": {
+    "family": {
+      "current_ratio|qwen3-1.7b-grpo": {
+        "accuracy": 0.9069767441860465,
+        "correct": 39,
+        "invalid": 0,
+        "n": 43
+      },
+      "current_ratio|qwen3-1.7b-nothink": {
+        "accuracy": 0.4883720930232558,
+        "correct": 21,
+        "invalid": 0,
+        "n": 43
+      },
+      "current_ratio|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.37209302325581395,
+        "correct": 16,
+        "invalid": 0,
+        "n": 43
+      },
+      "free_cash_flow|qwen3-1.7b-grpo": {
+        "accuracy": 0.075,
+        "correct": 3,
+        "invalid": 0,
+        "n": 40
+      },
+      "free_cash_flow|qwen3-1.7b-nothink": {
+        "accuracy": 0.05,
+        "correct": 2,
+        "invalid": 7,
+        "n": 40
+      },
+      "free_cash_flow|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.05,
+        "correct": 2,
+        "invalid": 11,
+        "n": 40
+      },
+      "gross_margin|qwen3-1.7b-grpo": {
+        "accuracy": 0.9583333333333334,
+        "correct": 23,
+        "invalid": 0,
+        "n": 24
+      },
+      "gross_margin|qwen3-1.7b-nothink": {
+        "accuracy": 0.9583333333333334,
+        "correct": 23,
+        "invalid": 0,
+        "n": 24
+      },
+      "gross_margin|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.9166666666666666,
+        "correct": 22,
+        "invalid": 0,
+        "n": 24
+      },
+      "lookup_assets|qwen3-1.7b-grpo": {
+        "accuracy": 0.11666666666666667,
+        "correct": 7,
+        "invalid": 0,
+        "n": 60
+      },
+      "lookup_assets|qwen3-1.7b-nothink": {
+        "accuracy": 0.11666666666666667,
+        "correct": 7,
+        "invalid": 0,
+        "n": 60
+      },
+      "lookup_assets|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.11666666666666667,
+        "correct": 7,
+        "invalid": 0,
+        "n": 60
+      },
+      "lookup_liabilities_current|qwen3-1.7b-grpo": {
+        "accuracy": 0.16279069767441862,
+        "correct": 7,
+        "invalid": 0,
+        "n": 43
+      },
+      "lookup_liabilities_current|qwen3-1.7b-nothink": {
+        "accuracy": 0.16279069767441862,
+        "correct": 7,
+        "invalid": 0,
+        "n": 43
+      },
+      "lookup_liabilities_current|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.16279069767441862,
+        "correct": 7,
+        "invalid": 0,
+        "n": 43
+      },
+      "lookup_net_income|qwen3-1.7b-grpo": {
+        "accuracy": 0.0196078431372549,
+        "correct": 1,
+        "invalid": 0,
+        "n": 51
+      },
+      "lookup_net_income|qwen3-1.7b-nothink": {
+        "accuracy": 0.0392156862745098,
+        "correct": 2,
+        "invalid": 0,
+        "n": 51
+      },
+      "lookup_net_income|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.0392156862745098,
+        "correct": 2,
+        "invalid": 0,
+        "n": 51
+      },
+      "lookup_operating_cash_flow|qwen3-1.7b-grpo": {
+        "accuracy": 0.03389830508474576,
+        "correct": 2,
+        "invalid": 0,
+        "n": 59
+      },
+      "lookup_operating_cash_flow|qwen3-1.7b-nothink": {
+        "accuracy": 0.11864406779661017,
+        "correct": 7,
+        "invalid": 0,
+        "n": 59
+      },
+      "lookup_operating_cash_flow|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.11864406779661017,
+        "correct": 7,
+        "invalid": 0,
+        "n": 59
+      },
+      "lookup_revenue|qwen3-1.7b-grpo": {
+        "accuracy": 0.10869565217391304,
+        "correct": 5,
+        "invalid": 0,
+        "n": 46
+      },
+      "lookup_revenue|qwen3-1.7b-nothink": {
+        "accuracy": 0.10869565217391304,
+        "correct": 5,
+        "invalid": 0,
+        "n": 46
+      },
+      "lookup_revenue|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.08695652173913043,
+        "correct": 4,
+        "invalid": 0,
+        "n": 46
+      },
+      "net_income_change|qwen3-1.7b-grpo": {
+        "accuracy": 0.0392156862745098,
+        "correct": 2,
+        "invalid": 0,
+        "n": 51
+      },
+      "net_income_change|qwen3-1.7b-nothink": {
+        "accuracy": 0.058823529411764705,
+        "correct": 3,
+        "invalid": 0,
+        "n": 51
+      },
+      "net_income_change|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.058823529411764705,
+        "correct": 3,
+        "invalid": 1,
+        "n": 51
+      },
+      "operating_margin|qwen3-1.7b-grpo": {
+        "accuracy": 0.5789473684210527,
+        "correct": 22,
+        "invalid": 0,
+        "n": 38
+      },
+      "operating_margin|qwen3-1.7b-nothink": {
+        "accuracy": 0.4473684210526316,
+        "correct": 17,
+        "invalid": 0,
+        "n": 38
+      },
+      "operating_margin|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.34210526315789475,
+        "correct": 13,
+        "invalid": 0,
+        "n": 38
+      },
+      "revenue_growth|qwen3-1.7b-grpo": {
+        "accuracy": 0.3333333333333333,
+        "correct": 15,
+        "invalid": 0,
+        "n": 45
+      },
+      "revenue_growth|qwen3-1.7b-nothink": {
+        "accuracy": 0.37777777777777777,
+        "correct": 17,
+        "invalid": 0,
+        "n": 45
+      },
+      "revenue_growth|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.3111111111111111,
+        "correct": 14,
+        "invalid": 0,
+        "n": 45
+      }
+    },
+    "form": {
+      "10-K|qwen3-1.7b-grpo": {
+        "accuracy": 0.5333333333333333,
+        "correct": 24,
+        "invalid": 0,
+        "n": 45
+      },
+      "10-K|qwen3-1.7b-nothink": {
+        "accuracy": 0.4888888888888889,
+        "correct": 22,
+        "invalid": 1,
+        "n": 45
+      },
+      "10-K|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.4,
+        "correct": 18,
+        "invalid": 1,
+        "n": 45
+      },
+      "10-Q|qwen3-1.7b-grpo": {
+        "accuracy": 0.22417582417582418,
+        "correct": 102,
+        "invalid": 0,
+        "n": 455
+      },
+      "10-Q|qwen3-1.7b-nothink": {
+        "accuracy": 0.1956043956043956,
+        "correct": 89,
+        "invalid": 6,
+        "n": 455
+      },
+      "10-Q|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.17362637362637362,
+        "correct": 79,
+        "invalid": 11,
+        "n": 455
+      }
+    },
+    "sector": {
+      "Agriculture|qwen3-1.7b-grpo": {
+        "accuracy": 0.42857142857142855,
+        "correct": 3,
+        "invalid": 0,
+        "n": 7
+      },
+      "Agriculture|qwen3-1.7b-nothink": {
+        "accuracy": 0.42857142857142855,
+        "correct": 3,
+        "invalid": 0,
+        "n": 7
+      },
+      "Agriculture|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.42857142857142855,
+        "correct": 3,
+        "invalid": 1,
+        "n": 7
+      },
+      "Construction|qwen3-1.7b-grpo": {
+        "accuracy": 0.2857142857142857,
+        "correct": 4,
+        "invalid": 0,
+        "n": 14
+      },
+      "Construction|qwen3-1.7b-nothink": {
+        "accuracy": 0.35714285714285715,
+        "correct": 5,
+        "invalid": 0,
+        "n": 14
+      },
+      "Construction|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.21428571428571427,
+        "correct": 3,
+        "invalid": 0,
+        "n": 14
+      },
+      "Finance|qwen3-1.7b-grpo": {
+        "accuracy": 0.09,
+        "correct": 9,
+        "invalid": 0,
+        "n": 100
+      },
+      "Finance|qwen3-1.7b-nothink": {
+        "accuracy": 0.07,
+        "correct": 7,
+        "invalid": 1,
+        "n": 100
+      },
+      "Finance|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.07,
+        "correct": 7,
+        "invalid": 2,
+        "n": 100
+      },
+      "Manufacturing|qwen3-1.7b-grpo": {
+        "accuracy": 0.2391304347826087,
+        "correct": 44,
+        "invalid": 0,
+        "n": 184
+      },
+      "Manufacturing|qwen3-1.7b-nothink": {
+        "accuracy": 0.21195652173913043,
+        "correct": 39,
+        "invalid": 1,
+        "n": 184
+      },
+      "Manufacturing|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.19021739130434784,
+        "correct": 35,
+        "invalid": 5,
+        "n": 184
+      },
+      "Mining|qwen3-1.7b-grpo": {
+        "accuracy": 0.36363636363636365,
+        "correct": 4,
+        "invalid": 0,
+        "n": 11
+      },
+      "Mining|qwen3-1.7b-nothink": {
+        "accuracy": 0.45454545454545453,
+        "correct": 5,
+        "invalid": 0,
+        "n": 11
+      },
+      "Mining|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.45454545454545453,
+        "correct": 5,
+        "invalid": 0,
+        "n": 11
+      },
+      "Retail|qwen3-1.7b-grpo": {
+        "accuracy": 0.21052631578947367,
+        "correct": 4,
+        "invalid": 0,
+        "n": 19
+      },
+      "Retail|qwen3-1.7b-nothink": {
+        "accuracy": 0.15789473684210525,
+        "correct": 3,
+        "invalid": 1,
+        "n": 19
+      },
+      "Retail|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.10526315789473684,
+        "correct": 2,
+        "invalid": 1,
+        "n": 19
+      },
+      "Services|qwen3-1.7b-grpo": {
+        "accuracy": 0.3709677419354839,
+        "correct": 46,
+        "invalid": 0,
+        "n": 124
+      },
+      "Services|qwen3-1.7b-nothink": {
+        "accuracy": 0.3225806451612903,
+        "correct": 40,
+        "invalid": 3,
+        "n": 124
+      },
+      "Services|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.2661290322580645,
+        "correct": 33,
+        "invalid": 2,
+        "n": 124
+      },
+      "Transport & utilities|qwen3-1.7b-grpo": {
+        "accuracy": 0.46153846153846156,
+        "correct": 6,
+        "invalid": 0,
+        "n": 13
+      },
+      "Transport & utilities|qwen3-1.7b-nothink": {
+        "accuracy": 0.3076923076923077,
+        "correct": 4,
+        "invalid": 0,
+        "n": 13
+      },
+      "Transport & utilities|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.3076923076923077,
+        "correct": 4,
+        "invalid": 1,
+        "n": 13
+      },
+      "Wholesale|qwen3-1.7b-grpo": {
+        "accuracy": 0.2222222222222222,
+        "correct": 6,
+        "invalid": 0,
+        "n": 27
+      },
+      "Wholesale|qwen3-1.7b-nothink": {
+        "accuracy": 0.18518518518518517,
+        "correct": 5,
+        "invalid": 1,
+        "n": 27
+      },
+      "Wholesale|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.18518518518518517,
+        "correct": 5,
+        "invalid": 0,
+        "n": 27
+      },
+      "unknown|qwen3-1.7b-grpo": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "invalid": 0,
+        "n": 1
+      },
+      "unknown|qwen3-1.7b-nothink": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "invalid": 0,
+        "n": 1
+      },
+      "unknown|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "invalid": 0,
+        "n": 1
+      }
+    },
+    "size": {
+      "large (>$10B)|qwen3-1.7b-grpo": {
+        "accuracy": 0.1875,
+        "correct": 9,
+        "invalid": 0,
+        "n": 48
+      },
+      "large (>$10B)|qwen3-1.7b-nothink": {
+        "accuracy": 0.1875,
+        "correct": 9,
+        "invalid": 0,
+        "n": 48
+      },
+      "large (>$10B)|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.14583333333333334,
+        "correct": 7,
+        "invalid": 3,
+        "n": 48
+      },
+      "mid ($1-10B)|qwen3-1.7b-grpo": {
+        "accuracy": 0.24691358024691357,
+        "correct": 40,
+        "invalid": 0,
+        "n": 162
+      },
+      "mid ($1-10B)|qwen3-1.7b-nothink": {
+        "accuracy": 0.19753086419753085,
+        "correct": 32,
+        "invalid": 3,
+        "n": 162
+      },
+      "mid ($1-10B)|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.16049382716049382,
+        "correct": 26,
+        "invalid": 3,
+        "n": 162
+      },
+      "small (<$1B assets)|qwen3-1.7b-grpo": {
+        "accuracy": 0.22556390977443608,
+        "correct": 30,
+        "invalid": 0,
+        "n": 133
+      },
+      "small (<$1B assets)|qwen3-1.7b-nothink": {
+        "accuracy": 0.19548872180451127,
+        "correct": 26,
+        "invalid": 0,
+        "n": 133
+      },
+      "small (<$1B assets)|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.18045112781954886,
+        "correct": 24,
+        "invalid": 2,
+        "n": 133
+      },
+      "unknown|qwen3-1.7b-grpo": {
+        "accuracy": 0.29936305732484075,
+        "correct": 47,
+        "invalid": 0,
+        "n": 157
+      },
+      "unknown|qwen3-1.7b-nothink": {
+        "accuracy": 0.2802547770700637,
+        "correct": 44,
+        "invalid": 4,
+        "n": 157
+      },
+      "unknown|qwen3-1.7b-nothink-units": {
+        "accuracy": 0.25477707006369427,
+        "correct": 40,
+        "invalid": 4,
+        "n": 157
+      }
+    }
+  },
+  "by_difficulty": {
+    "T1": {
+      "accuracy": 0.0990990990990991,
+      "correct": 77,
+      "invalid": 0,
+      "n": 777
+    },
+    "T2": {
+      "accuracy": 0.5377777777777778,
+      "correct": 242,
+      "invalid": 0,
+      "n": 450
+    },
+    "T3": {
+      "accuracy": 0.054945054945054944,
+      "correct": 15,
+      "invalid": 19,
+      "n": 273
+    }
+  },
+  "by_difficulty_and_model": {
+    "T1|qwen3-1.7b-grpo": {
+      "accuracy": 0.08494208494208494,
+      "correct": 22,
+      "invalid": 0,
+      "n": 259
+    },
+    "T1|qwen3-1.7b-nothink": {
+      "accuracy": 0.10810810810810811,
+      "correct": 28,
+      "invalid": 0,
+      "n": 259
+    },
+    "T1|qwen3-1.7b-nothink-units": {
+      "accuracy": 0.10424710424710425,
+      "correct": 27,
+      "invalid": 0,
+      "n": 259
+    },
+    "T2|qwen3-1.7b-grpo": {
+      "accuracy": 0.66,
+      "correct": 99,
+      "invalid": 0,
+      "n": 150
+    },
+    "T2|qwen3-1.7b-nothink": {
+      "accuracy": 0.52,
+      "correct": 78,
+      "invalid": 0,
+      "n": 150
+    },
+    "T2|qwen3-1.7b-nothink-units": {
+      "accuracy": 0.43333333333333335,
+      "correct": 65,
+      "invalid": 0,
+      "n": 150
+    },
+    "T3|qwen3-1.7b-grpo": {
+      "accuracy": 0.054945054945054944,
+      "correct": 5,
+      "invalid": 0,
+      "n": 91
+    },
+    "T3|qwen3-1.7b-nothink": {
+      "accuracy": 0.054945054945054944,
+      "correct": 5,
+      "invalid": 7,
+      "n": 91
+    },
+    "T3|qwen3-1.7b-nothink-units": {
+      "accuracy": 0.054945054945054944,
+      "correct": 5,
+      "invalid": 12,
+      "n": 91
+    }
+  },
+  "by_model": {
+    "qwen3-1.7b-grpo": {
+      "accuracy": 0.252,
+      "correct": 126,
+      "invalid": 0,
+      "n": 500
+    },
+    "qwen3-1.7b-nothink": {
+      "accuracy": 0.222,
+      "correct": 111,
+      "invalid": 7,
+      "n": 500
+    },
+    "qwen3-1.7b-nothink-units": {
+      "accuracy": 0.194,
+      "correct": 97,
+      "invalid": 12,
+      "n": 500
+    }
+  },
+  "by_reasoning_type": {
+    "derived_metric": {
+      "accuracy": 0.058333333333333334,
+      "correct": 7,
+      "invalid": 18,
+      "n": 120
+    },
+    "direct_retrieval": {
+      "accuracy": 0.0990990990990991,
+      "correct": 77,
+      "invalid": 0,
+      "n": 777
+    },
+    "multi_period_comparison": {
+      "accuracy": 0.05228758169934641,
+      "correct": 8,
+      "invalid": 1,
+      "n": 153
+    },
+    "percentage_change": {
+      "accuracy": 0.34074074074074073,
+      "correct": 46,
+      "invalid": 0,
+      "n": 135
+    },
+    "ratio": {
+      "accuracy": 0.6222222222222222,
+      "correct": 196,
+      "invalid": 0,
+      "n": 315
+    }
+  },
+  "by_reasoning_type_and_model": {
+    "derived_metric|qwen3-1.7b-grpo": {
+      "accuracy": 0.075,
+      "correct": 3,
+      "invalid": 0,
+      "n": 40
+    },
+    "derived_metric|qwen3-1.7b-nothink": {
+      "accuracy": 0.05,
+      "correct": 2,
+      "invalid": 7,
+      "n": 40
+    },
+    "derived_metric|qwen3-1.7b-nothink-units": {
+      "accuracy": 0.05,
+      "correct": 2,
+      "invalid": 11,
+      "n": 40
+    },
+    "direct_retrieval|qwen3-1.7b-grpo": {
+      "accuracy": 0.08494208494208494,
+      "correct": 22,
+      "invalid": 0,
+      "n": 259
+    },
+    "direct_retrieval|qwen3-1.7b-nothink": {
+      "accuracy": 0.10810810810810811,
+      "correct": 28,
+      "invalid": 0,
+      "n": 259
+    },
+    "direct_retrieval|qwen3-1.7b-nothink-units": {
+      "accuracy": 0.10424710424710425,
+      "correct": 27,
+      "invalid": 0,
+      "n": 259
+    },
+    "multi_period_comparison|qwen3-1.7b-grpo": {
+      "accuracy": 0.0392156862745098,
+      "correct": 2,
+      "invalid": 0,
+      "n": 51
+    },
+    "multi_period_comparison|qwen3-1.7b-nothink": {
+      "accuracy": 0.058823529411764705,
+      "correct": 3,
+      "invalid": 0,
+      "n": 51
+    },
+    "multi_period_comparison|qwen3-1.7b-nothink-units": {
+      "accuracy": 0.058823529411764705,
+      "correct": 3,
+      "invalid": 1,
+      "n": 51
+    },
+    "percentage_change|qwen3-1.7b-grpo": {
+      "accuracy": 0.3333333333333333,
+      "correct": 15,
+      "invalid": 0,
+      "n": 45
+    },
+    "percentage_change|qwen3-1.7b-nothink": {
+      "accuracy": 0.37777777777777777,
+      "correct": 17,
+      "invalid": 0,
+      "n": 45
+    },
+    "percentage_change|qwen3-1.7b-nothink-units": {
+      "accuracy": 0.3111111111111111,
+      "correct": 14,
+      "invalid": 0,
+      "n": 45
+    },
+    "ratio|qwen3-1.7b-grpo": {
+      "accuracy": 0.8,
+      "correct": 84,
+      "invalid": 0,
+      "n": 105
+    },
+    "ratio|qwen3-1.7b-nothink": {
+      "accuracy": 0.580952380952381,
+      "correct": 61,
+      "invalid": 0,
+      "n": 105
+    },
+    "ratio|qwen3-1.7b-nothink-units": {
+      "accuracy": 0.4857142857142857,
+      "correct": 51,
+      "invalid": 0,
+      "n": 105
+    }
+  },
+  "ci_cluster": "company",
+  "easy_to_hard_drop": {
+    "overall": {
+      "T1_accuracy": 0.0990990990990991,
+      "T3_accuracy": 0.054945054945054944,
+      "drop": 0.044154044154044156
+    },
+    "qwen3-1.7b-grpo": {
+      "T1_accuracy": 0.08494208494208494,
+      "T3_accuracy": 0.054945054945054944,
+      "drop": 0.029997029997029995
+    },
+    "qwen3-1.7b-nothink": {
+      "T1_accuracy": 0.10810810810810811,
+      "T3_accuracy": 0.054945054945054944,
+      "drop": 0.05316305316305317
+    },
+    "qwen3-1.7b-nothink-units": {
+      "T1_accuracy": 0.10424710424710425,
+      "T3_accuracy": 0.054945054945054944,
+      "drop": 0.0493020493020493
+    }
+  },
+  "epsilon": null,
+  "incorrect_question_ids": [
+    "ACT-2026Q2-lookup_assets",
+    "ACT-2026Q2-lookup_revenue",
+    "ACT-2026Q2-revenue_growth",
+    "ADCT-2026Q2-free_cash_flow",
+    "ADCT-2026Q2-lookup_assets",
+    "ADCT-2026Q2-lookup_net_income",
+    "ADCT-2026Q2-net_income_change",
+    "ADCT-2026Q2-operating_margin",
+    "ADCT-2026Q3-lookup_liabilities_current",
+    "ADCT-2026Q3-revenue_growth",
+    "AGL-2026Q3-current_ratio",
+    "AGL-2026Q3-lookup_revenue",
+    "AGQ-2026Q2-lookup_net_income",
+    "AGQ-2026Q2-revenue_growth",
+    "ALKS-2026Q2-current_ratio",
+    "ALKS-2026Q3-lookup_liabilities_current",
+    "ALKS-2026Q3-lookup_operating_cash_flow",
+    "ALKS-2026Q3-operating_margin",
+    "AMRC-2026Q2-free_cash_flow",
+    "AMRC-2026Q2-gross_margin",
+    "AMRC-2026Q2-lookup_assets",
+    "AMRC-2026Q2-lookup_operating_cash_flow",
+    "AMRC-2026Q2-net_income_change",
+    "AMRC-2026Q2-operating_margin",
+    "AMRC-2026Q3-lookup_revenue",
+    "AOSL-2026-lookup_operating_cash_flow",
+    "AOSL-2026-net_income_change",
+    "AOSL-2026Q1-operating_margin",
+    "APC-2026Q2-lookup_assets",
+    "APC-2026Q2-operating_margin",
+    "APC-2026Q3-lookup_liabilities_current",
+    "APC-2026Q3-revenue_growth",
+    "ARR-2026Q2-lookup_net_income",
+    "ARR-2026Q2-lookup_operating_cash_flow",
+    "ARR-2026Q2-net_income_change",
+    "ARR-2026Q3-lookup_assets",
+    "ASFT-2026Q2-current_ratio",
+    "ASFT-2026Q2-lookup_net_income",
+    "ASFT-2026Q2-lookup_operating_cash_flow",
+    "ASFT-2026Q2-net_income_change",
+    "ASST-2026Q2-lookup_liabilities_current",
+    "ASST-2026Q2-lookup_net_income",
+    "ASST-2026Q2-net_income_change",
+    "ASST-2026Q3-lookup_operating_cash_flow",
+    "ASST-2026Q3-operating_margin",
+    "AVGO-2026Q3-current_ratio",
+    "AVGO-2026Q3-free_cash_flow",
+    "AVGO-2026Q3-lookup_assets",
+    "AVGO-2026Q3-lookup_liabilities_current",
+    "AVGO-2026Q3-lookup_revenue",
+    "AVGO-2026Q3-revenue_growth",
+    "AXR-2026-lookup_operating_cash_flow",
+    "AXR-2026-lookup_revenue",
+    "AXR-2027Q1-lookup_assets",
+    "AXR-2027Q1-lookup_net_income",
+    "BBDC-2026Q2-lookup_operating_cash_flow",
+    "BKSY-2026Q2-lookup_assets",
+    "BKSY-2026Q2-lookup_operating_cash_flow",
+    "BKSY-2026Q3-lookup_liabilities_current",
+    "BKSY-2026Q3-lookup_revenue",
+    "BKSY-2026Q3-operating_margin",
+    "BKSY-2026Q3-revenue_growth",
+    "BNL-2026Q3-lookup_net_income",
+    "BNL-2026Q3-net_income_change",
+    "BNL-2026Q3-revenue_growth",
+    "BNY-2026Q2-free_cash_flow",
+    "BNY-2026Q2-lookup_net_income",
+    "BNY-2026Q2-net_income_change",
+    "BNY-2026Q3-lookup_operating_cash_flow",
+    "BRRR-2026Q2-lookup_net_income",
+    "BRSP-2026Q2-lookup_net_income",
+    "BRSP-2026Q3-lookup_assets",
+    "BRSP-2026Q3-net_income_change",
+    "BXC-2026Q2-free_cash_flow",
+    "BXC-2026Q2-lookup_net_income",
+    "BXC-2026Q2-lookup_revenue",
+    "BXC-2026Q2-net_income_change",
+    "BXC-2026Q3-current_ratio",
+    "BXC-2026Q3-lookup_assets",
+    "BXC-2026Q3-revenue_growth",
+    "CCEL-2026Q2-lookup_net_income",
+    "CCEL-2026Q2-net_income_change",
+    "CCEL-2026Q3-current_ratio",
+    "CCEL-2026Q3-lookup_revenue",
+    "CME-2026Q2-lookup_assets",
+    "CME-2026Q2-lookup_liabilities_current",
+    "CME-2026Q3-lookup_operating_cash_flow",
+    "CME-2026Q3-net_income_change",
+    "CME-2026Q3-revenue_growth",
+    "CNM-2026Q2-current_ratio",
+    "CNM-2026Q2-lookup_assets",
+    "CNM-2026Q2-lookup_liabilities_current",
+    "CNM-2026Q2-lookup_net_income",
+    "CNM-2026Q2-lookup_operating_cash_flow",
+    "CNM-2026Q2-lookup_revenue",
+    "CNM-2026Q2-net_income_change",
+    "CSQR-2026Q2-free_cash_flow",
+    "CSQR-2026Q2-lookup_assets",
+    "CSQR-2026Q2-lookup_liabilities_current",
+    "CSQR-2026Q2-lookup_net_income",
+    "CSQR-2026Q2-lookup_operating_cash_flow",
+    "CSQR-2026Q2-lookup_revenue",
+    "EAT-2026-current_ratio",
+    "EAT-2026-lookup_assets",
+    "EAT-2026-operating_margin",
+    "EAT-2027Q1-free_cash_flow",
+    "EAT-2027Q1-lookup_revenue",
+    "EFSC-2026Q2-lookup_operating_cash_flow",
+    "EFSC-2026Q2-net_income_change",
+    "FDS-2026-lookup_net_income",
+    "FDS-2026Q3-current_ratio",
+    "FDS-2026Q3-lookup_assets",
+    "FDS-2026Q3-lookup_operating_cash_flow",
+    "FDS-2026Q3-lookup_revenue",
+    "FDS-2026Q3-net_income_change",
+    "FHB-2026Q2-lookup_operating_cash_flow",
+    "FLO-2026Q2-current_ratio",
+    "FLO-2026Q2-lookup_liabilities_current",
+    "FLO-2026Q2-lookup_net_income",
+    "FLO-2026Q2-lookup_operating_cash_flow",
+    "FLO-2026Q2-operating_margin",
+    "FNB-2026Q2-free_cash_flow",
+    "FNB-2026Q2-lookup_assets",
+    "FNB-2026Q3-lookup_net_income",
+    "FNB-2026Q3-lookup_operating_cash_flow",
+    "FRPT-2026Q3-lookup_liabilities_current",
+    "FRPT-2026Q3-lookup_net_income",
+    "FSBC-2026Q2-lookup_net_income",
+    "FSBC-2026Q2-net_income_change",
+    "FSBC-2026Q3-free_cash_flow",
+    "FSBC-2026Q3-lookup_assets",
+    "FSBC-2026Q3-lookup_operating_cash_flow",
+    "FTNT-2026Q2-gross_margin",
+    "FTNT-2026Q2-lookup_revenue",
+    "FTNT-2026Q3-current_ratio",
+    "FTNT-2026Q3-lookup_assets",
+    "FTNT-2026Q3-lookup_liabilities_current",
+    "FTNT-2026Q3-revenue_growth",
+    "FUSB-2026Q2-lookup_assets",
+    "FUSB-2026Q2-lookup_net_income",
+    "FUSB-2026Q3-free_cash_flow",
+    "FUSB-2026Q3-lookup_operating_cash_flow",
+    "FUSB-2026Q3-net_income_change",
+    "FUSB-2026Q3-revenue_growth",
+    "GEVO-2026Q2-lookup_assets",
+    "GEVO-2026Q2-lookup_net_income",
+    "GEVO-2026Q2-lookup_operating_cash_flow",
+    "GEVO-2026Q2-lookup_revenue",
+    "GEVO-2026Q2-net_income_change",
+    "GEVO-2026Q2-operating_margin",
+    "GRI-2026Q2-lookup_liabilities_current",
+    "GRI-2026Q2-lookup_net_income",
+    "GRI-2026Q2-lookup_operating_cash_flow",
+    "HFFG-2026Q2-lookup_operating_cash_flow",
+    "HFFG-2026Q2-net_income_change",
+    "HFFG-2026Q2-operating_margin",
+    "HFFG-2026Q2-revenue_growth",
+    "HFFG-2026Q3-lookup_liabilities_current",
+    "HFFG-2026Q3-lookup_net_income",
+    "HHH-2026Q3-lookup_assets",
+    "HHH-2026Q3-lookup_net_income",
+    "HHH-2026Q3-lookup_operating_cash_flow",
+    "HHS-2026Q2-free_cash_flow",
+    "HHS-2026Q2-lookup_assets",
+    "HHS-2026Q2-operating_margin",
+    "HIVE-2027Q1-lookup_operating_cash_flow",
+    "HIVE-2027Q2-lookup_net_income",
+    "HLIO-2026Q2-net_income_change",
+    "HLIO-2026Q3-current_ratio",
+    "HLIO-2026Q3-lookup_net_income",
+    "HLIO-2026Q3-lookup_revenue",
+    "HLNE-2027Q1-lookup_operating_cash_flow",
+    "HLNE-2027Q2-lookup_assets",
+    "HLNE-2027Q2-net_income_change",
+    "INGR-2026Q2-lookup_assets",
+    "INGR-2026Q2-lookup_revenue",
+    "INGR-2026Q2-net_income_change",
+    "INGR-2026Q3-current_ratio",
+    "INGR-2026Q3-lookup_liabilities_current",
+    "INGR-2026Q3-lookup_net_income",
+    "INGR-2026Q3-revenue_growth",
+    "ITGR-2026Q2-lookup_liabilities_current",
+    "ITGR-2026Q2-revenue_growth",
+    "ITGR-2026Q3-current_ratio",
+    "ITGR-2026Q3-lookup_operating_cash_flow",
+    "JANL-2026Q3-current_ratio",
+    "JANL-2026Q3-free_cash_flow",
+    "JANL-2026Q3-gross_margin",
+    "JANL-2026Q3-lookup_assets",
+    "JANL-2026Q3-lookup_net_income",
+    "JANL-2026Q3-lookup_revenue",
+    "JANL-2026Q3-net_income_change",
+    "JANL-2026Q3-operating_margin",
+    "JANL-2026Q3-revenue_growth",
+    "JRVR-2026Q2-lookup_net_income",
+    "JRVR-2026Q2-lookup_operating_cash_flow",
+    "JRVR-2026Q2-lookup_revenue",
+    "JRVR-2026Q3-net_income_change",
+    "LMB-2026Q2-lookup_net_income",
+    "LMB-2026Q2-lookup_operating_cash_flow",
+    "LMB-2026Q2-net_income_change",
+    "LMB-2026Q3-lookup_revenue",
+    "LMB-2026Q3-revenue_growth",
+    "LOOP-2027Q1-lookup_liabilities_current",
+    "LOOP-2027Q1-lookup_net_income",
+    "LOOP-2027Q1-lookup_revenue",
+    "LOOP-2027Q1-net_income_change",
+    "LOVE-2027Q2-free_cash_flow",
+    "LOVE-2027Q2-lookup_assets",
+    "LOVE-2027Q2-lookup_liabilities_current",
+    "LOVE-2027Q2-lookup_net_income",
+    "LOVE-2027Q2-lookup_operating_cash_flow",
+    "LOVE-2027Q2-lookup_revenue",
+    "LOVE-2027Q2-net_income_change",
+    "LOVE-2027Q2-revenue_growth",
+    "LOW-2026Q2-lookup_liabilities_current",
+    "LOW-2026Q2-lookup_operating_cash_flow",
+    "LOW-2026Q2-lookup_revenue",
+    "LOW-2026Q2-net_income_change",
+    "LSEB-2026-lookup_net_income",
+    "LSEB-2026-lookup_operating_cash_flow",
+    "LSEB-2027Q1-net_income_change",
+    "MATW-2026Q3-lookup_assets",
+    "MATW-2026Q3-lookup_liabilities_current",
+    "MATW-2026Q3-lookup_operating_cash_flow",
+    "MATW-2026Q3-lookup_revenue",
+    "MATW-2026Q3-operating_margin",
+    "MATW-2026Q3-revenue_growth",
+    "MFIN-2026Q2-lookup_assets",
+    "MFIN-2026Q3-lookup_operating_cash_flow",
+    "MFIN-2026Q3-net_income_change",
+    "MKSI-2026Q2-lookup_operating_cash_flow",
+    "MKSI-2026Q2-net_income_change",
+    "MKSI-2026Q3-current_ratio",
+    "MKSI-2026Q3-free_cash_flow",
+    "MKSI-2026Q3-lookup_assets",
+    "MKSI-2026Q3-revenue_growth",
+    "MTB-2026Q2-lookup_operating_cash_flow",
+    "MTB-2026Q2-net_income_change",
+    "NAGE-2026Q2-lookup_net_income",
+    "NAGE-2026Q2-lookup_revenue",
+    "NAGE-2026Q3-lookup_assets",
+    "NAGE-2026Q3-lookup_liabilities_current",
+    "NAGE-2026Q3-net_income_change",
+    "NAGE-2026Q3-operating_margin",
+    "NBTB-2026Q2-lookup_net_income",
+    "NBTB-2026Q3-lookup_assets",
+    "NET-2026Q2-current_ratio",
+    "NET-2026Q2-lookup_liabilities_current",
+    "NET-2026Q3-lookup_assets",
+    "NET-2026Q3-lookup_operating_cash_flow",
+    "NKE-2026-lookup_liabilities_current",
+    "NKE-2026-lookup_operating_cash_flow",
+    "NKE-2026-net_income_change",
+    "NKE-2027Q1-lookup_assets",
+    "NRDY-2026Q2-free_cash_flow",
+    "NRDY-2026Q2-lookup_liabilities_current",
+    "NRDY-2026Q2-lookup_net_income",
+    "NRDY-2026Q2-operating_margin",
+    "NRDY-2026Q3-lookup_assets",
+    "NRDY-2026Q3-lookup_operating_cash_flow",
+    "NRDY-2026Q3-lookup_revenue",
+    "NTWK-2026-net_income_change",
+    "NTWK-2026-operating_margin",
+    "NXDT-2026Q2-lookup_assets",
+    "NXDT-2026Q2-lookup_operating_cash_flow",
+    "NXDT-2026Q2-revenue_growth",
+    "OI-2026Q2-revenue_growth",
+    "OI-2026Q3-free_cash_flow",
+    "OI-2026Q3-lookup_assets",
+    "OI-2026Q3-lookup_revenue",
+    "OKUR-2026Q2-free_cash_flow",
+    "OKUR-2026Q3-current_ratio",
+    "PAYS-2026Q2-current_ratio",
+    "PAYS-2026Q2-lookup_revenue",
+    "PAYS-2026Q2-revenue_growth",
+    "PCVX-2026Q3-current_ratio",
+    "PCVX-2026Q3-lookup_assets",
+    "PCVX-2026Q3-net_income_change",
+    "PEPG-2026Q2-lookup_assets",
+    "PEPG-2026Q2-lookup_liabilities_current",
+    "PEPG-2026Q2-lookup_operating_cash_flow",
+    "PEPG-2026Q2-net_income_change",
+    "PSNL-2026Q2-lookup_assets",
+    "PSNL-2026Q2-lookup_revenue",
+    "PSNL-2026Q2-operating_margin",
+    "PSNL-2026Q2-revenue_growth",
+    "PSNL-2026Q3-free_cash_flow",
+    "QTWO-2026Q2-free_cash_flow",
+    "QTWO-2026Q2-lookup_revenue",
+    "QTWO-2026Q2-net_income_change",
+    "QTWO-2026Q3-current_ratio",
+    "QTWO-2026Q3-lookup_assets",
+    "QTWO-2026Q3-lookup_liabilities_current",
+    "RCUS-2026Q2-lookup_operating_cash_flow",
+    "RCUS-2026Q3-free_cash_flow",
+    "RCUS-2026Q3-lookup_assets",
+    "RCUS-2026Q3-lookup_liabilities_current",
+    "RCUS-2026Q3-lookup_revenue",
+    "RCUS-2026Q3-net_income_change",
+    "RCUS-2026Q3-operating_margin",
+    "RCUS-2026Q3-revenue_growth",
+    "REG-2026Q2-lookup_assets",
+    "REG-2026Q2-lookup_net_income",
+    "REG-2026Q3-net_income_change",
+    "RGR-2026Q2-free_cash_flow",
+    "RGR-2026Q2-lookup_revenue",
+    "RGR-2026Q3-lookup_liabilities_current",
+    "RGR-2026Q3-lookup_net_income",
+    "RGR-2026Q3-lookup_operating_cash_flow",
+    "RHP-2026Q2-revenue_growth",
+    "RHP-2026Q3-lookup_assets",
+    "RHP-2026Q3-lookup_net_income",
+    "RHP-2026Q3-net_income_change",
+    "RHP-2026Q3-operating_margin",
+    "RITE-2026Q2-free_cash_flow",
+    "RITE-2026Q2-lookup_operating_cash_flow",
+    "RITE-2026Q2-net_income_change",
+    "RITE-2026Q3-current_ratio",
+    "RITE-2026Q3-lookup_net_income",
+    "ROCK-2026Q2-current_ratio",
+    "ROCK-2026Q2-free_cash_flow",
+    "ROCK-2026Q2-lookup_liabilities_current",
+    "ROCK-2026Q3-lookup_revenue",
+    "SEQC-2026Q2-free_cash_flow",
+    "SEQC-2026Q2-lookup_liabilities_current",
+    "SEQC-2026Q2-lookup_net_income",
+    "SEQC-2026Q2-lookup_operating_cash_flow",
+    "SEQC-2026Q2-lookup_revenue",
+    "SEQC-2026Q2-operating_margin",
+    "SEQC-2026Q2-revenue_growth",
+    "SLAB-2026Q2-current_ratio",
+    "SLAB-2026Q2-free_cash_flow",
+    "SLAB-2026Q2-lookup_assets",
+    "SLAB-2026Q2-lookup_net_income",
+    "SLAB-2026Q2-lookup_operating_cash_flow",
+    "SLAB-2026Q2-lookup_revenue",
+    "SLDP-2026Q2-lookup_assets",
+    "SLDP-2026Q2-lookup_liabilities_current",
+    "SLDP-2026Q2-lookup_operating_cash_flow",
+    "SLDP-2026Q2-lookup_revenue",
+    "SLDP-2026Q2-revenue_growth",
+    "SLDP-2026Q3-free_cash_flow",
+    "SLDP-2026Q3-operating_margin",
+    "SLNG-2026Q2-current_ratio",
+    "SLNG-2026Q2-lookup_operating_cash_flow",
+    "SLNG-2026Q2-lookup_revenue",
+    "SLNG-2026Q2-net_income_change",
+    "SLNG-2026Q3-free_cash_flow",
+    "SLNG-2026Q3-lookup_assets",
+    "SLNG-2026Q3-lookup_liabilities_current",
+    "SMBC-2026-lookup_net_income",
+    "SMBC-2027Q1-lookup_operating_cash_flow",
+    "SMBC-2027Q1-net_income_change",
+    "SNDK-2026-lookup_assets",
+    "SNDK-2026-lookup_liabilities_current",
+    "SNDK-2026-net_income_change",
+    "SNDK-2027Q1-free_cash_flow",
+    "STCB-2026Q2-lookup_operating_cash_flow",
+    "STLE-2026Q2-free_cash_flow",
+    "STLE-2026Q2-lookup_assets",
+    "STLE-2026Q2-lookup_net_income",
+    "STLE-2026Q2-net_income_change",
+    "STLN-2026Q2-free_cash_flow",
+    "STLN-2026Q2-lookup_revenue",
+    "STLN-2026Q2-revenue_growth",
+    "STLN-2026Q3-lookup_net_income",
+    "STLN-2026Q3-net_income_change",
+    "SVC-2026Q2-lookup_assets",
+    "SVC-2026Q2-lookup_operating_cash_flow",
+    "SVC-2026Q2-revenue_growth",
+    "SVC-2026Q3-lookup_net_income",
+    "SVC-2026Q3-lookup_revenue",
+    "TMGI-2026-current_ratio",
+    "TMGI-2027Q1-operating_margin",
+    "TPR-2026-lookup_liabilities_current",
+    "TPR-2026-lookup_operating_cash_flow",
+    "TPR-2027Q1-lookup_assets",
+    "TPR-2027Q1-lookup_revenue",
+    "TWIN-2026-current_ratio",
+    "TWIN-2026-lookup_assets",
+    "TWIN-2026-lookup_revenue",
+    "TWIN-2026-operating_margin",
+    "TWIN-2026Q1-free_cash_flow",
+    "TWIN-2026Q1-lookup_liabilities_current",
+    "TWIN-2026Q1-lookup_net_income",
+    "TWIN-2026Q1-net_income_change",
+    "UMAC-2026Q2-free_cash_flow",
+    "UMAC-2026Q3-current_ratio",
+    "UMAC-2026Q3-operating_margin",
+    "UMAC-2026Q3-revenue_growth",
+    "USAU-2026-free_cash_flow",
+    "USAU-2026-lookup_net_income",
+    "USAU-2027Q1-lookup_operating_cash_flow",
+    "VCYT-2026Q2-current_ratio",
+    "VCYT-2026Q2-net_income_change",
+    "VCYT-2026Q3-free_cash_flow",
+    "VCYT-2026Q3-lookup_liabilities_current",
+    "VCYT-2026Q3-lookup_revenue",
+    "VCYT-2026Q3-operating_margin",
+    "VENU-2026Q2-current_ratio",
+    "VENU-2026Q2-free_cash_flow",
+    "VENU-2026Q2-lookup_operating_cash_flow",
+    "VENU-2026Q2-revenue_growth",
+    "VRNO-2026Q2-lookup_net_income",
+    "VRNO-2026Q3-free_cash_flow",
+    "VRNO-2026Q3-lookup_assets",
+    "VRNO-2026Q3-lookup_operating_cash_flow",
+    "WAY-2026Q2-current_ratio",
+    "WAY-2026Q2-lookup_operating_cash_flow",
+    "WAY-2026Q2-net_income_change",
+    "WAY-2026Q2-operating_margin",
+    "WAY-2026Q3-lookup_assets",
+    "WAY-2026Q3-revenue_growth",
+    "XYZ-2026Q2-lookup_net_income",
+    "XYZ-2026Q2-lookup_operating_cash_flow",
+    "XYZ-2026Q2-operating_margin",
+    "XYZ-2026Q3-free_cash_flow",
+    "XYZ-2026Q3-lookup_revenue",
+    "XYZ-2026Q3-revenue_growth"
+  ],
+  "invalid_question_ids": [
+    "AVGO-2026Q3-free_cash_flow",
+    "BXC-2026Q2-free_cash_flow",
+    "EAT-2027Q1-free_cash_flow",
+    "FNB-2026Q2-free_cash_flow",
+    "FSBC-2026Q3-free_cash_flow",
+    "NTWK-2026-free_cash_flow",
+    "RGR-2026Q2-free_cash_flow",
+    "ROCK-2026Q2-free_cash_flow",
+    "SLNG-2026Q3-free_cash_flow",
+    "SNDK-2027Q1-free_cash_flow",
+    "STLE-2026Q2-net_income_change",
+    "STLN-2026Q2-free_cash_flow",
+    "TWIN-2026Q1-free_cash_flow",
+    "VRNO-2026Q3-free_cash_flow",
+    "XYZ-2026Q3-free_cash_flow"
+  ],
+  "models": {
+    "qwen3-1.7b-grpo": {
+      "accuracy": 0.252,
+      "accuracy_forgiving_scale_and_sign": 0.796,
+      "best_model": "qwen3-1.7b-grpo",
+      "ci95": [
+        0.20556745182012848,
+        0.29770992366412213
+      ],
+      "correct": 126,
+      "cost_usd": null,
+      "error_kinds": {
+        "invalid": 0,
+        "other": 100,
+        "percent_vs_fraction": 2,
+        "scale": 206,
+        "scale_and_sign": 42,
+        "sign": 24
+      },
+      "invalid": 0,
+      "mean_completion_tokens": 106,
+      "n": 500,
+      "vs_best": null
+    },
+    "qwen3-1.7b-nothink": {
+      "accuracy": 0.222,
+      "accuracy_forgiving_scale_and_sign": 0.742,
+      "best_model": "qwen3-1.7b-grpo",
+      "ci95": [
+        0.17463617463617465,
+        0.2730696798493409
+      ],
+      "correct": 111,
+      "cost_usd": null,
+      "error_kinds": {
+        "invalid": 7,
+        "other": 120,
+        "percent_vs_fraction": 2,
+        "scale": 216,
+        "scale_and_sign": 29,
+        "sign": 15
+      },
+      "invalid": 7,
+      "mean_completion_tokens": 69,
+      "n": 500,
+      "vs_best": {
+        "ci95": [
+          -0.056133056133056136,
+          -0.003968253968253968
+        ],
+        "difference": -0.03,
+        "n": 500
+      }
+    },
+    "qwen3-1.7b-nothink-units": {
+      "accuracy": 0.194,
+      "accuracy_forgiving_scale_and_sign": 0.698,
+      "best_model": "qwen3-1.7b-grpo",
+      "ci95": [
+        0.15090543259557343,
+        0.23933209647495363
+      ],
+      "correct": 97,
+      "cost_usd": null,
+      "error_kinds": {
+        "invalid": 12,
+        "other": 137,
+        "percent_vs_fraction": 2,
+        "scale": 213,
+        "scale_and_sign": 25,
+        "sign": 14
+      },
+      "invalid": 12,
+      "mean_completion_tokens": 62,
+      "n": 500,
+      "vs_best": {
+        "ci95": [
+          -0.08836206896551724,
+          -0.02584493041749503
+        ],
+        "difference": -0.058,
+        "n": 500
+      }
+    }
+  },
+  "overall": {
+    "accuracy": 0.22266666666666668,
+    "correct": 334,
+    "invalid": 19,
+    "n": 1500
+  },
+  "per_question": {
+    "ACT-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ACT-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ACT-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ADCT-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ADCT-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ADCT-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ADCT-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ADCT-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ADCT-2026Q3-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ADCT-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AGL-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AGL-2026Q3-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AGQ-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AGQ-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AGQ-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "ALKS-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ALKS-2026Q3-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ALKS-2026Q3-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ALKS-2026Q3-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AMRC-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AMRC-2026Q2-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AMRC-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AMRC-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AMRC-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AMRC-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AMRC-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "AMRC-2026Q3-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AOSL-2026-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AOSL-2026-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AOSL-2026Q1-operating_margin": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "APC-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "APC-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "APC-2026Q3-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "APC-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ARR-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ARR-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ARR-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ARR-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ASFT-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ASFT-2026Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "ASFT-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ASFT-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "ASFT-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "ASFT-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ASST-2026Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ASST-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ASST-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ASST-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "ASST-2026Q3-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ASST-2026Q3-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AVGO-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AVGO-2026Q3-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "invalid_response"
+    },
+    "AVGO-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AVGO-2026Q3-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AVGO-2026Q3-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AVGO-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AXR-2026-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AXR-2026-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AXR-2027Q1-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "AXR-2027Q1-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BBDC-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BKSY-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BKSY-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BKSY-2026Q3-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BKSY-2026Q3-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BKSY-2026Q3-operating_margin": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "BKSY-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BNL-2026Q3-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BNL-2026Q3-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BNL-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BNY-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BNY-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BNY-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BNY-2026Q3-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BRRR-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "BRRR-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BRSP-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BRSP-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BRSP-2026Q3-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BXC-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "invalid_response",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BXC-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BXC-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BXC-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BXC-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "BXC-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "BXC-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "BXC-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "CCEL-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "CCEL-2026Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "CCEL-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CCEL-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "CCEL-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CCEL-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "CCEL-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CCEL-2026Q3-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CME-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CME-2026Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CME-2026Q3-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CME-2026Q3-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CME-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CNM-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CNM-2026Q2-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "CNM-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CNM-2026Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CNM-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CNM-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CNM-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CNM-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CSQR-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "CSQR-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CSQR-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CSQR-2026Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CSQR-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CSQR-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CSQR-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "CSQR-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "CSQR-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "EAT-2026-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "EAT-2026-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "EAT-2026-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "EAT-2027Q1-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "invalid_response",
+      "qwen3-1.7b-nothink-units": "invalid_response"
+    },
+    "EAT-2027Q1-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "EFSC-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "EFSC-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FDS-2026-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FDS-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FDS-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FDS-2026Q3-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FDS-2026Q3-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FDS-2026Q3-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FHB-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FLO-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FLO-2026Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FLO-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FLO-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FLO-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FNB-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "invalid_response"
+    },
+    "FNB-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FNB-2026Q3-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FNB-2026Q3-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FRPT-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "FRPT-2026Q3-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FRPT-2026Q3-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FSBC-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FSBC-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FSBC-2026Q3-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "invalid_response",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FSBC-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FSBC-2026Q3-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FTNT-2026Q2-gross_margin": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FTNT-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FTNT-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "FTNT-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FTNT-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FTNT-2026Q3-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FTNT-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FUSB-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FUSB-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FUSB-2026Q3-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FUSB-2026Q3-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FUSB-2026Q3-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "FUSB-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "GEVO-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "GEVO-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "GEVO-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "GEVO-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "GEVO-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "GEVO-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "GRI-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "GRI-2026Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "GRI-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "GRI-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HFFG-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HFFG-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HFFG-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HFFG-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HFFG-2026Q3-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "HFFG-2026Q3-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HFFG-2026Q3-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HHH-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "HHH-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HHH-2026Q3-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HHH-2026Q3-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HHS-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HHS-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HHS-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HIVE-2027Q1-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HIVE-2027Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HLIO-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HLIO-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "HLIO-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HLIO-2026Q3-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "HLIO-2026Q3-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HLIO-2026Q3-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HLNE-2027Q1-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HLNE-2027Q1-revenue_growth": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "HLNE-2027Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "HLNE-2027Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "INGR-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "INGR-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "INGR-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "INGR-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "INGR-2026Q3-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "INGR-2026Q3-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "INGR-2026Q3-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "INGR-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ITGR-2026Q2-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "ITGR-2026Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ITGR-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ITGR-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "ITGR-2026Q3-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "JANL-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "JANL-2026Q3-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "JANL-2026Q3-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "JANL-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "JANL-2026Q3-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "JANL-2026Q3-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "JANL-2026Q3-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "JANL-2026Q3-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "JANL-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "JRVR-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "JRVR-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "JRVR-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "JRVR-2026Q3-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LMB-2026Q2-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "LMB-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LMB-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LMB-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LMB-2026Q3-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LMB-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "LOOP-2027Q1-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "LOOP-2027Q1-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LOOP-2027Q1-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LOOP-2027Q1-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LOOP-2027Q1-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LOVE-2027Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LOVE-2027Q2-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "LOVE-2027Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LOVE-2027Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LOVE-2027Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LOVE-2027Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LOVE-2027Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LOVE-2027Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LOVE-2027Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LOW-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "LOW-2026Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LOW-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LOW-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LOW-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "LSEB-2026-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "LSEB-2026-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "LSEB-2026-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "LSEB-2026-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "LSEB-2027Q1-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "LSEB-2027Q1-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "LSEB-2027Q1-revenue_growth": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "MATW-2026Q3-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "MATW-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "MATW-2026Q3-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "MATW-2026Q3-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "MATW-2026Q3-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "MATW-2026Q3-operating_margin": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "MATW-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "MFIN-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "MFIN-2026Q3-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "MFIN-2026Q3-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "MKSI-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "MKSI-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "MKSI-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "MKSI-2026Q3-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "MKSI-2026Q3-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "MKSI-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "MKSI-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "MTB-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "MTB-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NAGE-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NAGE-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NAGE-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NAGE-2026Q3-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NAGE-2026Q3-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NAGE-2026Q3-operating_margin": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NBTB-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NBTB-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NET-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NET-2026Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NET-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NET-2026Q3-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NKE-2026-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "NKE-2026-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NKE-2026-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NKE-2026-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NKE-2027Q1-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "NKE-2027Q1-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NRDY-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "NRDY-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NRDY-2026Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NRDY-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NRDY-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NRDY-2026Q3-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "NRDY-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NRDY-2026Q3-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NRDY-2026Q3-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NTWK-2026-free_cash_flow": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "invalid_response",
+      "qwen3-1.7b-nothink-units": "invalid_response"
+    },
+    "NTWK-2026-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "NTWK-2026-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "NTWK-2026-lookup_net_income": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "NTWK-2026-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "NTWK-2026-lookup_revenue": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "NTWK-2026-net_income_change": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NTWK-2026-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NTWK-2026-revenue_growth": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "NXDT-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NXDT-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "NXDT-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "NXDT-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "OI-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "OI-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "OI-2026Q3-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "OI-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "OI-2026Q3-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "OKUR-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "OKUR-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "PAYS-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "PAYS-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "PAYS-2026Q2-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "PAYS-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "PAYS-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "PCVX-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "PCVX-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "PCVX-2026Q3-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "PEPG-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "PEPG-2026Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "PEPG-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "PEPG-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "PSNL-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "PSNL-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "PSNL-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "PSNL-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "PSNL-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "PSNL-2026Q3-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "QTWO-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "QTWO-2026Q2-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "QTWO-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "QTWO-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "QTWO-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "QTWO-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "QTWO-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "QTWO-2026Q3-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RCUS-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "RCUS-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RCUS-2026Q3-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RCUS-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RCUS-2026Q3-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RCUS-2026Q3-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RCUS-2026Q3-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RCUS-2026Q3-operating_margin": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RCUS-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "REG-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "REG-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "REG-2026Q3-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RGR-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "invalid_response"
+    },
+    "RGR-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RGR-2026Q3-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RGR-2026Q3-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RGR-2026Q3-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RHP-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RHP-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RHP-2026Q3-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RHP-2026Q3-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RHP-2026Q3-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "RITE-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RITE-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "RITE-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "RITE-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "RITE-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "RITE-2026Q3-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ROCK-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "ROCK-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "invalid_response",
+      "qwen3-1.7b-nothink-units": "invalid_response"
+    },
+    "ROCK-2026Q2-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "ROCK-2026Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "ROCK-2026Q3-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SEQC-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "SEQC-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SEQC-2026Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SEQC-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SEQC-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SEQC-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SEQC-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SEQC-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLAB-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLAB-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLAB-2026Q2-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "SLAB-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLAB-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLAB-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLAB-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLAB-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "SLDP-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLDP-2026Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLDP-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLDP-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLDP-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLDP-2026Q3-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLDP-2026Q3-operating_margin": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLNG-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLNG-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLNG-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLNG-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLNG-2026Q3-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "invalid_response"
+    },
+    "SLNG-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SLNG-2026Q3-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SMBC-2026-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SMBC-2027Q1-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SMBC-2027Q1-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SNDK-2026-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "SNDK-2026-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SNDK-2026-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SNDK-2026-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SNDK-2026-revenue_growth": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "SNDK-2027Q1-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "invalid_response"
+    },
+    "SNDK-2027Q1-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "STCB-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "STLE-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "STLE-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "STLE-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "STLE-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "invalid_response"
+    },
+    "STLN-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "invalid_response",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "STLN-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "STLN-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "STLN-2026Q3-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "STLN-2026Q3-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SVC-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SVC-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SVC-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SVC-2026Q3-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "SVC-2026Q3-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "TMGI-2026-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "TMGI-2026-lookup_assets": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "TMGI-2026-lookup_revenue": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "TMGI-2027Q1-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "TMGI-2027Q1-net_income_change": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "TMGI-2027Q1-operating_margin": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "TPR-2026-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "TPR-2026-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "TPR-2026-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "TPR-2027Q1-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "TPR-2027Q1-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "TPR-2027Q1-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "TWIN-2026-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "TWIN-2026-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "TWIN-2026-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "TWIN-2026-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "TWIN-2026-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "TWIN-2026Q1-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "invalid_response"
+    },
+    "TWIN-2026Q1-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "TWIN-2026Q1-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "TWIN-2026Q1-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "TWIN-2026Q1-revenue_growth": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "UMAC-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "UMAC-2026Q3-current_ratio": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "UMAC-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "UMAC-2026Q3-operating_margin": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "UMAC-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "USAU-2026-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "USAU-2026-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "USAU-2026-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "USAU-2027Q1-lookup_assets": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "USAU-2027Q1-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "VCYT-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "VCYT-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "VCYT-2026Q3-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "VCYT-2026Q3-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "VCYT-2026Q3-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "VCYT-2026Q3-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "VENU-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "VENU-2026Q2-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "VENU-2026Q2-lookup_assets": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "VENU-2026Q2-lookup_liabilities_current": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "VENU-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "VENU-2026Q2-lookup_revenue": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "VENU-2026Q2-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "VRNO-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "VRNO-2026Q3-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "invalid_response"
+    },
+    "VRNO-2026Q3-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "VRNO-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "VRNO-2026Q3-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "VRNO-2026Q3-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "VRNO-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "WAY-2026Q2-current_ratio": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "WAY-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "WAY-2026Q2-net_income_change": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "WAY-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "WAY-2026Q3-lookup_assets": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "WAY-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "XYZ-2026Q2-lookup_net_income": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "XYZ-2026Q2-lookup_operating_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "XYZ-2026Q2-operating_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "XYZ-2026Q3-free_cash_flow": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "invalid_response",
+      "qwen3-1.7b-nothink-units": "invalid_response"
+    },
+    "XYZ-2026Q3-gross_margin": {
+      "qwen3-1.7b-grpo": "correct",
+      "qwen3-1.7b-nothink": "correct",
+      "qwen3-1.7b-nothink-units": "correct"
+    },
+    "XYZ-2026Q3-lookup_revenue": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    },
+    "XYZ-2026Q3-revenue_growth": {
+      "qwen3-1.7b-grpo": "incorrect",
+      "qwen3-1.7b-nothink": "incorrect",
+      "qwen3-1.7b-nothink-units": "incorrect"
+    }
+  },
+  "question_bank_size": 500,
+  "questions_evaluated": 500,
+  "response_count": 1500,
+  "single_vs_multi_step": {
+    "overall": {
+      "drop": -0.2563642480654929,
+      "multi_step_accuracy": 0.355463347164592,
+      "single_step_accuracy": 0.0990990990990991
+    },
+    "qwen3-1.7b-grpo": {
+      "drop": -0.34659318476745865,
+      "multi_step_accuracy": 0.4315352697095436,
+      "single_step_accuracy": 0.08494208494208494
+    },
+    "qwen3-1.7b-nothink": {
+      "drop": -0.23629023214085454,
+      "multi_step_accuracy": 0.34439834024896265,
+      "single_step_accuracy": 0.10810810810810811
+    },
+    "qwen3-1.7b-nothink-units": {
+      "drop": -0.18620932728816547,
+      "multi_step_accuracy": 0.29045643153526973,
+      "single_step_accuracy": 0.10424710424710425
+    }
+  },
+  "strongest_weakest_reasoning_type": {
+    "overall": {
+      "strongest": {
+        "accuracy": 0.6222222222222222,
+        "reasoning_type": "ratio"
+      },
+      "weakest": {
+        "accuracy": 0.05228758169934641,
+        "reasoning_type": "multi_period_comparison"
+      }
+    },
+    "qwen3-1.7b-grpo": {
+      "strongest": {
+        "accuracy": 0.8,
+        "reasoning_type": "ratio"
+      },
+      "weakest": {
+        "accuracy": 0.0392156862745098,
+        "reasoning_type": "multi_period_comparison"
+      }
+    },
+    "qwen3-1.7b-nothink": {
+      "strongest": {
+        "accuracy": 0.580952380952381,
+        "reasoning_type": "ratio"
+      },
+      "weakest": {
+        "accuracy": 0.05,
+        "reasoning_type": "derived_metric"
+      }
+    },
+    "qwen3-1.7b-nothink-units": {
+      "strongest": {
+        "accuracy": 0.4857142857142857,
+        "reasoning_type": "ratio"
+      },
+      "weakest": {
+        "accuracy": 0.05,
+        "reasoning_type": "derived_metric"
+      }
+    }
+  }
+}
