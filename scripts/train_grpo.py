@@ -183,6 +183,7 @@ def main(argv: list[str] | None = None) -> None:
     peft_config = LoraConfig(r=args.lora_r, lora_alpha=args.lora_alpha, lora_dropout=0.0,
                              target_modules="all-linear", task_type="CAUSAL_LM")
 
+    print(f"Setting up the trainer (vLLM: {args.vllm})...", flush=True)
     trainer = GRPOTrainer(
         model=model,
         reward_funcs=[rl.accuracy_reward, rl.format_reward],
