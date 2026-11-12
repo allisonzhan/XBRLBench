@@ -28,6 +28,8 @@ def test_defaults_fit_a_t4_debug_run():
 def test_batch_must_hold_whole_groups():
     with pytest.raises(SystemExit, match="multiple of"):
         train_grpo.check_args(args("--per-device-batch", "3", "--grad-accum", "1"))
+    with pytest.raises(SystemExit, match="whole groups"):
+        train_grpo.check_args(args("--steps-per-generation", "1"))
     with pytest.raises(SystemExit, match="at least 2"):
         train_grpo.check_args(args("--num-generations", "1"))
 

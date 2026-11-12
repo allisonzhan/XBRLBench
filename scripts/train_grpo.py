@@ -53,12 +53,17 @@ def build_arg_parser() -> argparse.ArgumentParser:
     p.add_argument("--max-steps", type=int, default=300)
     p.add_argument("--lr", type=float, default=2e-5)
     p.add_argument("--beta", type=float, default=0.0, help="KL penalty; 0 skips the reference model")
-    p.add_argument("--temperature", type=float, default=0.8)
+    # The base model is nearly deterministic in non-thinking mode (entropy ~0.05 in the first
+    # Kaggle run), so most groups got identical rewards and no gradient; sample hotter.
+    p.add_argument("--temperature", type=float, default=1.0)
+    p.add_argument("--steps-per-generation", type=int, default=2,
+                   help="micro-batches generated at once; 2 x 4 = 8 completions (one prompt group) per "
+                        "generate call keeps the prefill within a T4's memory without vLLM")
     # LoRA
     p.add_argument("--lora-r", type=int, default=32)
     p.add_argument("--lora-alpha", type=int, default=64)
     # Generation backend
-    p.add_argument("--vllm", choices=("off", "colocate", "server"), default="colocate")
+    p.add_argument("--vllm", choices=("off", "colocate", "server"), default="off")
     p.add_argument("--vllm-gpu-memory", type=float, default=0.35, help="colocate mode: share of GPU memory for vLLM")
     # Bookkeeping
     p.add_argument("--eval-steps", type=int, default=50, help="0 disables in-training evaluation")
@@ -78,6 +83,10 @@ def check_args(args: argparse.Namespace, n_processes: int = 1) -> None:
     effective = args.per_device_batch * args.grad_accum * n_processes
     if effective % args.num_generations:
         raise SystemExit(f"per-device batch x grad accum x processes ({effective}) must be a multiple of "
+                         f"--num-generations ({args.num_generations})")
+    gen_batch = args.per_device_batch * args.steps_per_generation * n_processes
+    if gen_batch % args.num_generations:
+        raise SystemExit(f"per-device batch x steps per generation ({gen_batch}) must hold whole groups of "
                          f"--num-generations ({args.num_generations})")
     if args.num_generations < 2:
         raise SystemExit("--num-generations must be at least 2: GRPO compares completions within a group")
@@ -122,6 +131,8 @@ def main(argv: list[str] | None = None) -> None:
     args = build_arg_parser().parse_args(argv)
     check_args(args, int(os.environ.get("WORLD_SIZE", "1")))
 
+    # Fragmentation left ~2 GB reserved-but-unused when the first Kaggle run ran out of memory.
+    os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
     import torch
     from datasets import Dataset
     from peft import LoraConfig
@@ -176,6 +187,7 @@ def main(argv: list[str] | None = None) -> None:
         max_steps=args.max_steps,
         per_device_train_batch_size=args.per_device_batch,
         gradient_accumulation_steps=args.grad_accum,
+        steps_per_generation=args.steps_per_generation,
         gradient_checkpointing=True,
         bf16=bf16,
         fp16=not bf16,
