@@ -217,3 +217,13 @@ def test_reward_check_agrees_with_grading():
              "raw_response": "ANSWER: 10", "extracted_answer": "10", "error": None}]
     c = rl.check_responses(rows)["m"]
     assert c["correct"] == 1 and c["scale_error"] == 1 and c["_disagrees_with_grading"] == 0
+
+
+def test_constant_answer_earns_nothing_in_training():
+    """Regression: the first 300-step run collapsed to "ANSWER: 12.34" for every
+    question because a wrong but well-formed answer earned the format reward.
+    Training weights only accuracy, under which a constant answer earns 0."""
+    golds = [1_234_000.0, 56.7, 1.45, -8_000.0]
+    units = ["USD", "percent", "ratio", "USD"]
+    acc = rl.accuracy_reward(["ANSWER: 12.34"] * 4, golds, units, [0.01] * 4)
+    assert acc == [0.0] * 4

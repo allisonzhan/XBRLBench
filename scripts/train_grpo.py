@@ -51,8 +51,13 @@ def build_arg_parser() -> argparse.ArgumentParser:
     p.add_argument("--per-device-batch", type=int, default=4, help="completions per forward/backward pass")
     p.add_argument("--grad-accum", type=int, default=8)
     p.add_argument("--max-steps", type=int, default=300)
-    p.add_argument("--lr", type=float, default=2e-5)
-    p.add_argument("--beta", type=float, default=0.0, help="KL penalty; 0 skips the reference model")
+    p.add_argument("--lr", type=float, default=1e-5)
+    # A small KL penalty keeps the policy near the base model; with LoRA the reference is the
+    # base with the adapter switched off, so it costs no extra memory. The first 300-step run
+    # (beta 0, lr 2e-5) collapsed to one constant answer.
+    p.add_argument("--beta", type=float, default=0.02, help="KL penalty; 0 skips the reference model")
+    p.add_argument("--format-weight", type=float, default=0.0,
+                   help="weight of the format reward (logged either way); >0 was gamed, see xbrlbench.rl")
     # The base model is nearly deterministic in non-thinking mode (entropy ~0.05 in the first
     # Kaggle run), so most groups got identical rewards and no gradient; sample hotter.
     p.add_argument("--temperature", type=float, default=1.0)
@@ -196,6 +201,7 @@ def main(argv: list[str] | None = None) -> None:
         temperature=args.temperature,
         chat_template_kwargs=template_kwargs,
         beta=args.beta,
+        reward_weights=[1.0, args.format_weight],
         # Cut-off completions earn 0 anyway; leaving them out of the loss
         # keeps them from being pushed down as if they were wrong (DAPO).
         mask_truncated_completions=True,
@@ -233,11 +239,16 @@ def main(argv: list[str] | None = None) -> None:
     (out / "run_config.json").write_text(json.dumps({
         **vars(args), "train_prompts": len(train_ds), "train_dropped_too_long": train_dropped,
         "eval_prompts": len(eval_ds) if eval_ds is not None else 0, "dtype": str(dtype),
-        "reward": {"correct": rl.CORRECT_REWARD, "format": rl.FORMAT_REWARD, "scale_factors": rl.SCALE_FACTORS},
+        "reward": {"correct": rl.CORRECT_REWARD, "format": rl.FORMAT_REWARD, "format_weight": args.format_weight,
+                   "scale_factors": rl.SCALE_FACTORS},
     }, indent=2))
     print(f"Training: {args.max_steps} steps, {args.per_device_batch * args.grad_accum // args.num_generations} "
           f"prompts x {args.num_generations} completions per step, vLLM {args.vllm}", flush=True)
-    trainer.train(resume_from_checkpoint=args.resume or None)
+    try:
+        trainer.train(resume_from_checkpoint=args.resume or None)
+    finally:
+        # Every logged step and evaluation, so a run can be diagnosed without its checkpoints.
+        (out / "log_history.json").write_text(json.dumps(trainer.state.log_history, indent=1))
 
     adapter_dir = out / "adapter"
     trainer.save_model(str(adapter_dir))

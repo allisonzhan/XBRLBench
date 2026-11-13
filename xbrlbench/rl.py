@@ -28,6 +28,14 @@ be graded. A policy being trained would learn to exploit those fallbacks, so
 the reward reads only the final ANSWER: line. A completion that earns reward
 here always grades the same way under xbrlbench.grading.
 
+Training uses only the accuracy part (scripts/train_grpo.py weights the
+format reward 0). In the first 300-step run the format reward was gamed:
+a constant "ANSWER: 12.34" (the example in the system prompt) earned a sure
+0.1, while attempting a dollar answer usually earned 0 for a scale error.
+By step 150 the policy answered 12.34 to every question and held-out
+accuracy fell from 22% to 0%. The format part is still logged, so TRL's
+rewards/format_reward/mean shows the share of well-formed wrong answers.
+
 This module is stdlib-only like the rest of the package; the training
 script (scripts/train_grpo.py) imports it and needs the `[train]` extra.
 """
