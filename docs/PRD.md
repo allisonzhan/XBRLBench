@@ -58,7 +58,8 @@ training, and an evaluation clean of contamination.
    later filings (after model cutoffs) from different companies; plus an
    anonymized variant to separate reading from memory.
 5. **Reward.** 1 if the parsed answer is within the unit-aware tolerance
-   (reuse `xbrlbench.grading`), else 0; small format reward; zero for answers
+   (reuse `xbrlbench.grading`), else 0; no format reward in training (a 0.1 format
+   reward was gamed in the first 300-step run, see results/m4/run300_collapsed); zero for answers
    with several numbers; no credit for ×1,000 scale errors.
 6. **Training.** Debug on Qwen3-1.7B, main run on Qwen3-4B; LoRA plus
    GRPO (TRL or verl); free Kaggle/Colab GPUs or credits first.
