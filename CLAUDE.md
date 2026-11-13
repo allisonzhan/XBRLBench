@@ -30,6 +30,9 @@ python -m xbrlbench spotcheck --email <contact> # compare gold values with the f
 python -m xbrlbench build --email <contact> --tickers AAPL,JPM   # real-filing questions, trial (network)
 python -m xbrlbench build --email <contact> --companies 500      # full real-filing corpus (network, resumable)
 python -m xbrlbench audit --in data/filings/questions.jsonl --n 1000   # re-derive gold from context text (offline)
+python -m xbrlbench export-rl --in data/filings/v3/questions.jsonl --out data/rl/train.jsonl   # train split -> RL prompts (offline)
+python -m xbrlbench reward --in <responses.jsonl>  # score saved responses with the RL reward (offline)
+python scripts/train_grpo.py --train data/rl/train.jsonl --out runs/grpo   # GRPO + LoRA (GPU, pip install -e ".[train]")
 ```
 
 Network: `generate`, `spotcheck` and `build` need `data.sec.gov` and `www.sec.gov`. The "XBRLBench" cloud environment
@@ -50,6 +53,8 @@ xbrlbench/edgar.py        EDGAR submissions lookup + rate-limited downloads
 xbrlbench/spotcheck.py    gold values vs. the filed 10-K's own tags
 xbrlbench/filings.py      real 10-K tables -> questions, train/test split, corpus build
 xbrlbench/audit.py        checks real-filing gold values against the context text
+xbrlbench/rl.py           RL reward (strict parsing, no credit for scale errors) + train-split export
+scripts/train_grpo.py     GRPO + LoRA trainer (TRL); notebooks/m4_grpo_debug.ipynb runs it on Kaggle
 tests/fixtures/           hand-written iXBRL samples (realistic_10k.htm mirrors EDGAR markup)
 data/questions.jsonl      the benchmark (generated, committed)
 results/baseline/         the committed reference run
@@ -130,3 +135,9 @@ docs/                     SCHEMA.md, METADATA.md, PRD.md
   Gate passed. Most small-model misses are scale (answer left in thousands
   or millions). Base models run on Kaggle via notebooks/m3_base_models.ipynb
   (OpenRouter doesn't serve them). Write-up: docs/M3_BASELINES.md.
+- Milestone 4 (RL debug on Qwen3-1.7B): tooling ready, not yet run.
+  `xbrlbench/rl.py` holds the reward; on the committed M3 and baseline
+  responses it agrees with grading on every correct answer and scores 239
+  of Qwen3-14B's 283 misses as scale errors. Next: run
+  `notebooks/m4_grpo_debug.ipynb` on Kaggle with the corpus's
+  questions.jsonl and heldout_500.jsonl from data/filings/v3.

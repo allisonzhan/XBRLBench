@@ -1,0 +1,23 @@
+{
+  "run_id": "qwen3-1.7b-grpo",
+  "started_at": "2026-11-13T05:06:08.847929+00:00",
+  "completed_at": "2026-11-13T05:07:27.364885+00:00",
+  "xbrlbench_version": "0.1.0",
+  "benchmark_version": "v0.4",
+  "git_commit": "1d37d3804a9f2ea3a06a7f0ff2850601c6a25115",
+  "models": [
+    "qwen3-1.7b-grpo"
+  ],
+  "temperature": 0,
+  "max_tokens": 1536,
+  "prompt_version": "v2",
+  "question_count": 500,
+  "response_count": 500,
+  "resume": false,
+  "questions_path": "/kaggle/input/datasets/allisonzhan/xrblbench-v3/heldout_500.jsonl",
+  "split": null,
+  "api_base": "http://localhost:8000/v1",
+  "reasoning": "off",
+  "prompt_variant": "default",
+  "cost_usd_this_session": 0.0
+}
