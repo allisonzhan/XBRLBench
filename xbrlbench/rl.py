@@ -220,6 +220,89 @@ def select_rows(rows: list[dict], split: str = "train") -> list[dict]:
     return picked
 
 
+# ---------------------------------------------------------------------------
+# Worked answers (SFT warm-up)
+# ---------------------------------------------------------------------------
+
+_SCALE_NAMES = {1.0: None, 1e3: "thousands", 1e6: "millions", 1e9: "billions"}
+
+# family -> (formula text, function of the input values in formula order)
+_FORMULAS = {
+    "current_ratio": ("{0} / {1}", lambda a, b: a / b),
+    "gross_margin": ("{0} / {1} x 100", lambda a, b: 100 * a / b),
+    "operating_margin": ("{0} / {1} x 100", lambda a, b: 100 * a / b),
+    "revenue_growth": ("({0} - {1}) / {1} x 100", lambda a, b: 100 * (a - b) / b),
+    "net_income_change": ("{0} - {1}", lambda a, b: a - b),
+    "free_cash_flow": ("{0} - {1}", lambda a, b: a - b),
+}
+
+
+def _scale_of(displayed: str, value: float) -> float | None:
+    """The table scale that turns the displayed figure into the tagged value."""
+    shown = grading.extract_numbers(displayed)
+    if len(shown) != 1 or shown[0] == 0:
+        return None
+    ratio = abs(value) / abs(shown[0])
+    for factor in _SCALE_NAMES:
+        if abs(ratio / factor - 1) < 1e-6:
+            return factor
+    return None
+
+
+def _usd(v: float) -> str:
+    return f"{v:,.0f}" if v == round(v) else f"{v:,.2f}"
+
+
+def final_answer(gold: float, unit: str) -> str:
+    """A bare number in the form SYSTEM_PROMPT asks for."""
+    if unit == "USD":
+        return str(round(gold))
+    return f"{gold:.2f}"
+
+
+def worked_answer(q: dict) -> str | None:
+    """A short, correct worked solution built from the question's own tagged
+    inputs: every figure is converted from the table's scale to whole dollars
+    before it is used. Used to warm the model up before RL (export-rl
+    --format sft), because the base model never converts on its own, so GRPO
+    gets no signal on dollar questions. None when the question can't be
+    explained this way or the explanation would not score as correct."""
+    inputs, family = q.get("inputs") or [], q.get("family") or ""
+    if not inputs or (len(inputs) == 1) != family.startswith("lookup_"):
+        return None
+    if not family.startswith("lookup_") and family not in _FORMULAS:
+        return None
+    lines, values = [], []
+    for i in inputs:
+        factor = _scale_of(i["displayed"], i["value"])
+        if factor is None:
+            return None
+        when = f" ({i['period_end']})" if i.get("period_end") else ""
+        if _SCALE_NAMES[factor]:
+            lines.append(f'"{i["label"]}"{when} is shown as {i["displayed"]}. The table is in '
+                         f'{_SCALE_NAMES[factor]}, so that is {i["displayed"]} x {factor:,.0f} = '
+                         f'{_usd(i["value"])} dollars.')
+        else:
+            lines.append(f'"{i["label"]}"{when} is shown as {i["displayed"]}, already in dollars: '
+                         f'{_usd(i["value"])}.')
+        values.append(i["value"])
+    gold, unit = q["gold_value"], q["gold_unit"]
+    result = values[0]  # a lookup's answer is its one input
+    if family in _FORMULAS:
+        text, fn = _FORMULAS[family]
+        try:
+            result = fn(*values)
+        except (TypeError, ZeroDivisionError):
+            return None
+        shown = _usd(result) if unit == "USD" else final_answer(result, unit)
+        lines.append(f"{text.format(*(_usd(v) for v in values))} = {shown}.")
+    # The answer comes from the explanation, never from the gold value, so a
+    # worked answer that disagrees with the gold is dropped, not papered over.
+    lines.append(f"ANSWER: {final_answer(result, unit)}")
+    answer = "\n".join(lines)
+    return answer if score(answer, gold, unit, q.get("tolerance")).status == "correct" else None
+
+
 def to_record(q: dict, fmt: str = "trl") -> dict:
     messages = build_messages(q["question"], q["context"])
     meta = {
@@ -233,6 +316,10 @@ def to_record(q: dict, fmt: str = "trl") -> dict:
         # Columns other than "prompt" are passed to the reward functions.
         return {"prompt": messages, "gold_value": q["gold_value"], "gold_unit": q["gold_unit"],
                 "tolerance": q.get("tolerance"), **meta}
+    if fmt == "sft":
+        # Prompt-completion format: TRL's SFTTrainer puts the loss on the completion only.
+        return {"prompt": messages, "completion": [{"role": "assistant", "content": worked_answer(q)}],
+                "gold_value": q["gold_value"], "gold_unit": q["gold_unit"], **meta}
     if fmt == "verl":
         gt = {"value": q["gold_value"], "unit": q["gold_unit"], "tolerance": q.get("tolerance")}
         return {"data_source": DATA_SOURCE, "prompt": messages, "ability": "financial_reading",
@@ -259,6 +346,8 @@ def export_records(rows: list[dict], fmt: str = "trl", split: str = "train", val
             dropped["context too long"] += 1
         elif q.get("gold_value") is None or q.get("gold_unit") not in {"USD", "ratio", "percent"}:
             dropped["bad gold"] += 1
+        elif fmt == "sft" and worked_answer(q) is None:
+            dropped["no worked answer"] += 1
         else:
             keep.append(q)
     keep.sort(key=lambda q: _h("order", q["id"]))
@@ -293,8 +382,7 @@ def export(inp: str, out: str, fmt: str = "trl", split: str = "train", val_fract
     write_jsonl(out, train)
     if val:
         write_jsonl(val_path(out), val)
-    fam_key = "family" if fmt == "trl" else None
-    fams = Counter(r[fam_key] if fam_key else r["extra_info"]["family"] for r in train)
+    fams = Counter(r.get("family") or r["extra_info"]["family"] for r in train)
     chars = [sum(len(m["content"]) for m in r["prompt"]) for r in train]
     summary = {
         "train": len(train), "val": len(val), "dropped": dict(dropped),
@@ -346,7 +434,8 @@ def build_export_parser(parser: argparse.ArgumentParser | None = None) -> argpar
     parser = parser or argparse.ArgumentParser(description="Export the train split as RL prompts.")
     parser.add_argument("--in", dest="inp", required=True, help="questions.jsonl from `build`")
     parser.add_argument("--out", required=True, help="output JSONL (a .val.jsonl is written beside it)")
-    parser.add_argument("--format", dest="fmt", choices=("trl", "verl"), default="trl")
+    parser.add_argument("--format", dest="fmt", choices=("trl", "verl", "sft"), default="trl",
+                        help="trl/verl: RL prompts; sft: prompts with worked answers for a warm-up")
     parser.add_argument("--split", choices=("train", "all"), default="train",
                         help="'all' is for inputs without a split field (e.g. the synthetic bank)")
     parser.add_argument("--val-fraction", type=float, default=0.05,

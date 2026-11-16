@@ -227,3 +227,53 @@ def test_constant_answer_earns_nothing_in_training():
     units = ["USD", "percent", "ratio", "USD"]
     acc = rl.accuracy_reward(["ANSWER: 12.34"] * 4, golds, units, [0.01] * 4)
     assert acc == [0.0] * 4
+
+
+# ---------------------------------------------------------------------------
+# Worked answers (SFT warm-up)
+# ---------------------------------------------------------------------------
+
+def _fixture_questions():
+    from pathlib import Path
+
+    from xbrlbench import filings, ixbrl
+    fixture = Path(__file__).parent / "fixtures" / "realistic_10k.htm"
+    meta = filings.FilingMeta(cik="0009999999", ticker="NWIN", accession="0009999999-25-000001",
+                              filing_date="2025-08-20", sic="3829")
+    return filings.build_filing_questions(ixbrl.parse_ixbrl(fixture.read_text()), meta)[0]
+
+
+def test_worked_answers_are_correct_and_convert_scale():
+    qs = _fixture_questions()
+    assert len(qs) >= 10
+    for q in qs:
+        w = rl.worked_answer(q)
+        assert w is not None, q["family"]
+        assert rl.score(w, q["gold_value"], q["gold_unit"], q["tolerance"]).status == "correct"
+        assert "The table is in thousands" in w and "x 1,000 =" in w
+
+
+def test_worked_answer_refuses_what_it_cannot_explain():
+    q = _fixture_questions()[0]
+    assert rl.worked_answer({**q, "inputs": []}) is None
+    assert rl.worked_answer({**q, "family": "something_new"}) is None
+    bad = [{**q["inputs"][0], "displayed": "7"}]  # no clean scale maps 7 to the tagged value
+    assert rl.worked_answer({**q, "inputs": bad}) is None
+    assert rl.worked_answer({**q, "gold_value": q["gold_value"] * 2}) is None  # explanation wouldn't score
+
+
+def test_worked_answer_in_whole_dollars():
+    q = _fixture_questions()[0]
+    i = q["inputs"][0]
+    q = {**q, "inputs": [{**i, "displayed": "1,284,550,000"}]}
+    assert "already in dollars" in rl.worked_answer(q)
+
+
+def test_sft_export_drops_unexplainable_rows():
+    qs = [{**q, "split": "train"} for q in _fixture_questions()]
+    qs.append({**qs[0], "id": "X", "inputs": []})
+    train, _, dropped = rl.export_records(qs, fmt="sft")
+    assert dropped == {"no worked answer": 1}
+    rec = train[0]
+    assert rec["prompt"][0]["role"] == "system" and rec["completion"][0]["role"] == "assistant"
+    assert rec["completion"][0]["content"].endswith(rl.final_answer(rec["gold_value"], rec["gold_unit"]))
