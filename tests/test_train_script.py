@@ -50,3 +50,21 @@ def test_load_prompts_and_default_val(tmp_path):
     assert train_grpo.default_val_path(str(train)) is None
     write_jsonl(tmp_path / "train.val.jsonl", rows[:1])
     assert train_grpo.default_val_path(str(train)) == str(tmp_path / "train.val.jsonl")
+
+
+_SFT_PATH = _PATH.parent / "train_sft.py"
+_sft_spec = importlib.util.spec_from_file_location("train_sft", _SFT_PATH)
+train_sft = importlib.util.module_from_spec(_sft_spec)
+_sft_spec.loader.exec_module(train_sft)
+
+
+def test_sft_loader_wants_worked_answers(tmp_path):
+    prompts = tmp_path / "train.jsonl"
+    write_jsonl(prompts, [rl.to_record({"id": "Q1", "question": "q", "context": "c", "gold_value": 1.0,
+                                        "gold_unit": "USD", "tolerance": 0.01})])
+    with pytest.raises(SystemExit, match="--format sft"):
+        train_sft.load_examples(str(prompts))
+    sft = tmp_path / "warmup.jsonl"
+    write_jsonl(sft, [{"prompt": [], "completion": [{"role": "assistant", "content": "ANSWER: 1"}]}] * 3)
+    assert len(train_sft.load_examples(str(sft), limit=2)) == 2
+    assert train_sft.build_arg_parser().parse_args(["--train", "x"]).model == "Qwen/Qwen3-1.7B"
