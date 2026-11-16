@@ -10,6 +10,8 @@
     python -m xbrlbench build --email you@example.com [--companies 500]
     python -m xbrlbench audit --in data/filings/questions.jsonl [--n 1000]
     python -m xbrlbench sample --in data/filings/questions.jsonl --out <file> [--n 500]
+    python -m xbrlbench export-rl --in data/filings/questions.jsonl --out data/rl/train.jsonl
+    python -m xbrlbench reward --in <responses.jsonl>
 
 Inference (`run`) and everything downstream of it (`grade`/`report`/
 `errors`) are deliberately separate commands backed by separate modules:
@@ -33,6 +35,7 @@ from . import (
     heldout,
     inference,
     reporting,
+    rl,
     spotcheck,
     validation,
 )
@@ -67,6 +70,10 @@ def build_parser() -> argparse.ArgumentParser:
         "audit", help="re-derive real-filing gold values from the context text"))
     heldout.build_arg_parser(subparsers.add_parser(
         "sample", help="draw the fixed held-out evaluation sample from a real-filing corpus"))
+    rl.build_export_parser(subparsers.add_parser(
+        "export-rl", help="export the train split as RL prompts (TRL or verl)"))
+    rl.build_check_parser(subparsers.add_parser(
+        "reward", help="score a saved responses file with the RL reward"))
 
     return parser
 
@@ -98,6 +105,10 @@ def main(argv: list[str] | None = None) -> None:
         filings.run(args)
     elif args.command == "sample":
         heldout.run(args)
+    elif args.command == "export-rl":
+        rl.run_export(args)
+    elif args.command == "reward":
+        rl.run_check(args)
     elif args.command == "audit":
         if not audit.run(args):
             raise SystemExit(1)

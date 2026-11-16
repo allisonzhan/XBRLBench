@@ -90,6 +90,18 @@ SYSTEM_PROMPT = (
     "ANSWER: <value>"
 )
 
+# Prompt variants for `run --prompt`. "default" is the benchmark prompt
+# (PROMPT_VERSION); the others are ablations recorded in metadata.json as
+# prompt_variant. "units" spells out the scale conversion, the cheapest fix
+# for the small models' main failure (answers left in thousands/millions),
+# so an RL gain can be measured against it.
+UNITS_HINT = (
+    "\n\nGive dollar amounts in whole US dollars. If a statement says its figures "
+    "are in thousands or in millions, multiply them by 1,000 or 1,000,000 before "
+    "answering: 1,234 in a table presented in thousands is 1234000."
+)
+PROMPTS = {"default": SYSTEM_PROMPT, "units": SYSTEM_PROMPT + UNITS_HINT}
+
 TEMPERATURE = 0
 MAX_TOKENS = None  # no explicit cap -- provider default applies
 
@@ -114,14 +126,22 @@ def is_openrouter(api_base: str) -> bool:
     return "openrouter.ai" in api_base
 
 
+def build_messages(question: str, context: str, prompt: str = "default") -> list[dict]:
+    """The chat messages every model sees for one question. RL training
+    (xbrlbench.rl) uses the same messages, so a trained model is evaluated
+    on exactly the prompt it was trained on."""
+    return [
+        {"role": "system", "content": PROMPTS[prompt]},
+        {"role": "user", "content": f"{context}\n\nQuestion: {question}"},
+    ]
+
+
 def build_payload(model: str, question: str, context: str, api_base: str = API_BASE,
-                  max_tokens: int | None = MAX_TOKENS, reasoning: str = "default") -> dict:
+                  max_tokens: int | None = MAX_TOKENS, reasoning: str = "default",
+                  prompt: str = "default") -> dict:
     payload = {
         "model": model,
-        "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": f"{context}\n\nQuestion: {question}"},
-        ],
+        "messages": build_messages(question, context, prompt),
         "temperature": TEMPERATURE,
     }
     if max_tokens is not None:
@@ -142,9 +162,9 @@ def build_payload(model: str, question: str, context: str, api_base: str = API_B
 
 def call_openrouter(api_key: str | None, model: str, question: str, context: str,
                     api_base: str = API_BASE, max_tokens: int | None = MAX_TOKENS,
-                    reasoning: str = "default", timeout: float = 600) -> dict:
+                    reasoning: str = "default", timeout: float = 600, prompt: str = "default") -> dict:
     url = f"{api_base.rstrip('/')}/chat/completions"
-    payload = build_payload(model, question, context, api_base, max_tokens, reasoning)
+    payload = build_payload(model, question, context, api_base, max_tokens, reasoning, prompt)
     data = _json.dumps(payload).encode("utf-8")
     headers = {
         "Content-Type": "application/json",
@@ -326,7 +346,10 @@ def run(
     reasoning: str = "default",
     max_cost: float | None = None,
     timeout: float = 600,
+    prompt: str = "default",
 ) -> None:
+    if prompt not in PROMPTS:
+        raise SystemExit(f"unknown --prompt {prompt!r}; choose from {sorted(PROMPTS)}")
     load_dotenv()
     api_base = api_base or os.environ.get("XBRLBENCH_API_BASE") or API_BASE
     api_key = os.environ.get("OPENROUTER_API_KEY") if is_openrouter(api_base) \
@@ -385,17 +408,19 @@ def run(
         "split": split,
         "api_base": api_base,
         "reasoning": reasoning,
+        "prompt_variant": prompt,
     })
     lock = acquire_lock(out_dir)
     try:
         _run_jobs(questions, models, done, api_key, responses_path, metadata, metadata_path,
-                  workers, api_base, max_tokens, reasoning, max_cost, questions_path, timeout)
+                  workers, api_base, max_tokens, reasoning, max_cost, questions_path, timeout, prompt)
     finally:
         lock.unlink(missing_ok=True)
 
 
 def _run_jobs(questions, models, done, api_key, responses_path, metadata, metadata_path,
-              workers, api_base, max_tokens, reasoning, max_cost, questions_path, timeout=600) -> None:
+              workers, api_base, max_tokens, reasoning, max_cost, questions_path, timeout=600,
+              prompt="default") -> None:
     experiment.write_metadata(metadata, metadata_path)
 
     # Interleave models so a run stopped by --max-cost (or by hand) leaves
@@ -406,7 +431,8 @@ def _run_jobs(questions, models, done, api_key, responses_path, metadata, metada
 
     lock = threading.Lock()
     state = {"written": 0, "spent": 0.0, "stopped": False}
-    opts = {"api_base": api_base, "max_tokens": max_tokens, "reasoning": reasoning, "timeout": timeout}
+    opts = {"api_base": api_base, "max_tokens": max_tokens, "reasoning": reasoning, "timeout": timeout,
+            "prompt": prompt}
 
     def work(job):
         q, model = job
@@ -485,13 +511,17 @@ def build_arg_parser(parser: argparse.ArgumentParser | None = None) -> argparse.
     parser.add_argument("--timeout", type=float, default=600,
                          help="seconds to wait for one response (default 600); raise it for a busy "
                               "local server, where a long thinking trace queues behind many others")
+    parser.add_argument("--prompt", choices=sorted(PROMPTS), default="default",
+                         help="system prompt variant: the benchmark prompt, or 'units' (an ablation that "
+                              "spells out converting thousands/millions to whole dollars)")
     return parser
 
 
 def run_from_args(args: argparse.Namespace) -> None:
     run(args.inp, args.out_dir, args.models, args.limit, args.resume, args.tier, args.question_ids,
         split=args.split, workers=args.workers, api_base=args.api_base, max_tokens=args.max_tokens,
-        reasoning=args.reasoning, max_cost=args.max_cost, timeout=args.timeout)
+        reasoning=args.reasoning, max_cost=args.max_cost, timeout=args.timeout,
+        prompt=args.prompt)
 
 
 def main(argv: list[str] | None = None) -> None:

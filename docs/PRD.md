@@ -58,7 +58,8 @@ training, and an evaluation clean of contamination.
    later filings (after model cutoffs) from different companies; plus an
    anonymized variant to separate reading from memory.
 5. **Reward.** 1 if the parsed answer is within the unit-aware tolerance
-   (reuse `xbrlbench.grading`), else 0; small format reward; zero for answers
+   (reuse `xbrlbench.grading`), else 0; no format reward in training (a 0.1 format
+   reward was gamed in the first 300-step run, see results/m4/run300_collapsed); zero for answers
    with several numbers; no credit for ×1,000 scale errors.
 6. **Training.** Debug on Qwen3-1.7B, main run on Qwen3-4B; LoRA plus
    GRPO (TRL or verl); free Kaggle/Colab GPUs or credits first.
@@ -110,3 +111,10 @@ if a clearly better small open model ships before milestone 3.
 
 Check each compared frontier model's published training cutoff before freezing
 the held-out set; move the date later if any cutoff falls after 2026-07-01.
+
+Checked 2026-11-11 for the milestone 3 models: Claude Sonnet 5.5, June 2026
+(training data and reliable knowledge, Anthropic's model page); GPT-5.6
+Terra, February 2026 (llm-stats.com; OpenAI's own page didn't state it);
+Gemini 3.1 Pro, January 2025 (llm-stats.com); Qwen3, released April 2025.
+All fall before 2026-07-01, so the cutoff date stands. Sonnet 5.5 leaves only
+one month of margin, so recheck it for any model released after mid-2026.

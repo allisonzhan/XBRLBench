@@ -1,0 +1,23 @@
+{
+  "run_id": "qwen3-1.7b-nothink",
+  "started_at": "2026-11-12T21:48:58.263640+00:00",
+  "completed_at": "2026-11-12T21:51:04.785874+00:00",
+  "xbrlbench_version": "0.1.0",
+  "benchmark_version": "v0.4",
+  "git_commit": "9571c67fcc6c500df9bbdbaabd91ca1c17c5a930",
+  "models": [
+    "qwen3-1.7b-nothink"
+  ],
+  "temperature": 0,
+  "max_tokens": 1536,
+  "prompt_version": "v2",
+  "question_count": 500,
+  "response_count": 500,
+  "resume": false,
+  "questions_path": "/kaggle/input/datasets/allisonzhan/xrblbench-v3/heldout_500.jsonl",
+  "split": null,
+  "api_base": "http://localhost:8000/v1",
+  "reasoning": "off",
+  "prompt_variant": "default",
+  "cost_usd_this_session": 0.0
+}
